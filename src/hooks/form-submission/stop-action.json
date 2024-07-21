@@ -1,0 +1,39 @@
+{
+  "$id": "/hooks/form-submission/stop-action.json",
+  "title": "FormSubmissionStopAction",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/reject"
+    },
+    {
+      "$ref": "#/$defs/skipSave"
+    }
+  ],
+  "$defs": {
+    "reject": {
+      "$id": "FormSubmissionStopActionReject",
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "reject"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["action", "message"]
+    },
+    "skipSave": {
+      "$id": "FormSubmissionStopActionSkipSave",
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "skipSave"
+        }
+      },
+      "required": ["action"]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@wirechunk/schemas",
+  "version": "0.0.1-rc1",
+  "description": "Wirechunk schemas with type definitions",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wirechunk/schemas.git"
+  },
+  "author": "Wirechunk, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wirechunk/schemas/issues"
+  },
+  "homepage": "https://github.com/wirechunk/schemas#readme",
+  "publishConfig": {
+    "provenance": true
+  },
+  "exports": {
+    "./*": "./src/*.d.ts",
+    "./*.json": "./src/*.json"
+  },
+  "scripts": {
+    "codegen": "npm run codegen:generate && npm run format",
+    "codegen:generate": "node scripts/codegen.js",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "json-schema-to-typescript": "^14.1.0",
+    "prettier": "^3.3.3"
+  }
+}

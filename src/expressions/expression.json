@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/expressions/expression.json",
+  "title": "Expression",
+  "oneOf": [
+    {
+      "$ref": "array-expression.json"
+    },
+    {
+      "$ref": "boolean-expression.json"
+    },
+    {
+      "$ref": "number-expression.json"
+    },
+    {
+      "$ref": "string-expression.json"
+    }
+  ]
+}

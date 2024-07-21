@@ -1,0 +1,29 @@
+{
+  "$id": "/hooks/form-submission/value.json",
+  "type": "object",
+  "title": "FormSubmissionValue",
+  "properties": {
+    "formId": {
+      "type": "string"
+    },
+    "formData": {
+      "$ref": "../../context-data/context-data.json"
+    },
+    "sessionId": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "stepId": {
+      "type": "string"
+    },
+    "finalStep": {
+      "type": "boolean"
+    },
+    "submitterIpAddress": {
+      "type": "string"
+    }
+  },
+  "required": ["formId", "formData", "sessionId", "userId", "finalStep"]
+}

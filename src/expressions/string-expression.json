@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/expressions/string-expression.json",
+  "title": "StringExpression",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/eventSourceComponentName"
+    },
+    {
+      "$ref": "#/$defs/eventSourceComponentType"
+    },
+    {
+      "$ref": "#/$defs/featureTag"
+    },
+    {
+      "$ref": "#/$defs/inputChangeEventStringValue"
+    },
+    {
+      "$ref": "#/$defs/inputDataString"
+    },
+    {
+      "$ref": "#/$defs/propsString"
+    },
+    {
+      "$ref": "#/$defs/stringLiteral"
+    },
+    {
+      "$ref": "#/$defs/userEmail"
+    },
+    {
+      "$ref": "#/$defs/userRole"
+    }
+  ],
+  "$defs": {
+    "eventSourceComponentName": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventSourceComponentName"
+        }
+      },
+      "required": ["operator"]
+    },
+    "eventSourceComponentType": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventSourceComponentType"
+        }
+      },
+      "required": ["operator"]
+    },
+    "featureTag": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "featureTag"
+        },
+        "tag": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "tag"]
+    },
+    "inputChangeEventStringValue": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "inputChangeEventStringValue"
+        }
+      },
+      "required": ["operator"]
+    },
+    "inputDataString": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "inputDataString"
+        },
+        "fieldKey": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "fieldKey"]
+    },
+    "propsString": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "propsString"
+        },
+        "prop": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "prop"]
+    },
+    "stringLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "stringLiteral"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "value"]
+    },
+    "userEmail": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userEmail"
+        }
+      },
+      "required": ["operator"]
+    },
+    "userRole": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userRole"
+        }
+      },
+      "required": ["operator"]
+    }
+  }
+}

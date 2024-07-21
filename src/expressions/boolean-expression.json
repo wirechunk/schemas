@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/expressions/boolean-expression.json",
+  "title": "BooleanExpression",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/all"
+    },
+    {
+      "$ref": "#/$defs/arrayIncludes"
+    },
+    {
+      "$ref": "#/$defs/booleanValue"
+    },
+    {
+      "$ref": "#/$defs/both"
+    },
+    {
+      "$ref": "#/$defs/greaterThan"
+    },
+    {
+      "$ref": "#/$defs/booleanLiteral"
+    },
+    {
+      "$ref": "#/$defs/either"
+    },
+    {
+      "$ref": "#/$defs/equals"
+    },
+    {
+      "$ref": "#/$defs/exists"
+    },
+    {
+      "$ref": "#/$defs/inputChangeEventBooleanValue"
+    },
+    {
+      "$ref": "#/$defs/inputDataBoolean"
+    },
+    {
+      "$ref": "#/$defs/not"
+    },
+    {
+      "$ref": "#/$defs/propsBoolean"
+    },
+    {
+      "$ref": "#/$defs/some"
+    }
+  ],
+  "$defs": {
+    "all": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "all"
+        },
+        "arrayExpression": {
+          "$ref": "array-expression.json"
+        },
+        "condition": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator", "arrayExpression", "condition"]
+    },
+    "arrayIncludes": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "arrayIncludes"
+        },
+        "arrayExpression": {
+          "$ref": "array-expression.json"
+        },
+        "value": {
+          "$ref": "expression.json"
+        }
+      },
+      "required": ["operator", "arrayExpression", "value"]
+    },
+    "booleanLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "booleanLiteral"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": ["operator", "value"]
+    },
+    "booleanValue": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "booleanValue"
+        },
+        "model": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "const": "dataPropertyBoolean"
+            },
+            "fieldKey": {
+              "type": "string"
+            }
+          },
+          "required": ["model", "fieldKey"]
+        }
+      },
+      "required": ["operator", "model"]
+    },
+    "both": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "both"
+        },
+        "left": {
+          "$ref": "#"
+        },
+        "right": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator", "left", "right"]
+    },
+    "either": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "either"
+        },
+        "left": {
+          "$ref": "#"
+        },
+        "right": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator", "left", "right"]
+    },
+    "equals": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "equals"
+        },
+        "left": {
+          "$ref": "expression.json#"
+        },
+        "right": {
+          "$ref": "expression.json#"
+        }
+      },
+      "required": ["operator", "left", "right"]
+    },
+    "exists": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "exists"
+        },
+        "expression": {
+          "$ref": "expression.json"
+        }
+      },
+      "required": ["operator", "expression"]
+    },
+    "greaterThan": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "greaterThan"
+        },
+        "left": {
+          "$ref": "number-expression.json#"
+        },
+        "right": {
+          "$ref": "number-expression.json#"
+        }
+      },
+      "required": ["operator", "left", "right"]
+    },
+    "inputChangeEventBooleanValue": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "inputChangeEventBooleanValue"
+        }
+      },
+      "required": ["operator"]
+    },
+    "inputDataBoolean": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "inputDataBoolean"
+        },
+        "fieldKey": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "fieldKey"]
+    },
+    "not": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "not"
+        },
+        "expression": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator", "expression"]
+    },
+    "some": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "some"
+        },
+        "arrayExpression": {
+          "$ref": "array-expression.json"
+        },
+        "condition": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator", "arrayExpression", "condition"]
+    },
+    "propsBoolean": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "propsBoolean"
+        },
+        "prop": {
+          "type": "string"
+        }
+      },
+      "required": ["operator", "prop"]
+    }
+  }
+}

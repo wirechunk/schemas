@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/context-data/context-data.json",
+  "title": "ContextData",
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "#/$defs/dataValue"
+  },
+  "$defs": {
+    "timeDuration": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "minutes": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["hours", "minutes"]
+    },
+    "dataValue": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/timeDuration"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dataTableRow"
+          }
+        },
+        {
+          "$ref": "#/$defs/uploadedFile"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "dataTableRow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#"
+        }
+      },
+      "required": ["id", "data"]
+    },
+    "uploadedFile": {
+      "type": "object",
+      "properties": {
+        "fileId": {
+          "type": "string"
+        }
+      },
+      "required": ["fileId"]
+    }
+  }
+}
