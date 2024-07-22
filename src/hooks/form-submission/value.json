@@ -25,5 +25,5 @@
       "type": "string"
     }
   },
-  "required": ["formId", "formData", "sessionId", "userId", "finalStep"]
+  "required": ["formId", "formData", "sessionId", "finalStep"]
 }

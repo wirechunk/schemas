@@ -12,6 +12,7 @@
   "$defs": {
     "reject": {
       "$id": "FormSubmissionStopActionReject",
+      "description": "Do not save the form submission. Respond with an error message that will be shown to the end-user. This is a terminating response.",
       "type": "object",
       "properties": {
         "action": {
@@ -26,6 +27,7 @@
     },
     "skipSave": {
       "$id": "FormSubmissionStopActionSkipSave",
+      "description": "Continue to other hooks (if any), but do not save the form submission. This is a terminating response.",
       "type": "object",
       "properties": {
         "action": {

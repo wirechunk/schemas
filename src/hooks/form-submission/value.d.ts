@@ -4,7 +4,7 @@ export interface FormSubmissionValue {
   formId: string;
   formData: ContextData;
   sessionId: string;
-  userId: string;
+  userId?: string;
   stepId?: string;
   finalStep: boolean;
   submitterIpAddress?: string;
