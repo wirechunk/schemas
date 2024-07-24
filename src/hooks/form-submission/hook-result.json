@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/form-submission/hook-result.json",
+  "title": "FormSubmissionHookResult",
+  "oneOf": [
+    {
+      "type": "object",
+      "title": "FormSubmissionHookResultContinue",
+      "properties": {
+        "continue": { "type": "boolean", "const": true },
+        "value": { "$ref": "./value.json" }
+      },
+      "required": ["continue", "value"]
+    },
+    {
+      "type": "object",
+      "title": "FormSubmissionHookResultStop",
+      "properties": {
+        "continue": { "type": "boolean", "const": false },
+        "value": { "$ref": "./value.json" },
+        "stopAction": { "$ref": "./stop-action.json" }
+      },
+      "required": ["continue", "stopAction"]
+    }
+  ]
+}
