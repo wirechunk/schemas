@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
 import { compileFromFile } from 'json-schema-to-typescript';
 
@@ -91,22 +92,31 @@ const buildHookResult = (hookName, valueSchema, stopActionSchema) => {
 const hooksDir = await readdir('src/hooks');
 
 for (const file of hooksDir) {
-  const stat = await lstat(`src/hooks/${file}`);
+  const filePath = `src/hooks/${file}`;
+  const stat = await lstat(filePath);
   if (stat.isDirectory()) {
-    const valueFileStat = await lstat(`src/hooks/${file}/value.json`);
+    const valueSchemaFilePath = `src/hooks/${file}/value.json`;
+    if (!existsSync(valueSchemaFilePath)) {
+      throw new Error(`Missing a value.json file for hook ${file}`);
+    }
+    const valueFileStat = await lstat(valueSchemaFilePath);
     if (!valueFileStat.isFile()) {
-      throw new Error(`Missing value.json file for hook ${file}`);
+      throw new Error(`The value.json file for hook ${file} must be a regular file`);
     }
-    const valueSchema = JSON.parse(await readFile(`src/hooks/${file}/value.json`, 'utf8'));
-    const stopActionFileStat = await lstat(`src/hooks/${file}/stop-action.json`);
+    const valueSchema = JSON.parse(await readFile(valueSchemaFilePath, 'utf8'));
+    const stopActionSchemaFilePath = `src/hooks/${file}/stop-action.json`;
+    if (!existsSync(stopActionSchemaFilePath)) {
+      throw new Error(`Missing a stop-action.json file for hook ${file}`);
+    }
+    const stopActionFileStat = await lstat(stopActionSchemaFilePath);
     if (!stopActionFileStat.isFile()) {
-      throw new Error(`Missing stop-action.json file for hook ${file}`);
+      throw new Error(`The stop-action.json file for hook ${file} must be a regular file`);
     }
-    const stopActionSchema = JSON.parse(
-      await readFile(`src/hooks/${file}/stop-action.json`, 'utf8'),
-    );
+    const stopActionSchema = JSON.parse(await readFile(stopActionSchemaFilePath, 'utf8'));
     const hookResultSchema = buildHookResult(file, valueSchema, stopActionSchema);
     await writeFile(`src/hooks/${file}/hook-result.json`, JSON.stringify(hookResultSchema));
+  } else {
+    console.error(`Unexpected file in the hooks directory: ${filePath}`);
   }
 }
 
