@@ -1,23 +1,27 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export interface FormSubmissionValue {
+export type InitialFormDataHookResult =
+  | InitialFormDataHookResultContinue
+  | InitialFormDataHookResultStop;
+
+export interface InitialFormDataHookResultContinue {
+  continue: true;
+  value: InitialFormDataValue;
+}
+export interface InitialFormDataValue {
   form: {
     id: string;
     title: string;
   };
   formData: ContextData;
-  sessionId: string;
   userId?: string;
-  stepId?: string;
-  finalStep: boolean;
-  submitterIpAddress?: string;
-  site?: {
+  site: {
     id: string;
     domain: string;
   };
 }
 /**
- * The data that was submitted in the form.
+ * The initial data for the form.
  */
 export interface ContextData {
   [k: string]:
@@ -40,3 +44,9 @@ export interface ContextData1 {
 export interface UploadedFile {
   fileId: string;
 }
+export interface InitialFormDataHookResultStop {
+  continue: false;
+  value?: InitialFormDataValue;
+  stopAction: InitialFormDataStopAction;
+}
+export interface InitialFormDataStopAction {}

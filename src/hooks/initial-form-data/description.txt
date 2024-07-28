@@ -1,0 +1,2 @@
+This hook allows customizing the data with which a form is initialized. For example, it can return different
+results depending on the user (if any) who is viewing the form and any data that the user has previously submitted.

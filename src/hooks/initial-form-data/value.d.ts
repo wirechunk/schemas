@@ -1,23 +1,19 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export interface FormSubmissionValue {
+export interface InitialFormDataValue {
   form: {
     id: string;
     title: string;
   };
   formData: ContextData;
-  sessionId: string;
   userId?: string;
-  stepId?: string;
-  finalStep: boolean;
-  submitterIpAddress?: string;
-  site?: {
+  site: {
     id: string;
     domain: string;
   };
 }
 /**
- * The data that was submitted in the form.
+ * The initial data for the form.
  */
 export interface ContextData {
   [k: string]:

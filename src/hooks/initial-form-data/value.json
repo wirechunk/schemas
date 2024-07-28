@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/form-submission/value.json",
+  "$id": "/hooks/initial-form-data/value.json",
   "type": "object",
-  "title": "FormSubmissionValue",
+  "title": "InitialFormDataValue",
   "properties": {
     "form": {
       "type": "object",
@@ -18,21 +18,9 @@
     },
     "formData": {
       "$ref": "../../context-data/context-data.json",
-      "description": "The data that was submitted in the form."
-    },
-    "sessionId": {
-      "type": "string"
+      "description": "The initial data for the form."
     },
     "userId": {
-      "type": "string"
-    },
-    "stepId": {
-      "type": "string"
-    },
-    "finalStep": {
-      "type": "boolean"
-    },
-    "submitterIpAddress": {
       "type": "string"
     },
     "site": {
@@ -48,5 +36,5 @@
       "required": ["id", "domain"]
     }
   },
-  "required": ["form", "formData", "sessionId", "finalStep"]
+  "required": ["form", "formData", "site"]
 }

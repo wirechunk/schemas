@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/initial-form-data/hook-result.json",
+  "title": "InitialFormDataHookResult",
+  "oneOf": [
+    {
+      "type": "object",
+      "title": "InitialFormDataHookResultContinue",
+      "properties": {
+        "continue": { "type": "boolean", "const": true },
+        "value": { "$ref": "./value.json" }
+      },
+      "required": ["continue", "value"]
+    },
+    {
+      "type": "object",
+      "title": "InitialFormDataHookResultStop",
+      "properties": {
+        "continue": { "type": "boolean", "const": false },
+        "value": { "$ref": "./value.json" },
+        "stopAction": { "$ref": "./stop-action.json" }
+      },
+      "required": ["continue", "stopAction"]
+    }
+  ]
+}
