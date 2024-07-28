@@ -12,14 +12,24 @@ export interface FormSubmissionHookResultContinue {
   value: FormSubmissionValue;
 }
 export interface FormSubmissionValue {
-  formId: string;
+  form: {
+    id: string;
+    title: string;
+  };
   formData: ContextData;
   sessionId: string;
   userId?: string;
   stepId?: string;
   finalStep: boolean;
   submitterIpAddress?: string;
+  site?: {
+    id: string;
+    domain: string;
+  };
 }
+/**
+ * The data that was submitted in the form.
+ */
 export interface ContextData {
   [k: string]:
     | (boolean | string | number | null | TimeDuration | DataTableRow[] | UploadedFile | string[])
@@ -31,7 +41,12 @@ export interface TimeDuration {
 }
 export interface DataTableRow {
   id: string;
-  data: ContextData;
+  data: ContextData1;
+}
+export interface ContextData1 {
+  [k: string]:
+    | (boolean | string | number | null | TimeDuration | DataTableRow[] | UploadedFile | string[])
+    | undefined;
 }
 export interface UploadedFile {
   fileId: string;
