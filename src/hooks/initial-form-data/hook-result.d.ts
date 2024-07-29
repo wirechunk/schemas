@@ -14,10 +14,13 @@ export interface InitialFormDataValue {
     title: string;
   };
   formData: ContextData;
+  /**
+   * The page where the form is being shown.
+   */
   page: {
     id: string;
     /**
-     * The full path (i.e., pathname) of the page, including the leading slash, where the form is being shown.
+     * The path of the page as saved in the database. This does not include a leading slash.
      */
     path: string;
   };
