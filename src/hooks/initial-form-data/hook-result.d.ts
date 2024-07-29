@@ -14,7 +14,7 @@ export interface InitialFormDataValue {
     title: string;
   };
   formData: ContextData;
-  page?: {
+  page: {
     id: string;
     /**
      * The full path (i.e., pathname) of the page, including the leading slash, where the form is being shown.

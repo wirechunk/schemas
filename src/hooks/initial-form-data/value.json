@@ -56,5 +56,5 @@
       "required": ["id", "domain"]
     }
   },
-  "required": ["form", "formData", "site"]
+  "required": ["form", "formData", "page", "site"]
 }
