@@ -22,13 +22,14 @@
     },
     "page": {
       "type": "object",
+      "description": "The page where the form is being shown.",
       "properties": {
         "id": {
           "type": "string"
         },
         "path": {
           "type": "string",
-          "description": "The full path (i.e., pathname) of the page, including the leading slash, where the form is being shown."
+          "description": "The path of the page as saved in the database. This does not include a leading slash."
         }
       },
       "required": ["id", "path"]
