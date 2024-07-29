@@ -6,7 +6,9 @@ export interface InitialFormDataValue {
     title: string;
   };
   formData: ContextData;
-  userId?: string;
+  user?: {
+    id: string;
+  };
   site: {
     id: string;
     domain: string;

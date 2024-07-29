@@ -20,8 +20,14 @@
       "$ref": "../../context-data/context-data.json",
       "description": "The initial data for the form."
     },
-    "userId": {
-      "type": "string"
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
     },
     "site": {
       "type": "object",

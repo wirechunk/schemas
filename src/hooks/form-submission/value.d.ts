@@ -7,10 +7,12 @@ export interface FormSubmissionValue {
   };
   formData: ContextData;
   sessionId: string;
-  userId?: string;
   stepId?: string;
   finalStep: boolean;
   submitterIpAddress?: string;
+  user?: {
+    id: string;
+  };
   site?: {
     id: string;
     domain: string;
