@@ -20,6 +20,19 @@
       "$ref": "../../context-data/context-data.json",
       "description": "The initial data for the form."
     },
+    "page": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "The full path (i.e., pathname) of the page, including the leading slash, where the form is being shown."
+        }
+      },
+      "required": ["id", "path"]
+    },
     "user": {
       "type": "object",
       "properties": {
@@ -31,6 +44,7 @@
     },
     "site": {
       "type": "object",
+      "description": "The site where the form is being shown.",
       "properties": {
         "id": {
           "type": "string"
