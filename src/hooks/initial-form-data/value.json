@@ -20,11 +20,31 @@
       "$ref": "../../context-data/context-data.json",
       "description": "The initial data for the form."
     },
-    "userId": {
-      "type": "string"
+    "page": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "The full path (i.e., pathname) of the page, including the leading slash, where the form is being shown."
+        }
+      },
+      "required": ["id", "path"]
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
     },
     "site": {
       "type": "object",
+      "description": "The site where the form is being shown.",
       "properties": {
         "id": {
           "type": "string"
@@ -36,5 +56,5 @@
       "required": ["id", "domain"]
     }
   },
-  "required": ["form", "formData", "site"]
+  "required": ["form", "formData", "page", "site"]
 }
