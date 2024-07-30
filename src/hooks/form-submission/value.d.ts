@@ -10,10 +10,14 @@ export interface FormSubmissionValue {
   stepId?: string;
   finalStep: boolean;
   submitterIpAddress?: string;
+  /**
+   * Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used.
+   */
+  saveToDatabase: boolean;
   user?: {
     id: string;
   };
-  site?: {
+  site: {
     id: string;
     domain: string;
   };

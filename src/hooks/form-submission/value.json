@@ -32,6 +32,10 @@
     "submitterIpAddress": {
       "type": "string"
     },
+    "saveToDatabase": {
+      "type": "boolean",
+      "description": "Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used."
+    },
     "user": {
       "type": "object",
       "properties": {
@@ -54,5 +58,5 @@
       "required": ["id", "domain"]
     }
   },
-  "required": ["form", "formData", "sessionId", "finalStep"]
+  "required": ["form", "formData", "sessionId", "finalStep", "saveToDatabase", "site"]
 }
