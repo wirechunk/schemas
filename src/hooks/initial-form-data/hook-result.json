@@ -6,21 +6,14 @@
     {
       "type": "object",
       "title": "InitialFormDataHookResultContinue",
-      "properties": {
-        "continue": { "type": "boolean", "const": true },
-        "value": { "$ref": "./value.json" }
-      },
-      "required": ["continue", "value"]
+      "properties": { "continue": { "$ref": "./value.json" } },
+      "required": ["continue"]
     },
     {
       "type": "object",
       "title": "InitialFormDataHookResultStop",
-      "properties": {
-        "continue": { "type": "boolean", "const": false },
-        "value": { "$ref": "./value.json" },
-        "stopAction": { "$ref": "./stop-action.json" }
-      },
-      "required": ["continue", "stopAction"]
+      "properties": { "stop": { "$ref": "./value.json" } },
+      "required": ["stop"]
     }
   ]
 }

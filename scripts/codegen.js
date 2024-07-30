@@ -38,7 +38,7 @@ const kebabToPascal = (kebab) =>
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join('');
 
-const buildHookResult = (hookName, valueSchema, stopActionSchema) => {
+const buildHookResult = (hookName, continueValueSchema, stopValueSchema) => {
   const hookNamePascal = kebabToPascal(hookName);
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
@@ -49,41 +49,17 @@ const buildHookResult = (hookName, valueSchema, stopActionSchema) => {
         type: 'object',
         title: `${hookNamePascal}HookResultContinue`,
         properties: {
-          continue: {
-            type: 'boolean',
-            const: true,
-          },
-          value:
-            typeof valueSchema === 'boolean'
-              ? valueSchema
-              : {
-                  $ref: './value.json',
-                },
+          continue: continueValueSchema,
         },
-        required: ['continue', 'value'],
+        required: ['continue'],
       },
       {
         type: 'object',
         title: `${hookNamePascal}HookResultStop`,
         properties: {
-          continue: {
-            type: 'boolean',
-            const: false,
-          },
-          value:
-            typeof valueSchema === 'boolean'
-              ? valueSchema
-              : {
-                  $ref: './value.json',
-                },
-          stopAction:
-            typeof stopActionSchema === 'boolean'
-              ? stopActionSchema
-              : {
-                  $ref: './stop-action.json',
-                },
+          stop: stopValueSchema,
         },
-        required: ['continue', 'stopAction'],
+        required: ['stop'],
       },
     ],
   };
@@ -91,32 +67,86 @@ const buildHookResult = (hookName, valueSchema, stopActionSchema) => {
 
 const hooksDir = await readdir('src/hooks');
 
-for (const file of hooksDir) {
-  const filePath = `src/hooks/${file}`;
+// It's important to check that we don't have any unrecognized files in any hook's directory so
+// that we don't accidentally ignore a file that was not named correctly.
+const possibleFileNamesInHookDirectory = [
+  'description.txt',
+  'hook-result.d.ts',
+  'hook-result.json',
+  'stop-value.d.ts',
+  'stop-value.json',
+  'value.d.ts',
+  'value.json',
+];
+
+const requiredFileNamesInHookDirectory = ['value.json'];
+
+for (const hookName of hooksDir) {
+  const filePath = `src/hooks/${hookName}`;
   const stat = await lstat(filePath);
   if (stat.isDirectory()) {
-    const valueSchemaFilePath = `src/hooks/${file}/value.json`;
-    if (!existsSync(valueSchemaFilePath)) {
-      throw new Error(`Missing a value.json file for hook ${file}`);
+    for (const requiredFileName of requiredFileNamesInHookDirectory) {
+      const requiredFilePath = `src/hooks/${hookName}/${requiredFileName}`;
+      if (!existsSync(requiredFilePath)) {
+        console.error(`Missing a required ${requiredFileName} file for hook ${hookName}`);
+        process.exit(1);
+      }
     }
+    const filesInHookDirectory = await readdir(filePath);
+    for (const fileInHookDirectory of filesInHookDirectory) {
+      if (!possibleFileNamesInHookDirectory.includes(fileInHookDirectory)) {
+        console.error(
+          `Unexpected file in the ${hookName} hook's directory: ${fileInHookDirectory}`,
+        );
+        process.exit(1);
+      }
+    }
+
+    const valueSchemaFilePath = `src/hooks/${hookName}/value.json`;
     const valueFileStat = await lstat(valueSchemaFilePath);
     if (!valueFileStat.isFile()) {
-      throw new Error(`The value.json file for hook ${file} must be a regular file`);
+      console.error(`The value.json file for the ${hookName} hook must be a regular file`);
+      process.exit(1);
     }
+
     const valueSchema = JSON.parse(await readFile(valueSchemaFilePath, 'utf8'));
-    const stopActionSchemaFilePath = `src/hooks/${file}/stop-action.json`;
-    if (!existsSync(stopActionSchemaFilePath)) {
-      throw new Error(`Missing a stop-action.json file for hook ${file}`);
+    if (valueSchema.$id !== `/hooks/${hookName}/value.json`) {
+      console.error(
+        `The $id in the value.json file for the ${hookName} hook must be "/hooks/${hookName}/value.json"`,
+      );
+      process.exit(1);
     }
-    const stopActionFileStat = await lstat(stopActionSchemaFilePath);
-    if (!stopActionFileStat.isFile()) {
-      throw new Error(`The stop-action.json file for hook ${file} must be a regular file`);
+
+    const continueValueSchemaRef = {
+      $ref: './value.json',
+    };
+    let stopValueSchemaRef;
+    const stopValueSchemaFilePath = `src/hooks/${hookName}/stop-value.json`;
+    if (existsSync(stopValueSchemaFilePath)) {
+      const stopValueFileStat = await lstat(stopValueSchemaFilePath);
+      if (!stopValueFileStat.isFile()) {
+        console.error(`The stop-value.json file for the ${hookName} hook must be a regular file`);
+        process.exit(1);
+      }
+      const stopValueSchema = JSON.parse(await readFile(stopValueSchemaFilePath, 'utf8'));
+      if (stopValueSchema.$id !== `/hooks/${hookName}/stop-value.json`) {
+        console.error(
+          `The $id in the stop-value.json file for the ${hookName} hook must be "/hooks/${hookName}/stop-value.json"`,
+        );
+        process.exit(1);
+      }
+      stopValueSchemaRef = {
+        $ref: './stop-value.json',
+      };
+    } else {
+      stopValueSchemaRef = continueValueSchemaRef;
     }
-    const stopActionSchema = JSON.parse(await readFile(stopActionSchemaFilePath, 'utf8'));
-    const hookResultSchema = buildHookResult(file, valueSchema, stopActionSchema);
-    await writeFile(`src/hooks/${file}/hook-result.json`, JSON.stringify(hookResultSchema));
+
+    const hookResultSchema = buildHookResult(hookName, continueValueSchemaRef, stopValueSchemaRef);
+    await writeFile(`src/hooks/${hookName}/hook-result.json`, JSON.stringify(hookResultSchema));
   } else {
     console.error(`Unexpected file in the hooks directory: ${filePath}`);
+    process.exit(1);
   }
 }
 

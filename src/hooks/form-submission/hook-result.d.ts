@@ -3,13 +3,9 @@
 export type FormSubmissionHookResult =
   | FormSubmissionHookResultContinue
   | FormSubmissionHookResultStop;
-export type FormSubmissionStopAction =
-  | FormSubmissionStopActionReject
-  | FormSubmissionStopActionSkipSave;
 
 export interface FormSubmissionHookResultContinue {
-  continue: true;
-  value: FormSubmissionValue;
+  continue: FormSubmissionValue;
 }
 export interface FormSubmissionValue {
   form: {
@@ -21,10 +17,14 @@ export interface FormSubmissionValue {
   stepId?: string;
   finalStep: boolean;
   submitterIpAddress?: string;
+  /**
+   * Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used.
+   */
+  saveToDatabase: boolean;
   user?: {
     id: string;
   };
-  site?: {
+  site: {
     id: string;
     domain: string;
   };
@@ -54,20 +54,12 @@ export interface UploadedFile {
   fileId: string;
 }
 export interface FormSubmissionHookResultStop {
-  continue: false;
-  value?: FormSubmissionValue;
-  stopAction: FormSubmissionStopAction;
+  stop: FormSubmissionStopValue;
 }
-/**
- * Do not save the form submission. Respond with an error message that will be shown to the end-user. This is a terminating response.
- */
-export interface FormSubmissionStopActionReject {
+export interface FormSubmissionStopValue {
   action: 'reject';
+  /**
+   * Do not save the form submission. Respond with an error message that will be shown to the user.
+   */
   message: string;
-}
-/**
- * Continue to other hooks (if any), but do not save the form submission. This is a terminating response.
- */
-export interface FormSubmissionStopActionSkipSave {
-  action: 'skipSave';
 }

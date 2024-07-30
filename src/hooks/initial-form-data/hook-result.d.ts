@@ -5,8 +5,7 @@ export type InitialFormDataHookResult =
   | InitialFormDataHookResultStop;
 
 export interface InitialFormDataHookResultContinue {
-  continue: true;
-  value: InitialFormDataValue;
+  continue: InitialFormDataValue;
 }
 export interface InitialFormDataValue {
   form: {
@@ -60,8 +59,5 @@ export interface UploadedFile {
   fileId: string;
 }
 export interface InitialFormDataHookResultStop {
-  continue: false;
-  value?: InitialFormDataValue;
-  stopAction: InitialFormDataStopAction;
+  stop: InitialFormDataValue;
 }
-export interface InitialFormDataStopAction {}
