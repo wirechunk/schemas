@@ -41,9 +41,12 @@
       "properties": {
         "id": {
           "type": "string"
+        },
+        "orgId": {
+          "type": "string"
         }
       },
-      "required": ["id"]
+      "required": ["id", "orgId"]
     },
     "site": {
       "type": "object",

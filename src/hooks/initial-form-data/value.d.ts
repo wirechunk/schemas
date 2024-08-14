@@ -18,6 +18,7 @@ export interface InitialFormDataValue {
   };
   user?: {
     id: string;
+    orgId: string;
   };
   /**
    * The site where the form is being shown.
