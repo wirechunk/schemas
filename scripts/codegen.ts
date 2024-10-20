@@ -1,6 +1,16 @@
 import { existsSync } from 'node:fs';
 import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
 import { compileFromFile } from 'json-schema-to-typescript';
+import type { SchemaObject } from 'ajv/dist/2020.d.ts';
+import { Ajv2020 } from 'ajv/dist/2020.js';
+import hookPropertiesSchema from '../src/meta/hook-properties-schema.json' with { type: 'json' };
+import type { HookPropertiesSchema } from '../src/meta/hook-properties-schema.d.ts';
+
+const ajv = new Ajv2020();
+
+ajv.addSchema([hookPropertiesSchema]);
+
+const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
 
 // Recurse through the src directory and for each file generate a corresponding TypeScript file.
 const generatorOptions = {
@@ -25,7 +35,9 @@ const codegenDirectoryToTypeScript = async (dirPath: string) => {
     const filePath = `${dirPath}/${file}`;
     const stat = await lstat(filePath);
     if (stat.isFile() && filePath.endsWith('.json')) {
-      await codegenFileToTypeScript(filePath);
+      if (!codegenExcludeFilePathPatterns.some((pattern) => pattern.test(filePath))) {
+        await codegenFileToTypeScript(filePath);
+      }
     } else if (stat.isDirectory()) {
       await codegenDirectoryToTypeScript(filePath);
     }
@@ -40,31 +52,37 @@ const kebabToPascal = (kebab: string) =>
 
 const buildHookResult = (
   hookName: string,
-  continueValueSchema: object,
-  stopValueSchema: object,
-) => {
+  properties: HookPropertiesSchema | undefined,
+): SchemaObject => {
+  const enableRejectResult = properties?.enableRejectResult ?? false;
   const hookNamePascal = kebabToPascal(hookName);
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: `/hooks/${hookName}/hook-result.json`,
-    title: `${hookNamePascal}HookResult`,
+    $id: `/hooks/${hookName}/result.json`,
+    title: `${hookNamePascal}Result`,
     oneOf: [
       {
+        title: `${hookNamePascal}Result`,
         type: 'object',
-        title: `${hookNamePascal}HookResultContinue`,
         properties: {
-          continue: continueValueSchema,
+          value: {
+            $ref: './value.json',
+          },
+          stop: {
+            description:
+              'If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.',
+            type: ['boolean', 'null'],
+          },
         },
-        required: ['continue'],
+        required: ['value'],
       },
-      {
-        type: 'object',
-        title: `${hookNamePascal}HookResultStop`,
-        properties: {
-          stop: stopValueSchema,
-        },
-        required: ['stop'],
-      },
+      ...(enableRejectResult
+        ? [
+            {
+              $ref: '../../hook-reject-result/hook-reject-result.json',
+            },
+          ]
+        : []),
     ],
   };
 };
@@ -74,20 +92,47 @@ const hooksDir = await readdir('src/hooks');
 // It's important to check that we don't have any unrecognized files in any hook's directory so
 // that we don't accidentally ignore a file that was not named correctly.
 const possibleFileNamesInHookDirectory = [
+  'context.d.ts',
+  'context.json',
   'description.txt',
-  'hook-result.d.ts',
-  'hook-result.json',
-  'stop-value.d.ts',
-  'stop-value.json',
+  // input.d.ts and input.json are always generated.
+  'input.d.ts',
+  'input.json',
+  'properties.json',
+  // result.d.ts and result.json are always generated.
+  'result.d.ts',
+  'result.json',
   'value.d.ts',
   'value.json',
 ];
 
-const requiredFileNamesInHookDirectory = ['value.json'];
+const requiredFileNamesInHookDirectory = ['description.txt'];
+
+const parseHookJsonSchema = async (
+  filePath: string,
+  hookName: string,
+  file: 'context' | 'value',
+): Promise<SchemaObject> => {
+  const contents = await readFile(filePath, 'utf8');
+  const schema: unknown = JSON.parse(contents);
+  const expectedId = `/hooks/${hookName}/${file}.json`;
+  if ((schema as { $id?: unknown } | null)?.$id !== expectedId) {
+    console.error(`The $id in the ${hookName} hook's ${expectedId} file must be "${expectedId}`);
+    process.exit(1);
+  }
+  const expectedTitle = `${kebabToPascal(hookName)}${kebabToPascal(file)}`;
+  if ((schema as { title?: unknown } | null)?.title !== expectedTitle) {
+    console.error(
+      `The title in the ${hookName} hook's ${expectedId} file must be "${expectedTitle}`,
+    );
+    process.exit(1);
+  }
+  return schema as SchemaObject;
+};
 
 for (const hookName of hooksDir) {
-  const filePath = `src/hooks/${hookName}`;
-  const stat = await lstat(filePath);
+  const hookDirPath = `src/hooks/${hookName}`;
+  const stat = await lstat(hookDirPath);
   if (stat.isDirectory()) {
     for (const requiredFileName of requiredFileNamesInHookDirectory) {
       const requiredFilePath = `src/hooks/${hookName}/${requiredFileName}`;
@@ -96,60 +141,54 @@ for (const hookName of hooksDir) {
         process.exit(1);
       }
     }
-    const filesInHookDirectory = await readdir(filePath);
-    for (const fileInHookDirectory of filesInHookDirectory) {
-      if (!possibleFileNamesInHookDirectory.includes(fileInHookDirectory)) {
-        console.error(
-          `Unexpected file in the ${hookName} hook's directory: ${fileInHookDirectory}`,
-        );
-        process.exit(1);
-      }
-    }
-
-    const valueSchemaFilePath = `src/hooks/${hookName}/value.json`;
-    const valueFileStat = await lstat(valueSchemaFilePath);
-    if (!valueFileStat.isFile()) {
-      console.error(`The value.json file for the ${hookName} hook must be a regular file`);
+    // Must have a context.json or value.json file, or both.
+    if (
+      !existsSync(`src/hooks/${hookName}/context.json`) &&
+      !existsSync(`src/hooks/${hookName}/value.json`)
+    ) {
+      console.error(`The ${hookName} hook must have a context.json or value.json file, or both`);
       process.exit(1);
     }
 
-    const valueSchema = JSON.parse(await readFile(valueSchemaFilePath, 'utf8'));
-    if (valueSchema.$id !== `/hooks/${hookName}/value.json`) {
-      console.error(
-        `The $id in the value.json file for the ${hookName} hook must be "/hooks/${hookName}/value.json"`,
-      );
-      process.exit(1);
-    }
+    let properties: HookPropertiesSchema | undefined = undefined;
 
-    const continueValueSchemaRef = {
-      $ref: './value.json',
-    };
-    let stopValueSchemaRef;
-    const stopValueSchemaFilePath = `src/hooks/${hookName}/stop-value.json`;
-    if (existsSync(stopValueSchemaFilePath)) {
-      const stopValueFileStat = await lstat(stopValueSchemaFilePath);
-      if (!stopValueFileStat.isFile()) {
-        console.error(`The stop-value.json file for the ${hookName} hook must be a regular file`);
+    for (const fileName of await readdir(hookDirPath)) {
+      if (!possibleFileNamesInHookDirectory.includes(fileName)) {
+        console.error(`Unexpected file in the ${hookName} hook's directory: ${fileName}`);
         process.exit(1);
       }
-      const stopValueSchema = JSON.parse(await readFile(stopValueSchemaFilePath, 'utf8'));
-      if (stopValueSchema.$id !== `/hooks/${hookName}/stop-value.json`) {
-        console.error(
-          `The $id in the stop-value.json file for the ${hookName} hook must be "/hooks/${hookName}/stop-value.json"`,
-        );
+      const filePath = `${hookDirPath}/${fileName}`;
+      const fileStat = await lstat(filePath);
+      if (!fileStat.isFile()) {
+        console.error(`The ${fileName} file for the ${hookName} hook must be a regular file`);
         process.exit(1);
       }
-      stopValueSchemaRef = {
-        $ref: './stop-value.json',
-      };
-    } else {
-      stopValueSchemaRef = continueValueSchemaRef;
+      switch (fileName) {
+        case 'context.json':
+          await parseHookJsonSchema(filePath, hookName, 'context');
+          break;
+        case 'value.json':
+          await parseHookJsonSchema(filePath, hookName, 'value');
+          break;
+        case 'properties.json': {
+          const parsedProperties: unknown = JSON.parse(await readFile(filePath, 'utf8'));
+          if (!ajv.validate<HookPropertiesSchema>(hookPropertiesSchema, parsedProperties)) {
+            console.error(
+              `The properties.json file for the ${hookName} hook is invalid: ${ajv.errorsText()}`,
+            );
+            process.exit(1);
+          }
+          properties = parsedProperties;
+        }
+      }
     }
 
-    const hookResultSchema = buildHookResult(hookName, continueValueSchemaRef, stopValueSchemaRef);
-    await writeFile(`src/hooks/${hookName}/hook-result.json`, JSON.stringify(hookResultSchema));
+    await writeFile(
+      `${hookDirPath}/result.json`,
+      JSON.stringify(buildHookResult(hookName, properties)),
+    );
   } else {
-    console.error(`Unexpected file in the hooks directory: ${filePath}`);
+    console.error(`Unexpected file in the hooks directory: ${hookDirPath}`);
     process.exit(1);
   }
 }

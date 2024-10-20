@@ -13,3 +13,4 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run codegen
       - run: git diff --exit-code src
+      - run: npm run typecheck-src

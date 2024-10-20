@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/meta/hook-properties-schema.json",
+  "title": "HookPropertiesSchema",
+  "type": "object",
+  "properties": {
+    "enableRejectResult": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

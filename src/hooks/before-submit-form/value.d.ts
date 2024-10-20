@@ -1,34 +1,11 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
 export interface BeforeSubmitFormValue {
-  form: {
-    id: string;
-    title: string;
-  };
   formData: ContextData;
-  sessionId: string;
-  stepId?: string;
-  finalStep: boolean;
-  submitterIpAddress?: string;
   /**
    * Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used.
    */
   saveToDatabase: boolean;
-  requestContext: {
-    /**
-     * The user making the request.
-     */
-    user?: {
-      id: string;
-    };
-    /**
-     * The site from which the request originated.
-     */
-    site: {
-      id: string;
-      domain: string;
-    };
-  };
 }
 /**
  * The data that was submitted in the form.

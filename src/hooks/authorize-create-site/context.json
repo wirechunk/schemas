@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/authorize-create-site/context.json",
+  "title": "AuthorizeCreateSiteContext",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "user": {
+      "$ref": "../../request-context/request-context-user.json"
+    },
+    "site": {
+      "$ref": "../../request-context/request-context-site.json"
+    }
+  },
+  "required": ["input", "user", "site"]
+}

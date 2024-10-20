@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-submit-form/context.json",
+  "title": "BeforeSubmitFormContext",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string"
+    },
+    "stepId": {
+      "type": "string"
+    },
+    "finalStep": {
+      "type": "boolean"
+    },
+    "submitterIpAddress": {
+      "type": "string"
+    },
+    "form": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "page": {
+      "description": "The page where the form is being shown.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "description": "The path of the page as saved in the database. This does not include a leading slash.",
+          "type": "string"
+        }
+      },
+      "required": ["id", "path"]
+    },
+    "user": {
+      "$ref": "../../request-context/request-context-user.json"
+    },
+    "site": {
+      "$ref": "../../request-context/request-context-site.json"
+    }
+  },
+  "required": ["sessionId", "finalStep", "form", "page", "site"]
+}

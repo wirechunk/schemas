@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/authorize-hook-result.json",
+  "title": "AuthorizeHookResult",
+  "oneOf": [
+    {
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": ["ok"]
+    },
+    {
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["ok", "message"]
+    }
+  ]
+}

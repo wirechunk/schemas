@@ -1,64 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/hooks/initial-form-data/value.json",
-  "type": "object",
   "title": "InitialFormDataValue",
+  "type": "object",
   "properties": {
-    "form": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "title"]
-    },
     "formData": {
       "$ref": "../../context-data/context-data.json",
       "description": "The initial data for the form."
-    },
-    "page": {
-      "type": "object",
-      "description": "The page where the form is being shown.",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string",
-          "description": "The path of the page as saved in the database. This does not include a leading slash."
-        }
-      },
-      "required": ["id", "path"]
-    },
-    "user": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "orgId": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "orgId"]
-    },
-    "site": {
-      "type": "object",
-      "description": "The site where the form is being shown.",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "domain"]
     }
   },
-  "required": ["form", "formData", "page", "site"]
+  "required": ["formData"]
 }

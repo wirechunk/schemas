@@ -1,39 +1,16 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export type InitialFormDataHookResult =
-  | InitialFormDataHookResultContinue
-  | InitialFormDataHookResultStop;
+export type InitialFormDataResult = InitialFormDataResult1;
 
-export interface InitialFormDataHookResultContinue {
-  continue: InitialFormDataValue;
+export interface InitialFormDataResult1 {
+  value: InitialFormDataValue;
+  /**
+   * If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.
+   */
+  stop?: boolean | null;
 }
 export interface InitialFormDataValue {
-  form: {
-    id: string;
-    title: string;
-  };
   formData: ContextData;
-  /**
-   * The page where the form is being shown.
-   */
-  page: {
-    id: string;
-    /**
-     * The path of the page as saved in the database. This does not include a leading slash.
-     */
-    path: string;
-  };
-  user?: {
-    id: string;
-    orgId: string;
-  };
-  /**
-   * The site where the form is being shown.
-   */
-  site: {
-    id: string;
-    domain: string;
-  };
 }
 /**
  * The initial data for the form.
@@ -58,7 +35,4 @@ export interface ContextData1 {
 }
 export interface UploadedFile {
   fileId: string;
-}
-export interface InitialFormDataHookResultStop {
-  stop: InitialFormDataValue;
 }

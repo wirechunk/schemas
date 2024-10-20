@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-create-site/context.json",
+  "title": "BeforeCreateSiteContext",
+  "type": "object",
+  "properties": {
+    "user": {
+      "$ref": "../../request-context/request-context-user.json"
+    },
+    "site": {
+      "$ref": "../../request-context/request-context-site.json"
+    }
+  },
+  "required": ["user", "site"]
+}
