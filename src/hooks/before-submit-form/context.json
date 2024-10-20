@@ -25,19 +25,9 @@
       },
       "required": ["id"]
     },
-    "page": {
-      "description": "The page where the form is being shown.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "path": {
-          "description": "The path of the page as saved in the database. This does not include a leading slash.",
-          "type": "string"
-        }
-      },
-      "required": ["id", "path"]
+    "pageUrl": {
+      "description": "The full URL of the page where the form is being shown.",
+      "type": "string"
     },
     "user": {
       "$ref": "../../request-context/request-context-user.json"
@@ -46,5 +36,5 @@
       "$ref": "../../request-context/request-context-site.json"
     }
   },
-  "required": ["sessionId", "finalStep", "form", "page", "site"]
+  "required": ["sessionId", "finalStep", "form", "pageUrl", "site"]
 }

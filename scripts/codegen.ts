@@ -71,7 +71,7 @@ const buildHookResult = (
   hookName: string,
   properties: HookPropertiesSchema | undefined,
 ): SchemaObject => {
-  const enableRejectResult = properties?.enableRejectResult ?? false;
+  const enableRejectResult = properties?.enableRejectResult ?? true;
   const hookNamePascal = kebabToPascal(hookName);
   const valueSchema: SchemaObject = {
     type: 'object',

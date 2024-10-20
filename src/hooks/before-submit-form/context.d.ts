@@ -9,15 +9,9 @@ export interface BeforeSubmitFormContext {
     id: string;
   };
   /**
-   * The page where the form is being shown.
+   * The full URL of the page where the form is being shown.
    */
-  page: {
-    id: string;
-    /**
-     * The path of the page as saved in the database. This does not include a leading slash.
-     */
-    path: string;
-  };
+  pageUrl: string;
   user?: RequestContextUser;
   site: RequestContextSite;
 }
