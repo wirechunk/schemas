@@ -22,12 +22,13 @@
   },
   "scripts": {
     "codegen": "npm run codegen:generate && npm run format",
-    "codegen:generate": "node scripts/codegen.js",
+    "codegen:generate": "node --experimental-transform-types scripts/codegen.ts",
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@types/node": "^20.14.11",
-    "json-schema-to-typescript": "^14.1.0",
-    "prettier": "^3.3.3"
+    "@types/node": "^22.7.7",
+    "json-schema-to-typescript": "^15.0.2",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
   }
 }

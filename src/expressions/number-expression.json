@@ -46,7 +46,7 @@
     },
     "currentTime": {
       "type": "object",
-      "description": "A timestamp in milliseconds since epoch",
+      "description": "A timestamp in milliseconds since epoch.",
       "properties": {
         "operator": {
           "const": "currentTime"
@@ -128,7 +128,7 @@
     },
     "timeLiteral": {
       "type": "object",
-      "description": "A timestamp in milliseconds since epoch",
+      "description": "A timestamp in milliseconds since epoch.",
       "properties": {
         "operator": {
           "const": "timeLiteral"

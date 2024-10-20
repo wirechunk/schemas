@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/form-submission/value.json",
+  "$id": "/hooks/before-submit-form/value.json",
   "type": "object",
-  "title": "FormSubmissionValue",
+  "title": "BeforeSubmitFormValue",
   "properties": {
     "form": {
       "type": "object",
@@ -36,30 +36,35 @@
       "type": "boolean",
       "description": "Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used."
     },
-    "user": {
+    "requestContext": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
+        "user": {
+          "type": "object",
+          "description": "The user making the request.",
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": ["id"]
         },
-        "orgId": {
-          "type": "string"
+        "site": {
+          "type": "object",
+          "description": "The site from which the request originated.",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "domain"]
         }
       },
-      "required": ["id", "orgId"]
-    },
-    "site": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "domain"]
+      "required": ["user", "site"]
     }
   },
-  "required": ["form", "formData", "sessionId", "finalStep", "saveToDatabase", "site"]
+  "required": ["form", "formData", "sessionId", "finalStep", "saveToDatabase", "requestContext"]
 }
