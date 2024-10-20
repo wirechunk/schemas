@@ -50,40 +50,52 @@ const kebabToPascal = (kebab: string) =>
     .map((word) => (word ? (word[0] as string).toUpperCase() + word.slice(1) : ''))
     .join('');
 
+const buildHookInput = (hookName: string, hasContext: boolean): SchemaObject => {
+  const hookNamePascal = kebabToPascal(hookName);
+  return {
+    $schema: 'https://json-schema.org/draft/2020-12/schema',
+    $id: `/hooks/${hookName}/input.json`,
+    title: `${hookNamePascal}Input`,
+    type: 'object',
+    properties: {
+      value: {
+        $ref: './value.json',
+      },
+      ...(hasContext ? { context: { $ref: './context.json' } } : {}),
+    },
+    required: ['value', ...(hasContext ? ['context'] : [])],
+  };
+};
+
 const buildHookResult = (
   hookName: string,
   properties: HookPropertiesSchema | undefined,
 ): SchemaObject => {
   const enableRejectResult = properties?.enableRejectResult ?? false;
   const hookNamePascal = kebabToPascal(hookName);
+  const valueSchema: SchemaObject = {
+    type: 'object',
+    properties: {
+      value: {
+        $ref: './value.json',
+      },
+      stop: {
+        description:
+          'If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.',
+        type: ['boolean', 'null'],
+      },
+    },
+    required: ['value'],
+  };
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
     $id: `/hooks/${hookName}/result.json`,
     title: `${hookNamePascal}Result`,
-    oneOf: [
-      {
-        title: `${hookNamePascal}Result`,
-        type: 'object',
-        properties: {
-          value: {
-            $ref: './value.json',
-          },
-          stop: {
-            description:
-              'If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.',
-            type: ['boolean', 'null'],
-          },
-        },
-        required: ['value'],
-      },
-      ...(enableRejectResult
-        ? [
-            {
-              $ref: '../../hook-reject-result/hook-reject-result.json',
-            },
-          ]
-        : []),
-    ],
+    ...(enableRejectResult
+      ? {
+          oneOf: [valueSchema, { $ref: '../../hook-reject-result/hook-reject-result.json' }],
+        }
+      : valueSchema),
   };
 };
 
@@ -106,7 +118,7 @@ const possibleFileNamesInHookDirectory = [
   'value.json',
 ];
 
-const requiredFileNamesInHookDirectory = ['description.txt'];
+const requiredFileNamesInHookDirectory = ['description.txt', 'value.json'];
 
 const parseHookJsonSchema = async (
   filePath: string,
@@ -141,15 +153,8 @@ for (const hookName of hooksDir) {
         process.exit(1);
       }
     }
-    // Must have a context.json or value.json file, or both.
-    if (
-      !existsSync(`src/hooks/${hookName}/context.json`) &&
-      !existsSync(`src/hooks/${hookName}/value.json`)
-    ) {
-      console.error(`The ${hookName} hook must have a context.json or value.json file, or both`);
-      process.exit(1);
-    }
 
+    let hasContext: boolean = false;
     let properties: HookPropertiesSchema | undefined = undefined;
 
     for (const fileName of await readdir(hookDirPath)) {
@@ -165,6 +170,7 @@ for (const hookName of hooksDir) {
       }
       switch (fileName) {
         case 'context.json':
+          hasContext = true;
           await parseHookJsonSchema(filePath, hookName, 'context');
           break;
         case 'value.json':
@@ -183,6 +189,10 @@ for (const hookName of hooksDir) {
       }
     }
 
+    await writeFile(
+      `${hookDirPath}/input.json`,
+      JSON.stringify(buildHookInput(hookName, hasContext)),
+    );
     await writeFile(
       `${hookDirPath}/result.json`,
       JSON.stringify(buildHookResult(hookName, properties)),
