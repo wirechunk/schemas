@@ -25,7 +25,7 @@ export interface BeforeSubmitFormValue {
     /**
      * The user making the request.
      */
-    user: {
+    user?: {
       id: string;
     };
     /**
