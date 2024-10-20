@@ -4,67 +4,14 @@
   "type": "object",
   "title": "BeforeSubmitFormValue",
   "properties": {
-    "form": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "title"]
-    },
     "formData": {
       "$ref": "../../context-data/context-data.json",
       "description": "The data that was submitted in the form."
     },
-    "sessionId": {
-      "type": "string"
-    },
-    "stepId": {
-      "type": "string"
-    },
-    "finalStep": {
-      "type": "boolean"
-    },
-    "submitterIpAddress": {
-      "type": "string"
-    },
     "saveToDatabase": {
       "type": "boolean",
       "description": "Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used."
-    },
-    "requestContext": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "object",
-          "description": "The user making the request.",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          },
-          "required": ["id"]
-        },
-        "site": {
-          "type": "object",
-          "description": "The site from which the request originated.",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "domain": {
-              "type": "string"
-            }
-          },
-          "required": ["id", "domain"]
-        }
-      },
-      "required": ["site"]
     }
   },
-  "required": ["form", "formData", "sessionId", "finalStep", "saveToDatabase", "requestContext"]
+  "required": ["formData", "saveToDatabase"]
 }

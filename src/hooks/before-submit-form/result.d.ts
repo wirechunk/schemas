@@ -1,5 +1,15 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
+export type BeforeSubmitFormResult =
+  | {
+      value: BeforeSubmitFormValue;
+      /**
+       * If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.
+       */
+      stop?: boolean | null;
+    }
+  | HookRejectResult;
+
 export interface BeforeSubmitFormValue {
   formData: ContextData;
   /**
@@ -30,4 +40,7 @@ export interface ContextData1 {
 }
 export interface UploadedFile {
   fileId: string;
+}
+export interface HookRejectResult {
+  reject: string;
 }

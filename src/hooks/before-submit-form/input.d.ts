@@ -1,41 +1,15 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export type BeforeSubmitFormHookResult =
-  | BeforeSubmitFormHookResultContinue
-  | BeforeSubmitFormHookResultStop;
-
-export interface BeforeSubmitFormHookResultContinue {
-  continue: BeforeSubmitFormValue;
+export interface BeforeSubmitFormInput {
+  value: BeforeSubmitFormValue;
+  context: BeforeSubmitFormContext;
 }
 export interface BeforeSubmitFormValue {
-  form: {
-    id: string;
-    title: string;
-  };
   formData: ContextData;
-  sessionId: string;
-  stepId?: string;
-  finalStep: boolean;
-  submitterIpAddress?: string;
   /**
    * Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used.
    */
   saveToDatabase: boolean;
-  requestContext: {
-    /**
-     * The user making the request.
-     */
-    user?: {
-      id: string;
-    };
-    /**
-     * The site from which the request originated.
-     */
-    site: {
-      id: string;
-      domain: string;
-    };
-  };
 }
 /**
  * The data that was submitted in the form.
@@ -61,13 +35,31 @@ export interface ContextData1 {
 export interface UploadedFile {
   fileId: string;
 }
-export interface BeforeSubmitFormHookResultStop {
-  stop: BeforeSubmitFormStopValue;
-}
-export interface BeforeSubmitFormStopValue {
-  action: 'reject';
+export interface BeforeSubmitFormContext {
+  sessionId: string;
+  stepId?: string;
+  finalStep: boolean;
+  submitterIpAddress?: string;
+  form: {
+    id: string;
+  };
   /**
-   * Do not save the form submission. Respond with an error message that will be shown to the user.
+   * The full URL of the page where the form is being shown.
    */
-  message: string;
+  pageUrl: string;
+  user?: RequestContextUser;
+  site: RequestContextSite;
+}
+/**
+ * The user making the request.
+ */
+export interface RequestContextUser {
+  id: string;
+}
+/**
+ * The site from which the request originated.
+ */
+export interface RequestContextSite {
+  id: string;
+  domain: string;
 }

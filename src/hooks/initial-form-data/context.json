@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/initial-form-data/context.json",
+  "title": "InitialFormDataContext",
+  "type": "object",
+  "properties": {
+    "form": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "pageUrl": {
+      "description": "The full URL of the page where the form is being shown.",
+      "type": "string"
+    },
+    "user": {
+      "$ref": "../../request-context/request-context-user.json"
+    },
+    "site": {
+      "$ref": "../../request-context/request-context-site.json"
+    }
+  },
+  "required": ["form", "pageUrl", "site"]
+}

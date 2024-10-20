@@ -1,0 +1,2 @@
+This hook is used to check if a user is permitted to create a site.
+It is fired before the before-create-site hook.

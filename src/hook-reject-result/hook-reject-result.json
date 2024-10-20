@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hook-reject-result/hook-reject-result.json",
+  "title": "HookRejectResult",
+  "type": "object",
+  "properties": {
+    "reject": {
+      "type": "string"
+    }
+  },
+  "required": ["reject"]
+}

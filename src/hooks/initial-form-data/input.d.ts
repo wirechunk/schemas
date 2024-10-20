@@ -1,14 +1,14 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export interface BeforeSubmitFormValue {
+export interface InitialFormDataInput {
+  value: InitialFormDataValue;
+  context: InitialFormDataContext;
+}
+export interface InitialFormDataValue {
   formData: ContextData;
-  /**
-   * Whether the form submission should be saved to the database. If there are multiple extensions handling this hook, the value of the last hook is used.
-   */
-  saveToDatabase: boolean;
 }
 /**
- * The data that was submitted in the form.
+ * The initial data for the form.
  */
 export interface ContextData {
   [k: string]:
@@ -30,4 +30,28 @@ export interface ContextData1 {
 }
 export interface UploadedFile {
   fileId: string;
+}
+export interface InitialFormDataContext {
+  form: {
+    id: string;
+  };
+  /**
+   * The full URL of the page where the form is being shown.
+   */
+  pageUrl: string;
+  user?: RequestContextUser;
+  site: RequestContextSite;
+}
+/**
+ * The user making the request.
+ */
+export interface RequestContextUser {
+  id: string;
+}
+/**
+ * The site from which the request originated.
+ */
+export interface RequestContextSite {
+  id: string;
+  domain: string;
 }
