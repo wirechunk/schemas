@@ -14,8 +14,12 @@
   },
   "homepage": "https://github.com/wirechunk/schemas#readme",
   "publishConfig": {
-    "provenance": true
+    "provenance": true,
+    "access": "public"
   },
+  "files": [
+    "src"
+  ],
   "exports": {
     "./*": "./src/*.d.ts",
     "./*.json": "./src/*.json"
