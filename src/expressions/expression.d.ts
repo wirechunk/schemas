@@ -82,7 +82,7 @@ export interface Count {
   arrayExpression: ArrayExpression;
 }
 /**
- * A timestamp in milliseconds since epoch
+ * A timestamp in milliseconds since epoch.
  */
 export interface CurrentTime {
   operator: 'currentTime';
@@ -112,7 +112,7 @@ export interface SumArray {
   arrayExpression: ArrayExpression;
 }
 /**
- * A timestamp in milliseconds since epoch
+ * A timestamp in milliseconds since epoch.
  */
 export interface TimeLiteral {
   operator: 'timeLiteral';

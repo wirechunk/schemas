@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/form-submission/stop-value.json",
-  "title": "FormSubmissionStopValue",
+  "$id": "/hooks/before-submit-form/stop-value.json",
+  "title": "BeforeSubmitFormStopValue",
   "type": "object",
   "properties": {
     "action": {

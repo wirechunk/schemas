@@ -1,17 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/form-submission/hook-result.json",
-  "title": "FormSubmissionHookResult",
+  "$id": "/hooks/before-create-site/hook-result.json",
+  "title": "BeforeCreateSiteHookResult",
   "oneOf": [
     {
       "type": "object",
-      "title": "FormSubmissionHookResultContinue",
+      "title": "BeforeCreateSiteHookResultContinue",
       "properties": { "continue": { "$ref": "./value.json" } },
       "required": ["continue"]
     },
     {
       "type": "object",
-      "title": "FormSubmissionHookResultStop",
+      "title": "BeforeCreateSiteHookResultStop",
       "properties": { "stop": { "$ref": "./stop-value.json" } },
       "required": ["stop"]
     }

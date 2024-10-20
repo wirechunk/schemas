@@ -13,13 +13,13 @@ const generatorOptions = {
 };
 
 // Read in the specified JSON Schema file, generate TypeScript, and output the new file next to the JSON file.
-const codegenFileToTypeScript = async (filePath) => {
+const codegenFileToTypeScript = async (filePath: string) => {
   const result = await compileFromFile(filePath, generatorOptions);
   const outFilePath = filePath.replace('.json', '.d.ts');
   await writeFile(outFilePath, result);
 };
 
-const codegenDirectoryToTypeScript = async (dirPath) => {
+const codegenDirectoryToTypeScript = async (dirPath: string) => {
   const files = await readdir(dirPath);
   for (const file of files) {
     const filePath = `${dirPath}/${file}`;
@@ -32,13 +32,17 @@ const codegenDirectoryToTypeScript = async (dirPath) => {
   }
 };
 
-const kebabToPascal = (kebab) =>
+const kebabToPascal = (kebab: string) =>
   kebab
     .split('-')
-    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .map((word) => (word ? (word[0] as string).toUpperCase() + word.slice(1) : ''))
     .join('');
 
-const buildHookResult = (hookName, continueValueSchema, stopValueSchema) => {
+const buildHookResult = (
+  hookName: string,
+  continueValueSchema: object,
+  stopValueSchema: object,
+) => {
   const hookNamePascal = kebabToPascal(hookName);
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',

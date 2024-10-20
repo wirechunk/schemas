@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-create-site/value.json",
+  "type": "object",
+  "title": "BeforeCreateSiteValue",
+  "properties": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "description": "The ID of the org that will own the site."
+        }
+      },
+      "required": ["name"]
+    },
+    "requestContext": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "description": "The user making the request.",
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": ["id"]
+        },
+        "site": {
+          "type": "object",
+          "description": "The site from which the request originated.",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "domain"]
+        }
+      },
+      "required": ["user", "site"]
+    }
+  },
+  "required": ["input", "requestContext"]
+}
