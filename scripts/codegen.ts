@@ -3,12 +3,47 @@ import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
 import { compileFromFile } from 'json-schema-to-typescript';
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
+import standaloneCode from 'ajv/dist/standalone/index.js';
 import hookPropertiesSchema from '../src/meta/hook-properties-schema.json' with { type: 'json' };
 import type { HookPropertiesSchema } from '../src/meta/hook-properties-schema.d.ts';
+import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-hook-result.json' with { type: 'json' };
+import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
+import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
+import requestContextSiteSchema from '../src/request-context/request-context-site.json' with { type: 'json' };
+import requestContextUserSchema from '../src/request-context/request-context-user.json' with { type: 'json' };
 
-const ajv = new Ajv2020();
+const ajvHookProperties = new Ajv2020();
 
-ajv.addSchema([hookPropertiesSchema]);
+ajvHookProperties.addSchema(hookPropertiesSchema);
+
+const ajv = new Ajv2020({
+  strict: true,
+  removeAdditional: true,
+  coerceTypes: false,
+  allErrors: false,
+  allowUnionTypes: true,
+  code: {
+    source: true,
+    esm: true,
+    optimize: 5,
+  },
+});
+
+ajv.addSchema([
+  authorizeHookResultSchema,
+  contextDataSchema,
+  hookRejectResultSchema,
+  requestContextSiteSchema,
+  requestContextUserSchema,
+]);
+
+const ajvNameMapping: Record<string, string> = {
+  validateAuthorizeHookResult: authorizeHookResultSchema.$id,
+  validateContextData: contextDataSchema.$id,
+  validateHookRejectResult: hookRejectResultSchema.$id,
+  validateRequestContextSite: requestContextSiteSchema.$id,
+  validateRequestContextUser: requestContextUserSchema.$id,
+};
 
 const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
 
@@ -99,6 +134,16 @@ const buildHookResult = (
   };
 };
 
+const requireNonEmptyString = (value: unknown): string => {
+  if (typeof value !== 'string') {
+    throw new Error(`Expected a string, got ${value}`);
+  }
+  if (!value) {
+    throw new Error('Expected a non-empty string');
+  }
+  return value;
+};
+
 const hooksDir = await readdir('src/hooks');
 
 // It's important to check that we don't have any unrecognized files in any hook's directory so
@@ -142,6 +187,14 @@ const parseHookJsonSchema = async (
   return schema as SchemaObject;
 };
 
+const validateFileImports = [
+  `import type { AuthorizeHookResult } from './authorize-hook-result/authorize-hook-result.js';`,
+  `import type { ContextData } from './context-data/context-data.js';`,
+  `import type { HookRejectResult } from './hook-reject-result/hook-reject-result.js';`,
+  `import type { RequestContextSite } from './request-context/request-context-site.js';`,
+  `import type { RequestContextUser } from './request-context/request-context-user.js';`,
+];
+
 for (const hookName of hooksDir) {
   const hookDirPath = `src/hooks/${hookName}`;
   const stat = await lstat(hookDirPath);
@@ -169,16 +222,36 @@ for (const hookName of hooksDir) {
         process.exit(1);
       }
       switch (fileName) {
-        case 'context.json':
+        case 'context.json': {
           hasContext = true;
-          await parseHookJsonSchema(filePath, hookName, 'context');
+          const schema = await parseHookJsonSchema(filePath, hookName, 'context');
+          ajv.addSchema(schema);
+          ajvNameMapping[`validate${requireNonEmptyString(schema.title)}`] = requireNonEmptyString(
+            schema.$id,
+          );
+          validateFileImports.push(
+            `import type { ${schema.title} } from './hooks/${hookName}/context.js';`,
+          );
           break;
-        case 'value.json':
-          await parseHookJsonSchema(filePath, hookName, 'value');
+        }
+        case 'value.json': {
+          const schema = await parseHookJsonSchema(filePath, hookName, 'value');
+          const title = schema.title;
+          ajv.addSchema(schema);
+          ajvNameMapping[`validate${requireNonEmptyString(title)}`] = requireNonEmptyString(
+            schema.$id,
+          );
+          validateFileImports.push(`import type { ${title} } from './hooks/${hookName}/value.js';`);
           break;
+        }
         case 'properties.json': {
           const parsedProperties: unknown = JSON.parse(await readFile(filePath, 'utf8'));
-          if (!ajv.validate<HookPropertiesSchema>(hookPropertiesSchema, parsedProperties)) {
+          if (
+            !ajvHookProperties.validate<HookPropertiesSchema>(
+              hookPropertiesSchema,
+              parsedProperties,
+            )
+          ) {
             console.error(
               `The properties.json file for the ${hookName} hook is invalid: ${ajv.errorsText()}`,
             );
@@ -189,18 +262,54 @@ for (const hookName of hooksDir) {
       }
     }
 
-    await writeFile(
-      `${hookDirPath}/input.json`,
-      JSON.stringify(buildHookInput(hookName, hasContext)),
+    validateFileImports.push(
+      `import type { ${kebabToPascal(hookName)}Input } from './hooks/${hookName}/input.js';`,
+      `import type { ${kebabToPascal(hookName)}Result } from './hooks/${hookName}/result.js';`,
     );
-    await writeFile(
-      `${hookDirPath}/result.json`,
-      JSON.stringify(buildHookResult(hookName, properties)),
+
+    const inputSchema = buildHookInput(hookName, hasContext);
+    ajv.addSchema(inputSchema);
+    ajvNameMapping[`validate${requireNonEmptyString(inputSchema.title)}`] = requireNonEmptyString(
+      inputSchema.$id,
     );
+    await writeFile(`${hookDirPath}/input.json`, JSON.stringify(inputSchema));
+
+    const resultSchema = buildHookResult(hookName, properties);
+    ajv.addSchema(resultSchema);
+    ajvNameMapping[`validate${requireNonEmptyString(resultSchema.title)}`] = requireNonEmptyString(
+      resultSchema.$id,
+    );
+    await writeFile(`${hookDirPath}/result.json`, JSON.stringify(resultSchema));
   } else {
     console.error(`Unexpected file in the hooks directory: ${hookDirPath}`);
     process.exit(1);
   }
 }
+
+await writeFile('src/validate.js', (standaloneCode as any)(ajv, ajvNameMapping));
+
+const validateTypings = Object.keys(ajvNameMapping).map((name) => {
+  const typeName = name.slice('validate'.length);
+  return `declare const ${name}: {
+    (value: unknown): value is ${typeName};
+    errors?: SchemaValidationError[] | null;
+  };`;
+});
+
+await writeFile(
+  'src/validate.d.ts',
+  `${validateFileImports.join('\n')}
+
+export type SchemaValidationError = {
+  keyword: string;
+  instancePath: string;
+  schemaPath: string;
+  params: Record<string, unknown>;
+  message?: string;
+};
+
+${validateTypings.join('\n')}
+`,
+);
 
 await codegenDirectoryToTypeScript('src');
