@@ -21,6 +21,10 @@
     "src"
   ],
   "exports": {
+    "./validate": {
+      "import": "./src/validate.js",
+      "types": "./src/validate.d.ts"
+    },
     "./*": "./src/*.d.ts",
     "./*.json": "./src/*.json"
   },
