@@ -2,15 +2,6 @@
 
 export type CustomField = BooleanCustomField | IntCustomField | StringCustomField;
 
-export interface BeforeCreateSiteValue {
-  name: string;
-  domain?: string;
-  /**
-   * The ID of the org that will own the site.
-   */
-  orgId?: string;
-  customFields: CustomField[];
-}
 export interface BooleanCustomField {
   type: 'Boolean';
   key: string;

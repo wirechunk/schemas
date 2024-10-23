@@ -1,5 +1,6 @@
 import type { AuthorizeHookResult } from './authorize-hook-result/authorize-hook-result.js';
 import type { ContextData } from './context-data/context-data.js';
+import type { CustomField } from './custom-field/custom-field.js';
 import type { HookRejectResult } from './hook-reject-result/hook-reject-result.js';
 import type { RequestContextSite } from './request-context/request-context-site.js';
 import type { RequestContextUser } from './request-context/request-context-user.js';
@@ -34,6 +35,10 @@ export declare const validateAuthorizeHookResult: {
 };
 export declare const validateContextData: {
   (value: unknown): value is ContextData;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateCustomField: {
+  (value: unknown): value is CustomField;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateHookRejectResult: {

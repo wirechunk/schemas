@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/custom-field/custom-field.json",
+  "title": "CustomField",
+  "oneOf": [
+    {
+      "title": "BooleanCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Boolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "IntCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Int"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "StringCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "String"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "key", "value"]
+    }
+  ]
+}
