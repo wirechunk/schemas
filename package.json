@@ -1,6 +1,6 @@
 {
   "name": "@wirechunk/schemas",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Wirechunk schemas with type definitions",
   "type": "module",
   "repository": {
@@ -22,11 +22,15 @@
   ],
   "exports": {
     "./validate": {
-      "import": "./src/validate.js",
-      "types": "./src/validate.d.ts"
+      "types": "./src/validate.d.ts",
+      "import": "./src/validate.js"
     },
-    "./*": "./src/*.d.ts",
-    "./*.json": "./src/*.json"
+    "./*.json": {
+      "import": "./src/*.json"
+    },
+    "./*": {
+      "import": "./src/*.d.ts"
+    }
   },
   "scripts": {
     "codegen": "npm run codegen:generate && npm run format",

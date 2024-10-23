@@ -290,7 +290,7 @@ await writeFile('src/validate.js', (standaloneCode as any)(ajv, ajvNameMapping))
 
 const validateTypings = Object.keys(ajvNameMapping).map((name) => {
   const typeName = name.slice('validate'.length);
-  return `declare const ${name}: {
+  return `export declare const ${name}: {
     (value: unknown): value is ${typeName};
     errors?: SchemaValidationError[] | null;
   };`;
