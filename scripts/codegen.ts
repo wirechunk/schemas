@@ -12,6 +12,7 @@ import customFieldSchmea from '../src/custom-field/custom-field.json' with { typ
 import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
 import requestContextSiteSchema from '../src/request-context/request-context-site.json' with { type: 'json' };
 import requestContextUserSchema from '../src/request-context/request-context-user.json' with { type: 'json' };
+import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
 
 const ajvHookProperties = new Ajv2020();
 
@@ -37,6 +38,7 @@ ajv.addSchema([
   hookRejectResultSchema,
   requestContextSiteSchema,
   requestContextUserSchema,
+  richTextSchema,
 ]);
 
 const ajvNameMapping: Record<string, string> = {
@@ -46,6 +48,7 @@ const ajvNameMapping: Record<string, string> = {
   validateHookRejectResult: hookRejectResultSchema.$id,
   validateRequestContextSite: requestContextSiteSchema.$id,
   validateRequestContextUser: requestContextUserSchema.$id,
+  validateRichText: richTextSchema.$id,
 };
 
 const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
@@ -197,6 +200,7 @@ const validateFileImports = [
   `import type { HookRejectResult } from './hook-reject-result/hook-reject-result.js';`,
   `import type { RequestContextSite } from './request-context/request-context-site.js';`,
   `import type { RequestContextUser } from './request-context/request-context-user.js';`,
+  `import type { RichText } from './custom-field/rich-text.js';`,
 ];
 
 for (const hookName of hooksDir) {

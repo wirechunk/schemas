@@ -4,6 +4,7 @@ import type { CustomField } from './custom-field/custom-field.js';
 import type { HookRejectResult } from './hook-reject-result/hook-reject-result.js';
 import type { RequestContextSite } from './request-context/request-context-site.js';
 import type { RequestContextUser } from './request-context/request-context-user.js';
+import type { RichText } from './custom-field/rich-text.js';
 import type { AuthorizeCreateSiteContext } from './hooks/authorize-create-site/context.js';
 import type { AuthorizeCreateSiteValue } from './hooks/authorize-create-site/value.js';
 import type { AuthorizeCreateSiteInput } from './hooks/authorize-create-site/input.js';
@@ -51,6 +52,10 @@ export declare const validateRequestContextSite: {
 };
 export declare const validateRequestContextUser: {
   (value: unknown): value is RequestContextUser;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateRichText: {
+  (value: unknown): value is RichText;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateAuthorizeCreateSiteContext: {
