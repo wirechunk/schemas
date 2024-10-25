@@ -11,19 +11,6 @@ export type CustomField =
   | OptionalStringCustomField;
 export type RichText = Delta;
 
-export interface BeforeCreateSiteInput {
-  value: BeforeCreateSiteValue;
-  context: BeforeCreateSiteContext;
-}
-export interface BeforeCreateSiteValue {
-  name: string;
-  domain?: string;
-  /**
-   * The ID of the org that will own the site.
-   */
-  orgId?: string;
-  customFields: CustomField[];
-}
 export interface BooleanCustomField {
   type: 'Boolean';
   key: string;
@@ -71,21 +58,4 @@ export interface OptionalStringCustomField {
   type: 'OptionalString';
   key: string;
   value: string | null;
-}
-export interface BeforeCreateSiteContext {
-  user: RequestContextUser;
-  site: RequestContextSite;
-}
-/**
- * The user making the request.
- */
-export interface RequestContextUser {
-  id: string;
-}
-/**
- * The site from which the request originated.
- */
-export interface RequestContextSite {
-  id: string;
-  domain: string;
 }

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/custom-field/custom-field.json",
+  "title": "CustomField",
+  "oneOf": [
+    {
+      "title": "BooleanCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Boolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "IntCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Int"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "RichTextCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "RichText"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "rich-text.json"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "StringCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "String"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "OptionalBooleanCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "OptionalBoolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "OptionalIntCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "OptionalInt"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "OptionalRichTextCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "OptionalRichText"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "rich-text.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["type", "key", "value"]
+    },
+    {
+      "title": "OptionalStringCustomField",
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "OptionalString"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["type", "key", "value"]
+    }
+  ]
+}

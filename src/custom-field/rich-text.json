@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/custom-field/rich-text.json",
+  "title": "RichText",
+  "oneOf": [
+    {
+      "title": "Delta",
+      "type": "object",
+      "properties": {
+        "delta": {
+          "type": "object",
+          "properties": {
+            "ops": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "insert": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "attributes": {
+                    "type": "object"
+                  }
+                },
+                "required": ["insert"]
+              }
+            }
+          },
+          "required": ["ops"]
+        }
+      },
+      "required": ["delta"]
+    }
+  ]
+}

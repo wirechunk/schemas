@@ -8,9 +8,11 @@ import hookPropertiesSchema from '../src/meta/hook-properties-schema.json' with 
 import type { HookPropertiesSchema } from '../src/meta/hook-properties-schema.d.ts';
 import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-hook-result.json' with { type: 'json' };
 import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
+import customFieldSchmea from '../src/custom-field/custom-field.json' with { type: 'json' };
 import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
 import requestContextSiteSchema from '../src/request-context/request-context-site.json' with { type: 'json' };
 import requestContextUserSchema from '../src/request-context/request-context-user.json' with { type: 'json' };
+import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
 
 const ajvHookProperties = new Ajv2020();
 
@@ -32,17 +34,21 @@ const ajv = new Ajv2020({
 ajv.addSchema([
   authorizeHookResultSchema,
   contextDataSchema,
+  customFieldSchmea,
   hookRejectResultSchema,
   requestContextSiteSchema,
   requestContextUserSchema,
+  richTextSchema,
 ]);
 
 const ajvNameMapping: Record<string, string> = {
   validateAuthorizeHookResult: authorizeHookResultSchema.$id,
   validateContextData: contextDataSchema.$id,
+  validateCustomField: customFieldSchmea.$id,
   validateHookRejectResult: hookRejectResultSchema.$id,
   validateRequestContextSite: requestContextSiteSchema.$id,
   validateRequestContextUser: requestContextUserSchema.$id,
+  validateRichText: richTextSchema.$id,
 };
 
 const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
@@ -190,9 +196,11 @@ const parseHookJsonSchema = async (
 const validateFileImports = [
   `import type { AuthorizeHookResult } from './authorize-hook-result/authorize-hook-result.js';`,
   `import type { ContextData } from './context-data/context-data.js';`,
+  `import type { CustomField } from './custom-field/custom-field.js';`,
   `import type { HookRejectResult } from './hook-reject-result/hook-reject-result.js';`,
   `import type { RequestContextSite } from './request-context/request-context-site.js';`,
   `import type { RequestContextUser } from './request-context/request-context-user.js';`,
+  `import type { RichText } from './custom-field/rich-text.js';`,
 ];
 
 for (const hookName of hooksDir) {

@@ -13,7 +13,11 @@
     "orgId": {
       "type": "string",
       "description": "The ID of the org that will own the site."
+    },
+    "customFields": {
+      "type": "array",
+      "items": { "$ref": "../../custom-field/custom-field.json" }
     }
   },
-  "required": ["name"]
+  "required": ["name", "customFields"]
 }
