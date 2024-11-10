@@ -9,10 +9,18 @@ import type { AuthorizeCreateSiteContext } from './hooks/authorize-create-site/c
 import type { AuthorizeCreateSiteValue } from './hooks/authorize-create-site/value.js';
 import type { AuthorizeCreateSiteInput } from './hooks/authorize-create-site/input.js';
 import type { AuthorizeCreateSiteResult } from './hooks/authorize-create-site/result.js';
+import type { AuthorizeEditSiteContext } from './hooks/authorize-edit-site/context.js';
+import type { AuthorizeEditSiteValue } from './hooks/authorize-edit-site/value.js';
+import type { AuthorizeEditSiteInput } from './hooks/authorize-edit-site/input.js';
+import type { AuthorizeEditSiteResult } from './hooks/authorize-edit-site/result.js';
 import type { BeforeCreateSiteContext } from './hooks/before-create-site/context.js';
 import type { BeforeCreateSiteValue } from './hooks/before-create-site/value.js';
 import type { BeforeCreateSiteInput } from './hooks/before-create-site/input.js';
 import type { BeforeCreateSiteResult } from './hooks/before-create-site/result.js';
+import type { BeforeEditSiteContext } from './hooks/before-edit-site/context.js';
+import type { BeforeEditSiteValue } from './hooks/before-edit-site/value.js';
+import type { BeforeEditSiteInput } from './hooks/before-edit-site/input.js';
+import type { BeforeEditSiteResult } from './hooks/before-edit-site/result.js';
 import type { BeforeSubmitFormContext } from './hooks/before-submit-form/context.js';
 import type { BeforeSubmitFormValue } from './hooks/before-submit-form/value.js';
 import type { BeforeSubmitFormInput } from './hooks/before-submit-form/input.js';
@@ -74,6 +82,22 @@ export declare const validateAuthorizeCreateSiteResult: {
   (value: unknown): value is AuthorizeCreateSiteResult;
   errors?: SchemaValidationError[] | null;
 };
+export declare const validateAuthorizeEditSiteContext: {
+  (value: unknown): value is AuthorizeEditSiteContext;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteValue: {
+  (value: unknown): value is AuthorizeEditSiteValue;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteInput: {
+  (value: unknown): value is AuthorizeEditSiteInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteResult: {
+  (value: unknown): value is AuthorizeEditSiteResult;
+  errors?: SchemaValidationError[] | null;
+};
 export declare const validateBeforeCreateSiteContext: {
   (value: unknown): value is BeforeCreateSiteContext;
   errors?: SchemaValidationError[] | null;
@@ -88,6 +112,22 @@ export declare const validateBeforeCreateSiteInput: {
 };
 export declare const validateBeforeCreateSiteResult: {
   (value: unknown): value is BeforeCreateSiteResult;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeEditSiteContext: {
+  (value: unknown): value is BeforeEditSiteContext;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeEditSiteValue: {
+  (value: unknown): value is BeforeEditSiteValue;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeEditSiteInput: {
+  (value: unknown): value is BeforeEditSiteInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeEditSiteResult: {
+  (value: unknown): value is BeforeEditSiteResult;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateBeforeSubmitFormContext: {
