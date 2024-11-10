@@ -3,10 +3,12 @@
 /**
  * The context of the request. Either adminUser or user will be set.
  */
-export interface AuthorizeCreateSiteContext {
+export interface AuthorizeEditSiteDomainContext {
   input: {
-    name: string;
-    domain?: string;
+    /**
+     * The ID of the site being edited.
+     */
+    id: string;
   };
   adminUser?: RequestContextAdminUser;
   user?: RequestContextUser;

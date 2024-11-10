@@ -51,7 +51,7 @@ export interface BeforeSubmitFormContext {
   site: RequestContextSite;
 }
 /**
- * The user making the request.
+ * The user making the request. This user belongs to the platform on which the request is being made.
  */
 export interface RequestContextUser {
   id: string;

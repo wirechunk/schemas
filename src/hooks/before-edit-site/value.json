@@ -19,5 +19,5 @@
       "items": { "$ref": "../../custom-field/custom-field.json" }
     }
   },
-  "required": ["name", "customFields"]
+  "required": ["name", "domain", "customFields"]
 }

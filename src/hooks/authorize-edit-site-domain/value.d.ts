@@ -3,7 +3,7 @@
 /**
  * An object indicating whether a user is authorized to perform a specific action. The initial value is determined by the user’s permissions on the platform where the action is happening.
  */
-export type AuthorizeCreateSiteValue =
+export type AuthorizeEditSiteDomainValue =
   | {
       ok: true;
     }

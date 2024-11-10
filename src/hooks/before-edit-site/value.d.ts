@@ -13,7 +13,7 @@ export type RichText = Delta;
 
 export interface BeforeEditSiteValue {
   name: string;
-  domain?: string;
+  domain: string;
   /**
    * The ID of the org that will own the site.
    */

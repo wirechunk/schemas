@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/request-context/request-context-user.json",
   "title": "RequestContextUser",
-  "description": "The user making the request.",
+  "description": "The user making the request. This user belongs to the platform on which the request is being made.",
   "type": "object",
   "properties": {
     "id": {

@@ -1,2 +1,3 @@
 This hook is used to check if a user is permitted to edit a site.
 It is fired before the before-edit-site hook.
+Note that the authorize-edit-site-domain hook is used to check if a user is permitted to edit a site's domain.
