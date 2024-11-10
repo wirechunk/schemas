@@ -1,4 +1,3 @@
-This hook is used to check if an end-user is permitted to edit a site.
-This hook is not used for platform admin users, whose access is controlled using platform settings.
+This hook is used to check if a user is permitted to edit a site.
 It is fired before the before-edit-site hook.
 Note that the authorize-edit-site-domain hook is used to check if a user is permitted to edit a site's domain.
