@@ -3489,7 +3489,7 @@ const schema44 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-create-site/context.json',
   title: 'AuthorizeCreateSiteContext',
-  description: 'The context of the createSite request. Either adminUser or user will be set.',
+  description: 'The context of the request. Either adminUser or user will be set.',
   type: 'object',
   properties: {
     input: {
@@ -4335,7 +4335,7 @@ const schema52 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site/context.json',
   title: 'AuthorizeEditSiteContext',
-  description: 'The context of the createSite request. Either adminUser or user will be set.',
+  description: 'The context of the request. Either adminUser or user will be set.',
   type: 'object',
   properties: {
     input: {
@@ -5143,7 +5143,7 @@ const schema60 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site-domain/context.json',
   title: 'AuthorizeEditSiteDomainContext',
-  description: 'The context of the createSite request. Either adminUser or user will be set.',
+  description: 'The context of the request. Either adminUser or user will be set.',
   type: 'object',
   properties: {
     input: {

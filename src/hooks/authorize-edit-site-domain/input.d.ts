@@ -17,7 +17,7 @@ export interface AuthorizeEditSiteDomainInput {
   context: AuthorizeEditSiteDomainContext;
 }
 /**
- * The context of the createSite request. Either adminUser or user will be set.
+ * The context of the request. Either adminUser or user will be set.
  */
 export interface AuthorizeEditSiteDomainContext {
   input: {

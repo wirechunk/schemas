@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/hooks/authorize-create-site/context.json",
   "title": "AuthorizeCreateSiteContext",
-  "description": "The context of the createSite request. Either adminUser or user will be set.",
+  "description": "The context of the request. Either adminUser or user will be set.",
   "type": "object",
   "properties": {
     "input": {

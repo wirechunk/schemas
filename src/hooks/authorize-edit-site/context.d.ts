@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
 /**
- * The context of the createSite request. Either adminUser or user will be set.
+ * The context of the request. Either adminUser or user will be set.
  */
 export interface AuthorizeEditSiteContext {
   input: {
