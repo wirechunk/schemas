@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-edit-site/value.json",
+  "title": "BeforeEditSiteValue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "orgId": {
+      "type": "string",
+      "description": "The ID of the org that will own the site."
+    },
+    "customFields": {
+      "type": "array",
+      "items": { "$ref": "../../custom-field/custom-field.json" }
+    }
+  },
+  "required": ["name", "customFields"]
+}

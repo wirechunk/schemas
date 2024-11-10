@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/authorize-edit-site/context.json",
+  "title": "AuthorizeEditSiteContext",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the site being edited.",
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "user": {
+      "$ref": "../../request-context/request-context-user.json"
+    },
+    "site": {
+      "$ref": "../../request-context/request-context-site.json"
+    }
+  },
+  "required": ["input", "user", "site"]
+}

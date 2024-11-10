@@ -1,0 +1,1 @@
+This hook is fired before a site is edited. It can be used to modify the input data or to prevent the request with an error message.

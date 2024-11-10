@@ -1,0 +1,2 @@
+This hook is used to check if a user is permitted to edit a site.
+It is fired before the before-edit-site hook.
