@@ -1,21 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/authorize-create-site/context.json",
-  "title": "AuthorizeCreateSiteContext",
+  "$id": "/hooks/authorize-edit-site-domain/context.json",
+  "title": "AuthorizeEditSiteDomainContext",
   "description": "The context of the createSite request. Either adminUser or user will be set.",
   "type": "object",
   "properties": {
     "input": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "domain": {
+        "id": {
+          "description": "The ID of the site being edited.",
           "type": "string"
         }
       },
-      "required": ["name"]
+      "required": ["id"]
     },
     "adminUser": {
       "$ref": "../../request-context/request-context-admin-user.json"

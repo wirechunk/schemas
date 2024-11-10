@@ -10,6 +10,7 @@ import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-ho
 import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
 import customFieldSchmea from '../src/custom-field/custom-field.json' with { type: 'json' };
 import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
+import requestContextAdminUserSchema from '../src/request-context/request-context-admin-user.json' with { type: 'json' };
 import requestContextSiteSchema from '../src/request-context/request-context-site.json' with { type: 'json' };
 import requestContextUserSchema from '../src/request-context/request-context-user.json' with { type: 'json' };
 import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
@@ -36,6 +37,7 @@ ajv.addSchema([
   contextDataSchema,
   customFieldSchmea,
   hookRejectResultSchema,
+  requestContextAdminUserSchema,
   requestContextSiteSchema,
   requestContextUserSchema,
   richTextSchema,

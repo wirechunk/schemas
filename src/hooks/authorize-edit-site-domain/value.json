@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/authorize-edit-site-domain/value.json",
+  "title": "AuthorizeEditSiteDomainValue",
+  "$ref": "../../authorize-hook-result/authorize-hook-result.json"
+}

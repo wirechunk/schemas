@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/authorize-edit-site-domain/result.json",
+  "title": "AuthorizeEditSiteDomainResult",
+  "type": "object",
+  "properties": {
+    "value": { "$ref": "./value.json" },
+    "stop": {
+      "description": "If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.",
+      "type": ["boolean", "null"]
+    }
+  },
+  "required": ["value"]
+}

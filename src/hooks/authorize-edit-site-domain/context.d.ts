@@ -1,19 +1,26 @@
 // DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.
 
-export interface BeforeSubmitFormContext {
-  sessionId: string;
-  stepId?: string;
-  finalStep: boolean;
-  submitterIpAddress?: string;
-  form: {
+/**
+ * The context of the createSite request. Either adminUser or user will be set.
+ */
+export interface AuthorizeEditSiteDomainContext {
+  input: {
+    /**
+     * The ID of the site being edited.
+     */
     id: string;
   };
-  /**
-   * The full URL of the page where the form is being shown.
-   */
-  pageUrl: string;
+  adminUser?: RequestContextAdminUser;
   user?: RequestContextUser;
   site: RequestContextSite;
+}
+/**
+ * The admin user making the request. Extensions do not see this user in the Users table.
+ */
+export interface RequestContextAdminUser {
+  id: string;
+  email: string;
+  permissions: string[];
 }
 /**
  * The user making the request. This user belongs to the platform on which the request is being made.

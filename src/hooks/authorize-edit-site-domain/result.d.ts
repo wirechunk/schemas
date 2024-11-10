@@ -3,7 +3,7 @@
 /**
  * An object indicating whether a user is authorized to perform a specific action. The initial value is determined by the user’s permissions on the platform where the action is happening.
  */
-export type AuthorizeCreateSiteValue =
+export type AuthorizeEditSiteDomainValue =
   | {
       ok: true;
     }
@@ -11,3 +11,11 @@ export type AuthorizeCreateSiteValue =
       ok: false;
       message: string;
     };
+
+export interface AuthorizeEditSiteDomainResult {
+  value: AuthorizeEditSiteDomainValue;
+  /**
+   * If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.
+   */
+  stop?: boolean | null;
+}

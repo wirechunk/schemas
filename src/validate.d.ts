@@ -13,6 +13,10 @@ import type { AuthorizeEditSiteContext } from './hooks/authorize-edit-site/conte
 import type { AuthorizeEditSiteValue } from './hooks/authorize-edit-site/value.js';
 import type { AuthorizeEditSiteInput } from './hooks/authorize-edit-site/input.js';
 import type { AuthorizeEditSiteResult } from './hooks/authorize-edit-site/result.js';
+import type { AuthorizeEditSiteDomainContext } from './hooks/authorize-edit-site-domain/context.js';
+import type { AuthorizeEditSiteDomainValue } from './hooks/authorize-edit-site-domain/value.js';
+import type { AuthorizeEditSiteDomainInput } from './hooks/authorize-edit-site-domain/input.js';
+import type { AuthorizeEditSiteDomainResult } from './hooks/authorize-edit-site-domain/result.js';
 import type { BeforeCreateSiteContext } from './hooks/before-create-site/context.js';
 import type { BeforeCreateSiteValue } from './hooks/before-create-site/value.js';
 import type { BeforeCreateSiteInput } from './hooks/before-create-site/input.js';
@@ -96,6 +100,22 @@ export declare const validateAuthorizeEditSiteInput: {
 };
 export declare const validateAuthorizeEditSiteResult: {
   (value: unknown): value is AuthorizeEditSiteResult;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteDomainContext: {
+  (value: unknown): value is AuthorizeEditSiteDomainContext;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteDomainValue: {
+  (value: unknown): value is AuthorizeEditSiteDomainValue;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteDomainInput: {
+  (value: unknown): value is AuthorizeEditSiteDomainInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAuthorizeEditSiteDomainResult: {
+  (value: unknown): value is AuthorizeEditSiteDomainResult;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateBeforeCreateSiteContext: {
