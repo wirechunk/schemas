@@ -28,10 +28,6 @@ export declare const validateContextData: {
   (value: unknown): value is ContextData;
   errors?: SchemaValidationError[] | null;
 };
-export declare const validateCustomField: {
-  (value: unknown): value is CustomField;
-  errors?: SchemaValidationError[] | null;
-};
 export declare const validateRichText: {
   (value: unknown): value is RichText;
   errors?: SchemaValidationError[] | null;

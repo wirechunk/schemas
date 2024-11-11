@@ -40,9 +40,8 @@ ajv.addSchema([
 ]);
 
 // The top-level schemas that should have a validation function generated.
-const ajvNameMapping: Record<string, string> = {
+const ajvGeneratedNameMapping: Record<string, string> = {
   validateContextData: contextDataSchema.$id,
-  validateCustomField: customFieldSchema.$id,
   validateRichText: richTextSchema.$id,
 };
 
@@ -257,16 +256,14 @@ for (const hookName of hooksDir) {
 
     const inputSchema = buildHookInput(hookName, hasContext);
     ajv.addSchema(inputSchema);
-    ajvNameMapping[`validate${requireNonEmptyString(inputSchema.title)}`] = requireNonEmptyString(
-      inputSchema.$id,
-    );
+    ajvGeneratedNameMapping[`validate${requireNonEmptyString(inputSchema.title)}`] =
+      requireNonEmptyString(inputSchema.$id);
     await writeFile(`${hookDirPath}/input.json`, JSON.stringify(inputSchema));
 
     const resultSchema = buildHookResult(hookName, properties);
     ajv.addSchema(resultSchema);
-    ajvNameMapping[`validate${requireNonEmptyString(resultSchema.title)}`] = requireNonEmptyString(
-      resultSchema.$id,
-    );
+    ajvGeneratedNameMapping[`validate${requireNonEmptyString(resultSchema.title)}`] =
+      requireNonEmptyString(resultSchema.$id);
     await writeFile(`${hookDirPath}/result.json`, JSON.stringify(resultSchema));
   } else {
     console.error(`Unexpected file in the hooks directory: ${hookDirPath}`);
@@ -274,9 +271,9 @@ for (const hookName of hooksDir) {
   }
 }
 
-await writeFile('src/validate.js', (standaloneCode as any)(ajv, ajvNameMapping));
+await writeFile('src/validate.js', (standaloneCode as any)(ajv, ajvGeneratedNameMapping));
 
-const validateTypings = Object.keys(ajvNameMapping).map((name) => {
+const validateTypings = Object.keys(ajvGeneratedNameMapping).map((name) => {
   const typeName = name.slice('validate'.length);
   return `export declare const ${name}: {
     (value: unknown): value is ${typeName};
