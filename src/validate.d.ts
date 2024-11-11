@@ -1,5 +1,4 @@
 import type { ContextData } from './context-data/context-data.js';
-import type { CustomField } from './custom-field/custom-field.js';
 import type { RichText } from './custom-field/rich-text.js';
 import type { AuthorizeCreateSiteInput } from './hooks/authorize-create-site/input.js';
 import type { AuthorizeCreateSiteResult } from './hooks/authorize-create-site/result.js';

@@ -189,7 +189,6 @@ const parseHookJsonSchema = async (
 
 const validateFileImports = [
   `import type { ContextData } from './context-data/context-data.js';`,
-  `import type { CustomField } from './custom-field/custom-field.js';`,
   `import type { RichText } from './custom-field/rich-text.js';`,
 ];
 
