@@ -5968,12 +5968,32 @@ const schema65 = {
   title: 'BeforeEditSiteValue',
   type: 'object',
   properties: {
-    name: { type: 'string' },
-    domain: { type: 'string' },
-    orgId: { type: 'string', description: 'The ID of the org that will own the site.' },
-    customFields: { type: 'array', items: { $ref: '../../custom-field/custom-field.json' } },
+    name: {
+      description: 'The new name. If this field is not set, the name is not being edited.',
+      type: 'object',
+      properties: { value: { type: 'string' } },
+      required: ['value'],
+    },
+    domain: {
+      description: 'The new domain. If this field is not set, the domain is not being edited.',
+      type: 'object',
+      properties: { value: { type: 'string' } },
+      required: ['value'],
+    },
+    orgId: {
+      description:
+        'The new ID of the org that will own the site. If this field is not set, the org is not being edited.',
+      type: 'object',
+      properties: { value: { type: 'string' } },
+      required: ['value'],
+    },
+    customFields: {
+      description:
+        'The custom fields to edit. If this field is not set or is an empty array, no custom fields are being edited.',
+      type: 'array',
+      items: { $ref: '../../custom-field/custom-field.json' },
+    },
   },
-  required: ['name', 'domain', 'customFields'],
 };
 function validate57(
   data,
@@ -5990,124 +6010,202 @@ function validate57(
   }
   if (errors === 0) {
     if (data && typeof data == 'object' && !Array.isArray(data)) {
-      let missing0;
-      if (
-        (data.name === undefined && (missing0 = 'name')) ||
-        (data.domain === undefined && (missing0 = 'domain')) ||
-        (data.customFields === undefined && (missing0 = 'customFields'))
-      ) {
-        validate57.errors = [
-          {
-            instancePath,
-            schemaPath: '#/required',
-            keyword: 'required',
-            params: { missingProperty: missing0 },
-            message: "must have required property '" + missing0 + "'",
-          },
-        ];
-        return false;
-      } else {
-        if (data.name !== undefined) {
-          const _errs1 = errors;
-          if (typeof data.name !== 'string') {
+      if (data.name !== undefined) {
+        let data0 = data.name;
+        const _errs1 = errors;
+        if (errors === _errs1) {
+          if (data0 && typeof data0 == 'object' && !Array.isArray(data0)) {
+            let missing0;
+            if (data0.value === undefined && (missing0 = 'value')) {
+              validate57.errors = [
+                {
+                  instancePath: instancePath + '/name',
+                  schemaPath: '#/properties/name/required',
+                  keyword: 'required',
+                  params: { missingProperty: missing0 },
+                  message: "must have required property '" + missing0 + "'",
+                },
+              ];
+              return false;
+            } else {
+              if (data0.value !== undefined) {
+                if (typeof data0.value !== 'string') {
+                  validate57.errors = [
+                    {
+                      instancePath: instancePath + '/name/value',
+                      schemaPath: '#/properties/name/properties/value/type',
+                      keyword: 'type',
+                      params: { type: 'string' },
+                      message: 'must be string',
+                    },
+                  ];
+                  return false;
+                }
+              }
+            }
+          } else {
             validate57.errors = [
               {
                 instancePath: instancePath + '/name',
                 schemaPath: '#/properties/name/type',
                 keyword: 'type',
-                params: { type: 'string' },
-                message: 'must be string',
+                params: { type: 'object' },
+                message: 'must be object',
               },
             ];
             return false;
           }
-          var valid0 = _errs1 === errors;
-        } else {
-          var valid0 = true;
         }
-        if (valid0) {
-          if (data.domain !== undefined) {
-            const _errs3 = errors;
-            if (typeof data.domain !== 'string') {
-              validate57.errors = [
-                {
-                  instancePath: instancePath + '/domain',
-                  schemaPath: '#/properties/domain/type',
-                  keyword: 'type',
-                  params: { type: 'string' },
-                  message: 'must be string',
-                },
-              ];
-              return false;
-            }
-            var valid0 = _errs3 === errors;
-          } else {
-            var valid0 = true;
-          }
-          if (valid0) {
-            if (data.orgId !== undefined) {
-              const _errs5 = errors;
-              if (typeof data.orgId !== 'string') {
+        var valid0 = _errs1 === errors;
+      } else {
+        var valid0 = true;
+      }
+      if (valid0) {
+        if (data.domain !== undefined) {
+          let data2 = data.domain;
+          const _errs5 = errors;
+          if (errors === _errs5) {
+            if (data2 && typeof data2 == 'object' && !Array.isArray(data2)) {
+              let missing1;
+              if (data2.value === undefined && (missing1 = 'value')) {
                 validate57.errors = [
                   {
-                    instancePath: instancePath + '/orgId',
-                    schemaPath: '#/properties/orgId/type',
-                    keyword: 'type',
-                    params: { type: 'string' },
-                    message: 'must be string',
+                    instancePath: instancePath + '/domain',
+                    schemaPath: '#/properties/domain/required',
+                    keyword: 'required',
+                    params: { missingProperty: missing1 },
+                    message: "must have required property '" + missing1 + "'",
                   },
                 ];
                 return false;
-              }
-              var valid0 = _errs5 === errors;
-            } else {
-              var valid0 = true;
-            }
-            if (valid0) {
-              if (data.customFields !== undefined) {
-                let data3 = data.customFields;
-                const _errs7 = errors;
-                if (errors === _errs7) {
-                  if (Array.isArray(data3)) {
-                    var valid1 = true;
-                    const len0 = data3.length;
-                    for (let i0 = 0; i0 < len0; i0++) {
-                      const _errs9 = errors;
-                      if (
-                        !validate25(data3[i0], {
-                          instancePath: instancePath + '/customFields/' + i0,
-                          parentData: data3,
-                          parentDataProperty: i0,
-                          rootData,
-                          dynamicAnchors,
-                        })
-                      ) {
-                        vErrors =
-                          vErrors === null ? validate25.errors : vErrors.concat(validate25.errors);
-                        errors = vErrors.length;
-                      }
-                      var valid1 = _errs9 === errors;
-                      if (!valid1) {
-                        break;
-                      }
-                    }
-                  } else {
+              } else {
+                if (data2.value !== undefined) {
+                  if (typeof data2.value !== 'string') {
                     validate57.errors = [
                       {
-                        instancePath: instancePath + '/customFields',
-                        schemaPath: '#/properties/customFields/type',
+                        instancePath: instancePath + '/domain/value',
+                        schemaPath: '#/properties/domain/properties/value/type',
                         keyword: 'type',
-                        params: { type: 'array' },
-                        message: 'must be array',
+                        params: { type: 'string' },
+                        message: 'must be string',
                       },
                     ];
                     return false;
                   }
                 }
-                var valid0 = _errs7 === errors;
-              } else {
-                var valid0 = true;
               }
+            } else {
+              validate57.errors = [
+                {
+                  instancePath: instancePath + '/domain',
+                  schemaPath: '#/properties/domain/type',
+                  keyword: 'type',
+                  params: { type: 'object' },
+                  message: 'must be object',
+                },
+              ];
+              return false;
+            }
+          }
+          var valid0 = _errs5 === errors;
+        } else {
+          var valid0 = true;
+        }
+        if (valid0) {
+          if (data.orgId !== undefined) {
+            let data4 = data.orgId;
+            const _errs9 = errors;
+            if (errors === _errs9) {
+              if (data4 && typeof data4 == 'object' && !Array.isArray(data4)) {
+                let missing2;
+                if (data4.value === undefined && (missing2 = 'value')) {
+                  validate57.errors = [
+                    {
+                      instancePath: instancePath + '/orgId',
+                      schemaPath: '#/properties/orgId/required',
+                      keyword: 'required',
+                      params: { missingProperty: missing2 },
+                      message: "must have required property '" + missing2 + "'",
+                    },
+                  ];
+                  return false;
+                } else {
+                  if (data4.value !== undefined) {
+                    if (typeof data4.value !== 'string') {
+                      validate57.errors = [
+                        {
+                          instancePath: instancePath + '/orgId/value',
+                          schemaPath: '#/properties/orgId/properties/value/type',
+                          keyword: 'type',
+                          params: { type: 'string' },
+                          message: 'must be string',
+                        },
+                      ];
+                      return false;
+                    }
+                  }
+                }
+              } else {
+                validate57.errors = [
+                  {
+                    instancePath: instancePath + '/orgId',
+                    schemaPath: '#/properties/orgId/type',
+                    keyword: 'type',
+                    params: { type: 'object' },
+                    message: 'must be object',
+                  },
+                ];
+                return false;
+              }
+            }
+            var valid0 = _errs9 === errors;
+          } else {
+            var valid0 = true;
+          }
+          if (valid0) {
+            if (data.customFields !== undefined) {
+              let data6 = data.customFields;
+              const _errs13 = errors;
+              if (errors === _errs13) {
+                if (Array.isArray(data6)) {
+                  var valid4 = true;
+                  const len0 = data6.length;
+                  for (let i0 = 0; i0 < len0; i0++) {
+                    const _errs15 = errors;
+                    if (
+                      !validate25(data6[i0], {
+                        instancePath: instancePath + '/customFields/' + i0,
+                        parentData: data6,
+                        parentDataProperty: i0,
+                        rootData,
+                        dynamicAnchors,
+                      })
+                    ) {
+                      vErrors =
+                        vErrors === null ? validate25.errors : vErrors.concat(validate25.errors);
+                      errors = vErrors.length;
+                    }
+                    var valid4 = _errs15 === errors;
+                    if (!valid4) {
+                      break;
+                    }
+                  }
+                } else {
+                  validate57.errors = [
+                    {
+                      instancePath: instancePath + '/customFields',
+                      schemaPath: '#/properties/customFields/type',
+                      keyword: 'type',
+                      params: { type: 'array' },
+                      message: 'must be array',
+                    },
+                  ];
+                  return false;
+                }
+              }
+              var valid0 = _errs13 === errors;
+            } else {
+              var valid0 = true;
             }
           }
         }
