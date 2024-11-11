@@ -3,27 +3,25 @@
   "$id": "/hooks/authorize-edit-site/context.json",
   "title": "AuthorizeEditSiteContext",
   "description": "The context of the request. Either adminUser or user will be set.",
-  "type": "object",
-  "properties": {
-    "input": {
+  "allOf": [
+    {
+      "$ref": "../../request-context/base-request-context.json"
+    },
+    {
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The ID of the site being edited.",
-          "type": "string"
+        "input": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "The ID of the site being edited.",
+              "type": "string"
+            }
+          },
+          "required": ["id"]
         }
       },
-      "required": ["id"]
-    },
-    "adminUser": {
-      "$ref": "../../request-context/request-context-admin-user.json"
-    },
-    "user": {
-      "$ref": "../../request-context/request-context-user.json"
-    },
-    "site": {
-      "$ref": "../../request-context/request-context-site.json"
+      "required": ["input"]
     }
-  },
-  "required": ["input", "site"]
+  ]
 }

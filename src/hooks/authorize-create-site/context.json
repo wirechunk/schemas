@@ -3,29 +3,5 @@
   "$id": "/hooks/authorize-create-site/context.json",
   "title": "AuthorizeCreateSiteContext",
   "description": "The context of the request. Either adminUser or user will be set.",
-  "type": "object",
-  "properties": {
-    "input": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        }
-      },
-      "required": ["name"]
-    },
-    "adminUser": {
-      "$ref": "../../request-context/request-context-admin-user.json"
-    },
-    "user": {
-      "$ref": "../../request-context/request-context-user.json"
-    },
-    "site": {
-      "$ref": "../../request-context/request-context-site.json"
-    }
-  },
-  "required": ["input", "site"]
+  "$ref": "../../request-context/base-request-context.json"
 }

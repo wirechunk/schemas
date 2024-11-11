@@ -12,13 +12,28 @@ export type CustomField =
 export type RichText = Delta;
 
 export interface BeforeEditSiteValue {
-  name: string;
-  domain: string;
   /**
-   * The ID of the org that will own the site.
+   * The new name. If this field is not set, the name is not being edited.
    */
-  orgId?: string;
-  customFields: CustomField[];
+  name?: {
+    value: string;
+  };
+  /**
+   * The new domain. If this field is not set, the domain is not being edited.
+   */
+  domain?: {
+    value: string;
+  };
+  /**
+   * The new ID of the org that will own the site. If this field is not set, the org is not being edited.
+   */
+  orgId?: {
+    value: string;
+  };
+  /**
+   * The custom fields to edit. If this field is not set or is an empty array, no custom fields are being edited.
+   */
+  customFields?: CustomField[];
 }
 export interface BooleanCustomField {
   type: 'Boolean';
