@@ -2,14 +2,6 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/hooks/before-create-site/context.json",
   "title": "BeforeCreateSiteContext",
-  "type": "object",
-  "properties": {
-    "user": {
-      "$ref": "../../request-context/request-context-user.json"
-    },
-    "site": {
-      "$ref": "../../request-context/request-context-site.json"
-    }
-  },
-  "required": ["user", "site"]
+  "description": "The context of the request. Either adminUser or user will be set.",
+  "$ref": "../../request-context/base-request-context.json"
 }

@@ -72,20 +72,27 @@ export interface OptionalStringCustomField {
   key: string;
   value: string | null;
 }
+/**
+ * The context of the request. Either adminUser or user will be set.
+ */
 export interface BeforeCreateSiteContext {
-  user: RequestContextUser;
-  site: RequestContextSite;
-}
-/**
- * The user making the request. This user belongs to the platform on which the request is being made.
- */
-export interface RequestContextUser {
-  id: string;
-}
-/**
- * The site from which the request originated.
- */
-export interface RequestContextSite {
-  id: string;
-  domain: string;
+  /**
+   * The admin user making the request. Extensions do not see this user in the Users table.
+   */
+  adminUser?: {
+    id: string;
+    email: string;
+  };
+  /**
+   * The user making the request. This user belongs to the platform on which the request is being made.
+   */
+  user?: {
+    id: string;
+  };
+  /**
+   * The site from which the request originated. This field will be set only if the site belongs to the platform (is not the admin site).
+   */
+  site?: {
+    id: string;
+  };
 }

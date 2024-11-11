@@ -2,39 +2,45 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/hooks/before-submit-form/context.json",
   "title": "BeforeSubmitFormContext",
-  "type": "object",
-  "properties": {
-    "sessionId": {
-      "type": "string"
+  "allOf": [
+    {
+      "$ref": "../../request-context/base-request-context.json"
     },
-    "stepId": {
-      "type": "string"
-    },
-    "finalStep": {
-      "type": "boolean"
-    },
-    "submitterIpAddress": {
-      "type": "string"
-    },
-    "form": {
+    {
       "type": "object",
       "properties": {
-        "id": {
+        "sessionId": {
+          "description": "The randomly generated ID that identifies the form submission session. It can be used to connect submissions of different steps of the same form.",
+          "type": "string"
+        },
+        "stepId": {
+          "description": "The ID of the step being submitted, if the form has steps.",
+          "type": "string"
+        },
+        "finalStep": {
+          "description": "Whether this is the final step of a multi-step form, or true if the form does not have steps.",
+          "type": "boolean"
+        },
+        "submitterIpAddress": {
+          "description": "The IP address of the user submitting the form.",
+          "type": "string"
+        },
+        "form": {
+          "description": "The form being submitted.",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": ["id"]
+        },
+        "pageUrl": {
+          "description": "The full URL of the page where the form is being shown.",
           "type": "string"
         }
       },
-      "required": ["id"]
-    },
-    "pageUrl": {
-      "description": "The full URL of the page where the form is being shown.",
-      "type": "string"
-    },
-    "user": {
-      "$ref": "../../request-context/request-context-user.json"
-    },
-    "site": {
-      "$ref": "../../request-context/request-context-site.json"
+      "required": ["sessionId", "finalStep", "form", "pageUrl"]
     }
-  },
-  "required": ["sessionId", "finalStep", "form", "pageUrl", "site"]
+  ]
 }
