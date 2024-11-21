@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-create-user/context.json",
+  "title": "BeforeCreateUserContext",
+  "description": "The context of the request. Either adminUser or user will be set.",
+  "$ref": "../../request-context/base-request-context.json"
+}

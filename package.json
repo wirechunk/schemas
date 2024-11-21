@@ -1,6 +1,6 @@
 {
   "name": "@wirechunk/schemas",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Wirechunk schemas with type definitions",
   "type": "module",
   "repository": {

@@ -1,0 +1,2 @@
+This hook is fired before a user is created. It can be used to modify the input data or to prevent the request with an error message.
+This hook is not used when creating an admin user.

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-create-user/input.json",
+  "title": "BeforeCreateUserInput",
+  "type": "object",
+  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "required": ["value", "context"]
+}
