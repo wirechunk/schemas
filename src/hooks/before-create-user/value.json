@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-create-user/value.json",
+  "title": "BeforeCreateUserValue",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "orgId": {
+      "type": "string",
+      "description": "The ID of the org that the user will be under. When not set, a new org is created and the user is set as the primary user in that org."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Pending", "Active", "Deactivated"]
+    }
+  },
+  "required": ["email", "firstName", "lastName", "status"]
+}

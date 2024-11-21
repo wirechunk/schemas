@@ -8,6 +8,8 @@ import type { AuthorizeEditSiteDomainInput } from './hooks/authorize-edit-site-d
 import type { AuthorizeEditSiteDomainResult } from './hooks/authorize-edit-site-domain/result.js';
 import type { BeforeCreateSiteInput } from './hooks/before-create-site/input.js';
 import type { BeforeCreateSiteResult } from './hooks/before-create-site/result.js';
+import type { BeforeCreateUserInput } from './hooks/before-create-user/input.js';
+import type { BeforeCreateUserResult } from './hooks/before-create-user/result.js';
 import type { BeforeEditSiteInput } from './hooks/before-edit-site/input.js';
 import type { BeforeEditSiteResult } from './hooks/before-edit-site/result.js';
 import type { BeforeSubmitFormInput } from './hooks/before-submit-form/input.js';
@@ -61,6 +63,14 @@ export declare const validateBeforeCreateSiteInput: {
 };
 export declare const validateBeforeCreateSiteResult: {
   (value: unknown): value is BeforeCreateSiteResult;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeCreateUserInput: {
+  (value: unknown): value is BeforeCreateUserInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeCreateUserResult: {
+  (value: unknown): value is BeforeCreateUserResult;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateBeforeEditSiteInput: {
