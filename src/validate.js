@@ -5970,7 +5970,11 @@ const schema65 = {
     email: { type: 'string' },
     firstName: { type: 'string' },
     lastName: { type: 'string' },
-    orgId: { type: 'string', description: 'The ID of the org that the user will be under.' },
+    orgId: {
+      type: 'string',
+      description:
+        'The ID of the org that the user will be under. When not set, a new org is created and the user is set as the primary user in that org.',
+    },
     status: { type: 'string', enum: ['Pending', 'Active', 'Deactivated'] },
   },
   required: ['email', 'firstName', 'lastName', 'status'],

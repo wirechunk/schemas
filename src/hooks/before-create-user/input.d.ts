@@ -9,7 +9,7 @@ export interface BeforeCreateUserValue {
   firstName: string;
   lastName: string;
   /**
-   * The ID of the org that the user will be under.
+   * The ID of the org that the user will be under. When not set, a new org is created and the user is set as the primary user in that org.
    */
   orgId?: string;
   status: 'Pending' | 'Active' | 'Deactivated';

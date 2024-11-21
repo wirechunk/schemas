@@ -15,7 +15,7 @@
     },
     "orgId": {
       "type": "string",
-      "description": "The ID of the org that the user will be under."
+      "description": "The ID of the org that the user will be under. When not set, a new org is created and the user is set as the primary user in that org."
     },
     "status": {
       "type": "string",
