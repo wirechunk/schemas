@@ -4,8 +4,9 @@ import { compileFromFile } from 'json-schema-to-typescript';
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import standaloneCode from 'ajv/dist/standalone/index.js';
-import hookPropertiesSchema from '../src/meta/hook-properties-schema.json' with { type: 'json' };
-import type { HookPropertiesSchema } from '../src/meta/hook-properties-schema.d.ts';
+import extensionConfigSchema from '../src/meta/extension-config.json' with { type: 'json' };
+import hookPropertiesSchema from '../src/meta/hook-properties.json' with { type: 'json' };
+import type { HookPropertiesSchema } from '../src/meta/hook-properties.d.ts';
 import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-hook-result.json' with { type: 'json' };
 import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
 import customFieldSchema from '../src/custom-field/custom-field.json' with { type: 'json' };
@@ -35,6 +36,7 @@ ajv.addSchema([
   baseRequestContextSchema,
   contextDataSchema,
   customFieldSchema,
+  extensionConfigSchema,
   hookRejectResultSchema,
   richTextSchema,
 ]);
@@ -42,6 +44,7 @@ ajv.addSchema([
 // The top-level schemas that should have a validation function generated.
 const ajvGeneratedNameMapping: Record<string, string> = {
   validateContextData: contextDataSchema.$id,
+  validateExtensionConfig: extensionConfigSchema.$id,
   validateRichText: richTextSchema.$id,
 };
 
@@ -189,6 +192,7 @@ const parseHookJsonSchema = async (
 
 const validateFileImports = [
   `import type { ContextData } from './context-data/context-data.js';`,
+  `import type { ExtensionConfig } from './meta/extension-config.js';`,
   `import type { RichText } from './custom-field/rich-text.js';`,
 ];
 

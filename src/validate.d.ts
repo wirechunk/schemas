@@ -1,4 +1,5 @@
 import type { ContextData } from './context-data/context-data.js';
+import type { ExtensionConfig } from './meta/extension-config.js';
 import type { RichText } from './custom-field/rich-text.js';
 import type { AuthorizeCreateSiteInput } from './hooks/authorize-create-site/input.js';
 import type { AuthorizeCreateSiteResult } from './hooks/authorize-create-site/result.js';
@@ -27,6 +28,10 @@ export type SchemaValidationError = {
 
 export declare const validateContextData: {
   (value: unknown): value is ContextData;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateExtensionConfig: {
+  (value: unknown): value is ExtensionConfig;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateRichText: {

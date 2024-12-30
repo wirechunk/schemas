@@ -3,12 +3,12 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
-        <entry key="hook-properties-schema">
+        <entry key="hook-properties">
           <value>
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
-              <option name="name" value="hook-properties-schema" />
-              <option name="relativePathToSchema" value="src/meta/hook-properties-schema.json" />
+              <option name="name" value="hook-properties" />
+              <option name="relativePathToSchema" value="src/meta/hook-properties.json" />
               <option name="schemaVersion" value="JSON Schema 202,012" />
               <option name="patterns">
                 <list>
