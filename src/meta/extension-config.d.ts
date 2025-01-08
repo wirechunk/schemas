@@ -2,6 +2,12 @@
 
 export interface ExtensionConfig {
   name: string;
+  server?: {
+    enable?: boolean;
+    database?: {
+      enable?: boolean;
+    };
+  };
   components?: {
     [k: string]:
       | {

@@ -708,6 +708,13 @@ const schema36 = {
   type: 'object',
   properties: {
     name: { type: 'string' },
+    server: {
+      type: 'object',
+      properties: {
+        enable: { type: 'boolean' },
+        database: { type: 'object', properties: { enable: { type: 'boolean' } } },
+      },
+    },
     components: {
       type: 'object',
       additionalProperties: {
@@ -766,78 +773,73 @@ function validate25(
           var valid0 = true;
         }
         if (valid0) {
-          if (data.components !== undefined) {
-            let data1 = data.components;
+          if (data.server !== undefined) {
+            let data1 = data.server;
             const _errs3 = errors;
             if (errors === _errs3) {
               if (data1 && typeof data1 == 'object' && !Array.isArray(data1)) {
-                for (const key0 in data1) {
-                  let data2 = data1[key0];
-                  const _errs6 = errors;
-                  if (errors === _errs6) {
-                    if (data2 && typeof data2 == 'object' && !Array.isArray(data2)) {
-                      let missing1;
-                      if (data2.path === undefined && (missing1 = 'path')) {
-                        validate25.errors = [
-                          {
-                            instancePath:
-                              instancePath +
-                              '/components/' +
-                              key0.replace(/~/g, '~0').replace(/\//g, '~1'),
-                            schemaPath: '#/properties/components/additionalProperties/required',
-                            keyword: 'required',
-                            params: { missingProperty: missing1 },
-                            message: "must have required property '" + missing1 + "'",
-                          },
-                        ];
-                        return false;
-                      } else {
-                        if (data2.path !== undefined) {
-                          if (typeof data2.path !== 'string') {
+                if (data1.enable !== undefined) {
+                  const _errs5 = errors;
+                  if (typeof data1.enable !== 'boolean') {
+                    validate25.errors = [
+                      {
+                        instancePath: instancePath + '/server/enable',
+                        schemaPath: '#/properties/server/properties/enable/type',
+                        keyword: 'type',
+                        params: { type: 'boolean' },
+                        message: 'must be boolean',
+                      },
+                    ];
+                    return false;
+                  }
+                  var valid1 = _errs5 === errors;
+                } else {
+                  var valid1 = true;
+                }
+                if (valid1) {
+                  if (data1.database !== undefined) {
+                    let data3 = data1.database;
+                    const _errs7 = errors;
+                    if (errors === _errs7) {
+                      if (data3 && typeof data3 == 'object' && !Array.isArray(data3)) {
+                        if (data3.enable !== undefined) {
+                          if (typeof data3.enable !== 'boolean') {
                             validate25.errors = [
                               {
-                                instancePath:
-                                  instancePath +
-                                  '/components/' +
-                                  key0.replace(/~/g, '~0').replace(/\//g, '~1') +
-                                  '/path',
+                                instancePath: instancePath + '/server/database/enable',
                                 schemaPath:
-                                  '#/properties/components/additionalProperties/properties/path/type',
+                                  '#/properties/server/properties/database/properties/enable/type',
                                 keyword: 'type',
-                                params: { type: 'string' },
-                                message: 'must be string',
+                                params: { type: 'boolean' },
+                                message: 'must be boolean',
                               },
                             ];
                             return false;
                           }
                         }
+                      } else {
+                        validate25.errors = [
+                          {
+                            instancePath: instancePath + '/server/database',
+                            schemaPath: '#/properties/server/properties/database/type',
+                            keyword: 'type',
+                            params: { type: 'object' },
+                            message: 'must be object',
+                          },
+                        ];
+                        return false;
                       }
-                    } else {
-                      validate25.errors = [
-                        {
-                          instancePath:
-                            instancePath +
-                            '/components/' +
-                            key0.replace(/~/g, '~0').replace(/\//g, '~1'),
-                          schemaPath: '#/properties/components/additionalProperties/type',
-                          keyword: 'type',
-                          params: { type: 'object' },
-                          message: 'must be object',
-                        },
-                      ];
-                      return false;
                     }
-                  }
-                  var valid1 = _errs6 === errors;
-                  if (!valid1) {
-                    break;
+                    var valid1 = _errs7 === errors;
+                  } else {
+                    var valid1 = true;
                   }
                 }
               } else {
                 validate25.errors = [
                   {
-                    instancePath: instancePath + '/components',
-                    schemaPath: '#/properties/components/type',
+                    instancePath: instancePath + '/server',
+                    schemaPath: '#/properties/server/type',
                     keyword: 'type',
                     params: { type: 'object' },
                     message: 'must be object',
@@ -849,6 +851,92 @@ function validate25(
             var valid0 = _errs3 === errors;
           } else {
             var valid0 = true;
+          }
+          if (valid0) {
+            if (data.components !== undefined) {
+              let data5 = data.components;
+              const _errs11 = errors;
+              if (errors === _errs11) {
+                if (data5 && typeof data5 == 'object' && !Array.isArray(data5)) {
+                  for (const key0 in data5) {
+                    let data6 = data5[key0];
+                    const _errs14 = errors;
+                    if (errors === _errs14) {
+                      if (data6 && typeof data6 == 'object' && !Array.isArray(data6)) {
+                        let missing1;
+                        if (data6.path === undefined && (missing1 = 'path')) {
+                          validate25.errors = [
+                            {
+                              instancePath:
+                                instancePath +
+                                '/components/' +
+                                key0.replace(/~/g, '~0').replace(/\//g, '~1'),
+                              schemaPath: '#/properties/components/additionalProperties/required',
+                              keyword: 'required',
+                              params: { missingProperty: missing1 },
+                              message: "must have required property '" + missing1 + "'",
+                            },
+                          ];
+                          return false;
+                        } else {
+                          if (data6.path !== undefined) {
+                            if (typeof data6.path !== 'string') {
+                              validate25.errors = [
+                                {
+                                  instancePath:
+                                    instancePath +
+                                    '/components/' +
+                                    key0.replace(/~/g, '~0').replace(/\//g, '~1') +
+                                    '/path',
+                                  schemaPath:
+                                    '#/properties/components/additionalProperties/properties/path/type',
+                                  keyword: 'type',
+                                  params: { type: 'string' },
+                                  message: 'must be string',
+                                },
+                              ];
+                              return false;
+                            }
+                          }
+                        }
+                      } else {
+                        validate25.errors = [
+                          {
+                            instancePath:
+                              instancePath +
+                              '/components/' +
+                              key0.replace(/~/g, '~0').replace(/\//g, '~1'),
+                            schemaPath: '#/properties/components/additionalProperties/type',
+                            keyword: 'type',
+                            params: { type: 'object' },
+                            message: 'must be object',
+                          },
+                        ];
+                        return false;
+                      }
+                    }
+                    var valid3 = _errs14 === errors;
+                    if (!valid3) {
+                      break;
+                    }
+                  }
+                } else {
+                  validate25.errors = [
+                    {
+                      instancePath: instancePath + '/components',
+                      schemaPath: '#/properties/components/type',
+                      keyword: 'type',
+                      params: { type: 'object' },
+                      message: 'must be object',
+                    },
+                  ];
+                  return false;
+                }
+              }
+              var valid0 = _errs11 === errors;
+            } else {
+              var valid0 = true;
+            }
           }
         }
       }
@@ -869,7 +957,7 @@ function validate25(
   return errors === 0;
 }
 validate25.evaluated = {
-  props: { name: true, components: true },
+  props: { name: true, server: true, components: true },
   dynamicProps: false,
   dynamicItems: false,
 };

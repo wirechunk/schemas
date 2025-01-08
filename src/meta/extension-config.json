@@ -7,6 +7,22 @@
     "name": {
       "type": "string"
     },
+    "server": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "database": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "components": {
       "type": "object",
       "additionalProperties": {
