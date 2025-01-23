@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/request-context/principal.json",
+  "title": "Principal",
+  "type": "object",
+  "properties": {
+    "principal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/$defs/user"
+            },
+            "adminUser": {
+              "type": "null"
+            },
+            "platformApiToken": {
+              "type": "null"
+            }
+          },
+          "required": ["user"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "null"
+            },
+            "adminUser": {
+              "$ref": "#/$defs/adminUser"
+            },
+            "platformApiToken": {
+              "type": "null"
+            }
+          },
+          "required": ["adminUser"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "null"
+            },
+            "adminUser": {
+              "type": "null"
+            },
+            "platformApiToken": {
+              "$ref": "#/$defs/platformApiToken"
+            }
+          },
+          "required": ["platformApiToken"]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "user": {
+      "description": "The user making the request. This is a regular user who belongs to the platform on which the request is being made.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "adminUser": {
+      "description": "The admin user making the request. Extensions do not see this user in the Users table.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "email"]
+    },
+    "platformApiToken": {
+      "description": "The platform API token that can be used to authenticate requests. This token is not tied to an admin or regular user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

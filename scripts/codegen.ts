@@ -12,6 +12,7 @@ import contextDataSchema from '../src/context-data/context-data.json' with { typ
 import customFieldSchema from '../src/custom-field/custom-field.json' with { type: 'json' };
 import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
 import baseRequestContextSchema from '../src/request-context/base-request-context.json' with { type: 'json' };
+import principalSchema from '../src/request-context/principal.json' with { type: 'json' };
 import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
 
 const ajvHookProperties = new Ajv2020();
@@ -38,6 +39,7 @@ ajv.addSchema([
   customFieldSchema,
   extensionConfigSchema,
   hookRejectResultSchema,
+  principalSchema,
   richTextSchema,
 ]);
 
