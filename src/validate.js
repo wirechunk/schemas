@@ -1588,7 +1588,7 @@ const schema47 = {
   properties: {
     site: {
       description:
-        'The site from which the request originated. This field will be set only if the site belongs to the platform (is not the admin site).',
+        'The site from which the request originated. This field will be set only if the site belongs to the platform on which the extension is installed (is not the admin site).',
       type: 'object',
       properties: { id: { type: 'string' } },
       required: ['id'],
