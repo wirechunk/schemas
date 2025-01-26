@@ -2,10 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/hooks/initial-form-data/context.json",
   "title": "InitialFormDataContext",
+  "description": "The context of the request.",
   "allOf": [
-    {
-      "$ref": "../../request-context/base-request-context.json"
-    },
+    { "$ref": "../../request-context/base-request-context.json" },
+    { "$ref": "../../request-context/principal.json" },
+    { "$ref": "../../request-context/site.json" },
     {
       "type": "object",
       "properties": {
