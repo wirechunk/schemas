@@ -1,18 +1,20 @@
-import { existsSync } from 'node:fs';
-import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
-import { compileFromFile } from 'json-schema-to-typescript';
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import standaloneCode from 'ajv/dist/standalone/index.js';
-import extensionConfigSchema from '../src/meta/extension-config.json' with { type: 'json' };
-import hookPropertiesSchema from '../src/meta/hook-properties.json' with { type: 'json' };
-import type { HookPropertiesSchema } from '../src/meta/hook-properties.d.ts';
+import { compileFromFile } from 'json-schema-to-typescript';
+import { existsSync } from 'node:fs';
+import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
 import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-hook-result.json' with { type: 'json' };
 import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
 import customFieldSchema from '../src/custom-field/custom-field.json' with { type: 'json' };
-import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
-import baseRequestContextSchema from '../src/request-context/base-request-context.json' with { type: 'json' };
 import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
+import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
+import extensionConfigSchema from '../src/meta/extension-config.json' with { type: 'json' };
+import type { HookPropertiesSchema } from '../src/meta/hook-properties.d.ts';
+import hookPropertiesSchema from '../src/meta/hook-properties.json' with { type: 'json' };
+import baseRequestContextSchema from '../src/request-context/base-request-context.json' with { type: 'json' };
+import principalSchema from '../src/request-context/principal.json' with { type: 'json' };
+import siteSchema from '../src/request-context/site.json' with { type: 'json' };
 
 const ajvHookProperties = new Ajv2020();
 
@@ -38,7 +40,9 @@ ajv.addSchema([
   customFieldSchema,
   extensionConfigSchema,
   hookRejectResultSchema,
+  principalSchema,
   richTextSchema,
+  siteSchema,
 ]);
 
 // The top-level schemas that should have a validation function generated.
