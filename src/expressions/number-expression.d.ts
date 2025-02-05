@@ -53,6 +53,7 @@ export type StringExpression =
   | PropsString
   | StringLiteral
   | UserEmail
+  | UserOrgId
   | UserRole;
 
 export interface Count {
@@ -196,6 +197,9 @@ export interface StringLiteral {
 }
 export interface UserEmail {
   operator: 'userEmail';
+}
+export interface UserOrgId {
+  operator: 'userOrgId';
 }
 export interface UserRole {
   operator: 'userRole';

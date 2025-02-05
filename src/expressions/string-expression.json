@@ -28,6 +28,9 @@
       "$ref": "#/$defs/userEmail"
     },
     {
+      "$ref": "#/$defs/userOrgId"
+    },
+    {
       "$ref": "#/$defs/userRole"
     }
   ],
