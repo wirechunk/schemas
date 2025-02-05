@@ -116,6 +116,15 @@
       },
       "required": ["operator"]
     },
+    "userOrgId": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userOrgId"
+        }
+      },
+      "required": ["operator"]
+    },
     "userRole": {
       "type": "object",
       "properties": {

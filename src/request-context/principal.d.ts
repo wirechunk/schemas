@@ -36,5 +36,5 @@ export interface AdminUser {
  * The platform API token that can be used to authenticate requests. This token is not tied to an admin or regular user.
  */
 export interface PlatformApiToken {
-  id?: string;
+  id: string;
 }

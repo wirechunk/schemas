@@ -1654,6 +1654,7 @@ const schema43 = {
         'The platform API token that can be used to authenticate requests. This token is not tied to an admin or regular user.',
       type: 'object',
       properties: { id: { type: 'string' } },
+      required: ['id'],
     },
   },
   required: ['principal'],
@@ -1677,6 +1678,7 @@ const schema46 = {
     'The platform API token that can be used to authenticate requests. This token is not tied to an admin or regular user.',
   type: 'object',
   properties: { id: { type: 'string' } },
+  required: ['id'],
 };
 function validate31(
   data,
@@ -2120,25 +2122,42 @@ function validate31(
                         const _errs34 = errors;
                         if (errors === _errs34) {
                           if (data12 && typeof data12 == 'object' && !Array.isArray(data12)) {
-                            if (data12.id !== undefined) {
-                              if (typeof data12.id !== 'string') {
-                                const err18 = {
-                                  instancePath: instancePath + '/principal/platformApiToken/id',
-                                  schemaPath: '#/$defs/platformApiToken/properties/id/type',
-                                  keyword: 'type',
-                                  params: { type: 'string' },
-                                  message: 'must be string',
-                                };
-                                if (vErrors === null) {
-                                  vErrors = [err18];
-                                } else {
-                                  vErrors.push(err18);
+                            let missing6;
+                            if (data12.id === undefined && (missing6 = 'id')) {
+                              const err18 = {
+                                instancePath: instancePath + '/principal/platformApiToken',
+                                schemaPath: '#/$defs/platformApiToken/required',
+                                keyword: 'required',
+                                params: { missingProperty: missing6 },
+                                message: "must have required property '" + missing6 + "'",
+                              };
+                              if (vErrors === null) {
+                                vErrors = [err18];
+                              } else {
+                                vErrors.push(err18);
+                              }
+                              errors++;
+                            } else {
+                              if (data12.id !== undefined) {
+                                if (typeof data12.id !== 'string') {
+                                  const err19 = {
+                                    instancePath: instancePath + '/principal/platformApiToken/id',
+                                    schemaPath: '#/$defs/platformApiToken/properties/id/type',
+                                    keyword: 'type',
+                                    params: { type: 'string' },
+                                    message: 'must be string',
+                                  };
+                                  if (vErrors === null) {
+                                    vErrors = [err19];
+                                  } else {
+                                    vErrors.push(err19);
+                                  }
+                                  errors++;
                                 }
-                                errors++;
                               }
                             }
                           } else {
-                            const err19 = {
+                            const err20 = {
                               instancePath: instancePath + '/principal/platformApiToken',
                               schemaPath: '#/$defs/platformApiToken/type',
                               keyword: 'type',
@@ -2146,9 +2165,9 @@ function validate31(
                               message: 'must be object',
                             };
                             if (vErrors === null) {
-                              vErrors = [err19];
+                              vErrors = [err20];
                             } else {
-                              vErrors.push(err19);
+                              vErrors.push(err20);
                             }
                             errors++;
                           }
@@ -2161,7 +2180,7 @@ function validate31(
                   }
                 }
               } else {
-                const err20 = {
+                const err21 = {
                   instancePath: instancePath + '/principal',
                   schemaPath: '#/properties/principal/oneOf/2/type',
                   keyword: 'type',
@@ -2169,9 +2188,9 @@ function validate31(
                   message: 'must be object',
                 };
                 if (vErrors === null) {
-                  vErrors = [err20];
+                  vErrors = [err21];
                 } else {
-                  vErrors.push(err20);
+                  vErrors.push(err21);
                 }
                 errors++;
               }
@@ -2193,7 +2212,7 @@ function validate31(
               }
               const _errs38 = errors;
               if (data0 !== null) {
-                const err21 = {
+                const err22 = {
                   instancePath: instancePath + '/principal',
                   schemaPath: '#/properties/principal/oneOf/3/type',
                   keyword: 'type',
@@ -2201,9 +2220,9 @@ function validate31(
                   message: 'must be null',
                 };
                 if (vErrors === null) {
-                  vErrors = [err21];
+                  vErrors = [err22];
                 } else {
-                  vErrors.push(err21);
+                  vErrors.push(err22);
                 }
                 errors++;
               }
@@ -2220,7 +2239,7 @@ function validate31(
             }
           }
           if (!valid1) {
-            const err22 = {
+            const err23 = {
               instancePath: instancePath + '/principal',
               schemaPath: '#/properties/principal/oneOf',
               keyword: 'oneOf',
@@ -2228,9 +2247,9 @@ function validate31(
               message: 'must match exactly one schema in oneOf',
             };
             if (vErrors === null) {
-              vErrors = [err22];
+              vErrors = [err23];
             } else {
-              vErrors.push(err22);
+              vErrors.push(err23);
             }
             errors++;
             validate31.errors = vErrors;
