@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-submit-form-webhook/context.json",
+  "title": "BeforeSubmitFormWebhookContext",
+  "description": "The context of the form submission webhook action.",
+  "type": "object",
+  "properties": {
+    "formSubmissionActionId": {
+      "description": "The ID of the form submission action being executed.",
+      "type": "string"
+    }
+  },
+  "required": ["formSubmissionActionId"]
+}

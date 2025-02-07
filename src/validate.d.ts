@@ -15,6 +15,8 @@ import type { BeforeEditSiteInput } from './hooks/before-edit-site/input.js';
 import type { BeforeEditSiteResult } from './hooks/before-edit-site/result.js';
 import type { BeforeSubmitFormInput } from './hooks/before-submit-form/input.js';
 import type { BeforeSubmitFormResult } from './hooks/before-submit-form/result.js';
+import type { BeforeSubmitFormWebhookInput } from './hooks/before-submit-form-webhook/input.js';
+import type { BeforeSubmitFormWebhookResult } from './hooks/before-submit-form-webhook/result.js';
 import type { InitialFormDataInput } from './hooks/initial-form-data/input.js';
 import type { InitialFormDataResult } from './hooks/initial-form-data/result.js';
 
@@ -92,6 +94,14 @@ export declare const validateBeforeSubmitFormInput: {
 };
 export declare const validateBeforeSubmitFormResult: {
   (value: unknown): value is BeforeSubmitFormResult;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeSubmitFormWebhookInput: {
+  (value: unknown): value is BeforeSubmitFormWebhookInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateBeforeSubmitFormWebhookResult: {
+  (value: unknown): value is BeforeSubmitFormWebhookResult;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateInitialFormDataInput: {

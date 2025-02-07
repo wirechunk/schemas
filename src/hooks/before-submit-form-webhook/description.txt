@@ -1,0 +1,3 @@
+This hook is fired after a form submission is processed successfully, before a webhook for a form submission is sent.
+It can be used to modify the webhook payload, including adding additional fields to the payload.
+The hook is invoked asynchronously by the Wirechunk job worker, so there is no site or principal field in the context object.

@@ -10,7 +10,7 @@
     {
       "type": "object",
       "properties": {
-        "sessionId": {
+        "formSubmissionSessionId": {
           "description": "The randomly generated ID that identifies the form submission session. It can be used to connect submissions of different steps of the same form.",
           "type": "string"
         },
@@ -23,7 +23,7 @@
           "type": "boolean"
         },
         "submitterIpAddress": {
-          "description": "The IP address of the user submitting the form.",
+          "description": "The IP address from which the submission was made.",
           "type": "string"
         },
         "form": {
@@ -41,7 +41,7 @@
           "type": "string"
         }
       },
-      "required": ["sessionId", "finalStep", "form", "pageUrl"]
+      "required": ["formSubmissionSessionId", "finalStep", "form", "pageUrl"]
     }
   ]
 }

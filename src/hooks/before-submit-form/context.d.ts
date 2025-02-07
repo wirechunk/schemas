@@ -9,7 +9,7 @@ export type BeforeSubmitFormContext = BaseRequestContext &
     /**
      * The randomly generated ID that identifies the form submission session. It can be used to connect submissions of different steps of the same form.
      */
-    sessionId: string;
+    formSubmissionSessionId: string;
     /**
      * The ID of the step being submitted, if the form has steps.
      */
@@ -19,7 +19,7 @@ export type BeforeSubmitFormContext = BaseRequestContext &
      */
     finalStep: boolean;
     /**
-     * The IP address of the user submitting the form.
+     * The IP address from which the submission was made.
      */
     submitterIpAddress?: string;
     /**

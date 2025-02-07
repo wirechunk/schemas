@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/before-submit-form-webhook/value.json",
+  "type": "object",
+  "title": "BeforeSubmitFormWebhookValue",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "formId": {
+          "type": "string"
+        },
+        "formSubmissionSessionId": {
+          "type": "string"
+        },
+        "formData": {
+          "description": "The submission data from all of the steps, or just from the form itself if there are no steps.",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "finalStep": {
+          "description": "Whether this submission came from the final step of the form. This is set to true if the form doesn't have any steps.",
+          "type": "boolean"
+        },
+        "submissionPageUrl": {
+          "description": "The full URL of the page where the form was submitted.",
+          "type": ["string", "null"]
+        },
+        "createdAt": {
+          "description": "The timestamp of the submission.",
+          "type": "string"
+        },
+        "submitterIpAddress": {
+          "description": "The IP address from which the submission was made.",
+          "type": ["string", "null"]
+        },
+        "submitterUser": {
+          "type": ["object", "null"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "email", "firstName", "lastName"]
+        },
+        "latestSubmissionsByStep": {
+          "description": "The latest submissions for the same session by step. The idea behind “latest” is that users can submit a step and then go back and change their input, if the form allows it. This is an empty array if the form has no steps.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the form submission."
+              },
+              "step": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The ID of the step.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the step.",
+                    "type": "string"
+                  },
+                  "position": {
+                    "description": "The relative position of the step in the form, a string that can be be used to sort the steps lexicographically.",
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name", "position"]
+              },
+              "formData": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "The submission data from just the step."
+              },
+              "submitterIpAddress": {
+                "description": "The IP address from which the submission was made.",
+                "type": ["string", "null"]
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "The timestamp of the submission."
+              }
+            },
+            "required": ["id", "step", "formData", "submitterIpAddress", "createdAt"]
+          }
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "formId",
+        "formSubmissionSessionId",
+        "formData",
+        "finalStep",
+        "submissionPageUrl",
+        "createdAt",
+        "submitterIpAddress",
+        "submitterUser",
+        "latestSubmissionsByStep"
+      ]
+    }
+  },
+  "required": ["payload"]
+}
