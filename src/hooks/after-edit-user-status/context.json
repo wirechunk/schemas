@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/hooks/before-create-user/context.json",
-  "title": "BeforeCreateUserContext",
+  "$id": "/hooks/after-edit-user-status/context.json",
+  "title": "AfterEditUserStatusContext",
   "description": "The context of the request.",
   "allOf": [
     { "$ref": "../../request-context/principal.json" },

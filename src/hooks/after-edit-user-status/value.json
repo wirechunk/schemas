@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/after-edit-user-status/value.json",
+  "title": "AfterEditUserStatusValue",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "description": "The user whose status was changed.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the user whose status was changed."
+        },
+        "status": {
+          "type": "string",
+          "description": "The new status of the user."
+        },
+        "previousStatus": {
+          "type": "string",
+          "description": "The previous status of the user."
+        }
+      },
+      "required": ["id", "status", "previousStatus"]
+    }
+  },
+  "required": ["user"]
+}

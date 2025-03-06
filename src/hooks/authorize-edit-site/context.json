@@ -4,7 +4,6 @@
   "title": "AuthorizeEditSiteContext",
   "description": "The context of the request.",
   "allOf": [
-    { "$ref": "../../request-context/base-request-context.json" },
     { "$ref": "../../request-context/principal.json" },
     { "$ref": "../../request-context/site.json" },
     {

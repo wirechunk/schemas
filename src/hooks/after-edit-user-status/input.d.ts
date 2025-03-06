@@ -3,17 +3,31 @@
 /**
  * The context of the request.
  */
-export type InitialFormDataContext = Principal &
-  Site & {
-    form: {
-      id: string;
-    };
-    /**
-     * The full URL of the page where the form is being shown.
-     */
-    pageUrl: string;
-  };
+export type AfterEditUserStatusContext = Principal & Site;
 
+export interface AfterEditUserStatusInput {
+  value: AfterEditUserStatusValue;
+  context: AfterEditUserStatusContext;
+}
+export interface AfterEditUserStatusValue {
+  /**
+   * The user whose status was changed.
+   */
+  user: {
+    /**
+     * The ID of the user whose status was changed.
+     */
+    id: string;
+    /**
+     * The new status of the user.
+     */
+    status: string;
+    /**
+     * The previous status of the user.
+     */
+    previousStatus: string;
+  };
+}
 export interface Principal {
   principal:
     | {
