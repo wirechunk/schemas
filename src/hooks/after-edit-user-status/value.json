@@ -13,16 +13,23 @@
           "description": "The ID of the user whose status was changed."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/$defs/userStatus",
           "description": "The new status of the user."
         },
         "previousStatus": {
-          "type": "string",
+          "$ref": "#/$defs/userStatus",
           "description": "The previous status of the user."
         }
       },
       "required": ["id", "status", "previousStatus"]
     }
   },
-  "required": ["user"]
+  "required": ["user"],
+  "$defs": {
+    "userStatus": {
+      "type": "string",
+      "title": "UserStatus",
+      "enum": ["Pending", "Active", "Deactivated"]
+    }
+  }
 }
