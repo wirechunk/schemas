@@ -3,16 +3,7 @@
 /**
  * The context of the request.
  */
-export type InitialFormDataContext = Principal &
-  Site & {
-    form: {
-      id: string;
-    };
-    /**
-     * The full URL of the page where the form is being shown.
-     */
-    pageUrl: string;
-  };
+export type AfterEditUserStatusContext = Principal & Site;
 
 export interface Principal {
   principal:

@@ -3,29 +3,8 @@
 /**
  * The context of the request.
  */
-export type AuthorizeCreateSiteContext = BaseRequestContext & Principal & Site;
+export type AuthorizeCreateSiteContext = Principal & Site;
 
-export interface BaseRequestContext {
-  /**
-   * The admin user making the request. Extensions do not see this user in the Users table.
-   */
-  adminUser?: {
-    id: string;
-    email: string;
-  };
-  /**
-   * The user making the request. This user belongs to the platform on which the request is being made.
-   */
-  user?: {
-    id: string;
-  };
-  /**
-   * The site from which the request originated. This field will be set only if the site belongs to the platform (is not the admin site).
-   */
-  site?: {
-    id: string;
-  };
-}
 export interface Principal {
   principal:
     | {

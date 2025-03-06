@@ -1,6 +1,8 @@
 import type { ContextData } from './context-data/context-data.js';
 import type { ExtensionConfig } from './meta/extension-config.js';
 import type { RichText } from './custom-field/rich-text.js';
+import type { AfterEditUserStatusInput } from './hooks/after-edit-user-status/input.js';
+import type { AfterEditUserStatusResult } from './hooks/after-edit-user-status/result.js';
 import type { AuthorizeCreateSiteInput } from './hooks/authorize-create-site/input.js';
 import type { AuthorizeCreateSiteResult } from './hooks/authorize-create-site/result.js';
 import type { AuthorizeEditSiteInput } from './hooks/authorize-edit-site/input.js';
@@ -38,6 +40,14 @@ export declare const validateExtensionConfig: {
 };
 export declare const validateRichText: {
   (value: unknown): value is RichText;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAfterEditUserStatusInput: {
+  (value: unknown): value is AfterEditUserStatusInput;
+  errors?: SchemaValidationError[] | null;
+};
+export declare const validateAfterEditUserStatusResult: {
+  (value: unknown): value is AfterEditUserStatusResult;
   errors?: SchemaValidationError[] | null;
 };
 export declare const validateAuthorizeCreateSiteInput: {

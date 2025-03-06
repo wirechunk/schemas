@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/hooks/after-edit-user-status/input.json",
+  "title": "AfterEditUserStatusInput",
+  "type": "object",
+  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "required": ["value", "context"]
+}

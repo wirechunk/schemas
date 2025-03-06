@@ -12,7 +12,6 @@ import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result
 import extensionConfigSchema from '../src/meta/extension-config.json' with { type: 'json' };
 import type { HookPropertiesSchema } from '../src/meta/hook-properties.d.ts';
 import hookPropertiesSchema from '../src/meta/hook-properties.json' with { type: 'json' };
-import baseRequestContextSchema from '../src/request-context/base-request-context.json' with { type: 'json' };
 import principalSchema from '../src/request-context/principal.json' with { type: 'json' };
 import siteSchema from '../src/request-context/site.json' with { type: 'json' };
 
@@ -35,7 +34,6 @@ const ajv = new Ajv2020({
 
 ajv.addSchema([
   authorizeHookResultSchema,
-  baseRequestContextSchema,
   contextDataSchema,
   customFieldSchema,
   extensionConfigSchema,

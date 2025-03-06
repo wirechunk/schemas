@@ -1,0 +1,2 @@
+This hook is fired after a user's status is changed.
+This hook is not used when an admin user's status is changed.
