@@ -30,6 +30,17 @@
         "properties": {
           "path": {
             "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "supports": {
+            "type": "object",
+            "properties": {
+              "children": {
+                "type": "boolean"
+              }
+            }
           }
         },
         "required": ["path"]

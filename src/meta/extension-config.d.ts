@@ -12,6 +12,10 @@ export interface ExtensionConfig {
     [k: string]:
       | {
           path: string;
+          description?: string;
+          supports?: {
+            children?: boolean;
+          };
         }
       | undefined;
   };
