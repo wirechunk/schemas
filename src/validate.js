@@ -719,7 +719,11 @@ const schema36 = {
       type: 'object',
       additionalProperties: {
         type: 'object',
-        properties: { path: { type: 'string' } },
+        properties: {
+          path: { type: 'string' },
+          description: { type: 'string' },
+          supports: { type: 'object', properties: { children: { type: 'boolean' } } },
+        },
         required: ['path'],
       },
     },
@@ -880,6 +884,7 @@ function validate25(
                           return false;
                         } else {
                           if (data6.path !== undefined) {
+                            const _errs16 = errors;
                             if (typeof data6.path !== 'string') {
                               validate25.errors = [
                                 {
@@ -896,6 +901,82 @@ function validate25(
                                 },
                               ];
                               return false;
+                            }
+                            var valid4 = _errs16 === errors;
+                          } else {
+                            var valid4 = true;
+                          }
+                          if (valid4) {
+                            if (data6.description !== undefined) {
+                              const _errs18 = errors;
+                              if (typeof data6.description !== 'string') {
+                                validate25.errors = [
+                                  {
+                                    instancePath:
+                                      instancePath +
+                                      '/components/' +
+                                      key0.replace(/~/g, '~0').replace(/\//g, '~1') +
+                                      '/description',
+                                    schemaPath:
+                                      '#/properties/components/additionalProperties/properties/description/type',
+                                    keyword: 'type',
+                                    params: { type: 'string' },
+                                    message: 'must be string',
+                                  },
+                                ];
+                                return false;
+                              }
+                              var valid4 = _errs18 === errors;
+                            } else {
+                              var valid4 = true;
+                            }
+                            if (valid4) {
+                              if (data6.supports !== undefined) {
+                                let data9 = data6.supports;
+                                const _errs20 = errors;
+                                if (errors === _errs20) {
+                                  if (data9 && typeof data9 == 'object' && !Array.isArray(data9)) {
+                                    if (data9.children !== undefined) {
+                                      if (typeof data9.children !== 'boolean') {
+                                        validate25.errors = [
+                                          {
+                                            instancePath:
+                                              instancePath +
+                                              '/components/' +
+                                              key0.replace(/~/g, '~0').replace(/\//g, '~1') +
+                                              '/supports/children',
+                                            schemaPath:
+                                              '#/properties/components/additionalProperties/properties/supports/properties/children/type',
+                                            keyword: 'type',
+                                            params: { type: 'boolean' },
+                                            message: 'must be boolean',
+                                          },
+                                        ];
+                                        return false;
+                                      }
+                                    }
+                                  } else {
+                                    validate25.errors = [
+                                      {
+                                        instancePath:
+                                          instancePath +
+                                          '/components/' +
+                                          key0.replace(/~/g, '~0').replace(/\//g, '~1') +
+                                          '/supports',
+                                        schemaPath:
+                                          '#/properties/components/additionalProperties/properties/supports/type',
+                                        keyword: 'type',
+                                        params: { type: 'object' },
+                                        message: 'must be object',
+                                      },
+                                    ];
+                                    return false;
+                                  }
+                                }
+                                var valid4 = _errs20 === errors;
+                              } else {
+                                var valid4 = true;
+                              }
                             }
                           }
                         }
