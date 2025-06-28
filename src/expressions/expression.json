@@ -4,16 +4,499 @@
   "title": "Expression",
   "oneOf": [
     {
-      "$ref": "array-expression.json"
+      "$ref": "#/$defs/arrayExpression"
     },
     {
-      "$ref": "boolean-expression.json"
+      "$ref": "#/$defs/booleanExpression"
     },
     {
-      "$ref": "number-expression.json"
+      "$ref": "#/$defs/numberExpression"
     },
     {
-      "$ref": "string-expression.json"
+      "$ref": "#/$defs/stringExpression"
     }
-  ]
+  ],
+  "$defs": {
+    "all": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "all"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        },
+        "condition": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "arrayExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/arrayLiteral"
+        },
+        {
+          "$ref": "#/$defs/filter"
+        },
+        {
+          "$ref": "#/$defs/map"
+        },
+        {
+          "$ref": "#/$defs/userProductItems"
+        },
+        {
+          "$ref": "#/$defs/dynamicValue"
+        }
+      ]
+    },
+    "arrayLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "arrayLiteral"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        }
+      },
+      "required": ["operator"]
+    },
+    "filter": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "filter"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        },
+        "filterExpression": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "numberExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/count"
+        },
+        {
+          "$ref": "#/$defs/currentTime"
+        },
+        {
+          "$ref": "#/$defs/numberLiteral"
+        },
+        {
+          "$ref": "#/$defs/sum"
+        },
+        {
+          "$ref": "#/$defs/sumArray"
+        },
+        {
+          "$ref": "#/$defs/timeLiteral"
+        },
+        {
+          "$ref": "#/$defs/dynamicValue"
+        }
+      ]
+    },
+    "count": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "count"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "currentTime": {
+      "type": "object",
+      "description": "A timestamp in milliseconds since epoch.",
+      "properties": {
+        "operator": {
+          "const": "currentTime"
+        }
+      },
+      "required": ["operator"]
+    },
+    "numberLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "numberLiteral"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": ["operator"]
+    },
+    "sum": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "sum"
+        },
+        "left": {
+          "$ref": "#/$defs/numberExpression"
+        },
+        "right": {
+          "$ref": "#/$defs/numberExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "sumArray": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "sumArray"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "timeLiteral": {
+      "type": "object",
+      "description": "A timestamp in milliseconds since epoch.",
+      "properties": {
+        "operator": {
+          "const": "timeLiteral"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": ["operator"]
+    },
+    "map": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "map"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        },
+        "mapExpression": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator"]
+    },
+    "stringExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/eventSourceComponentName"
+        },
+        {
+          "$ref": "#/$defs/eventSourceComponentType"
+        },
+        {
+          "$ref": "#/$defs/stringLiteral"
+        },
+        {
+          "$ref": "#/$defs/userEmail"
+        },
+        {
+          "$ref": "#/$defs/userOrgId"
+        },
+        {
+          "$ref": "#/$defs/userRole"
+        },
+        {
+          "$ref": "#/$defs/dynamicValue"
+        }
+      ]
+    },
+    "eventSourceComponentName": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventSourceComponentName"
+        }
+      },
+      "required": ["operator"]
+    },
+    "eventSourceComponentType": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventSourceComponentType"
+        }
+      },
+      "required": ["operator"]
+    },
+    "stringLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "stringLiteral"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["operator"]
+    },
+    "userEmail": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userEmail"
+        }
+      },
+      "required": ["operator"]
+    },
+    "userOrgId": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userOrgId"
+        }
+      },
+      "required": ["operator"]
+    },
+    "userRole": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userRole"
+        }
+      },
+      "required": ["operator"]
+    },
+    "arrayIncludes": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "arrayIncludes"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        },
+        "value": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator"]
+    },
+    "booleanExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/all"
+        },
+        {
+          "$ref": "#/$defs/arrayIncludes"
+        },
+        {
+          "$ref": "#/$defs/both"
+        },
+        {
+          "$ref": "#/$defs/booleanLiteral"
+        },
+        {
+          "$ref": "#/$defs/either"
+        },
+        {
+          "$ref": "#/$defs/equals"
+        },
+        {
+          "$ref": "#/$defs/exists"
+        },
+        {
+          "$ref": "#/$defs/greaterThan"
+        },
+        {
+          "$ref": "#/$defs/not"
+        },
+        {
+          "$ref": "#/$defs/some"
+        },
+        {
+          "$ref": "#/$defs/dynamicValue"
+        }
+      ]
+    },
+    "dynamicValue": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/dataValue"
+        },
+        {
+          "$ref": "#/$defs/prop"
+        },
+        {
+          "$ref": "#/$defs/eventValue"
+        }
+      ]
+    },
+    "booleanLiteral": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "booleanLiteral"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": ["operator"]
+    },
+    "both": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "both"
+        },
+        "left": {
+          "$ref": "#/$defs/booleanExpression"
+        },
+        "right": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "dataValue": {
+      "description": "Access a value from the data object. The source of the data depends on the context. For example, in a form the data object is the form data and the name is the name of the input component.",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "dataValue"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["operator"]
+    },
+    "prop": {
+      "description": "Access a value from props. Applicable only in contexts where the expression deals with props.",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "prop"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["operator"]
+    },
+    "either": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "either"
+        },
+        "left": {
+          "$ref": "#/$defs/booleanExpression"
+        },
+        "right": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "equals": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "equals"
+        },
+        "left": {
+          "$ref": "#"
+        },
+        "right": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator"]
+    },
+    "eventValue": {
+      "description": "Access the value associated with an event. Applicable only in contexts where the expression deals with an event. For example, in a form the event value is the new value of the input component for an input change event.",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventValue"
+        }
+      },
+      "required": ["operator"]
+    },
+    "exists": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "exists"
+        },
+        "expression": {
+          "$ref": "#"
+        }
+      },
+      "required": ["operator"]
+    },
+    "greaterThan": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "greaterThan"
+        },
+        "left": {
+          "$ref": "#/$defs/numberExpression"
+        },
+        "right": {
+          "$ref": "#/$defs/numberExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "not": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "not"
+        },
+        "expression": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "some": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "some"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        },
+        "condition": {
+          "$ref": "#/$defs/booleanExpression"
+        }
+      },
+      "required": ["operator"]
+    },
+    "userProductItems": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "userProductItems"
+        }
+      },
+      "required": ["operator"]
+    }
+  }
 }

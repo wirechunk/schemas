@@ -1,6 +1,7 @@
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import standaloneCode from 'ajv/dist/standalone/index.js';
+import type { Options as GeneratorOptions } from 'json-schema-to-typescript';
 import { compileFromFile } from 'json-schema-to-typescript';
 import { existsSync } from 'node:fs';
 import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -53,7 +54,7 @@ const ajvGeneratedNameMapping: Record<string, string> = {
 const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
 
 // Recurse through the src directory and for each file generate a corresponding TypeScript file.
-const generatorOptions = {
+const generatorOptions: Partial<GeneratorOptions> = {
   additionalProperties: false,
   bannerComment:
     '// DO NOT EDIT. This file was generated. Instead, edit the corresponding JSON Schema file.',

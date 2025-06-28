@@ -7,32 +7,6 @@
     "$ref": "#/$defs/dataValue"
   },
   "$defs": {
-    "timeDuration": {
-      "type": "object",
-      "properties": {
-        "hours": {
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "minutes": {
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": ["hours", "minutes"]
-    },
     "dataValue": {
       "anyOf": [
         {
@@ -46,9 +20,6 @@
         },
         {
           "type": "null"
-        },
-        {
-          "$ref": "#/$defs/timeDuration"
         },
         {
           "type": "array",

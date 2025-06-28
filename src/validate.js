@@ -7,21 +7,12 @@ const schema31 = {
   type: 'object',
   additionalProperties: { $ref: '#/$defs/dataValue' },
   $defs: {
-    timeDuration: {
-      type: 'object',
-      properties: {
-        hours: { oneOf: [{ type: 'number' }, { type: 'null' }] },
-        minutes: { oneOf: [{ type: 'number' }, { type: 'null' }] },
-      },
-      required: ['hours', 'minutes'],
-    },
     dataValue: {
       anyOf: [
         { type: 'boolean' },
         { type: 'string' },
         { type: 'number' },
         { type: 'null' },
-        { $ref: '#/$defs/timeDuration' },
         { type: 'array', items: { $ref: '#/$defs/dataTableRow' } },
         { $ref: '#/$defs/uploadedFile' },
         { type: 'array', items: { type: 'string' } },
@@ -45,26 +36,17 @@ const schema32 = {
     { type: 'string' },
     { type: 'number' },
     { type: 'null' },
-    { $ref: '#/$defs/timeDuration' },
     { type: 'array', items: { $ref: '#/$defs/dataTableRow' } },
     { $ref: '#/$defs/uploadedFile' },
     { type: 'array', items: { type: 'string' } },
   ],
 };
-const schema33 = {
-  type: 'object',
-  properties: {
-    hours: { oneOf: [{ type: 'number' }, { type: 'null' }] },
-    minutes: { oneOf: [{ type: 'number' }, { type: 'null' }] },
-  },
-  required: ['hours', 'minutes'],
-};
-const schema35 = {
+const schema34 = {
   type: 'object',
   properties: { fileId: { type: 'string' } },
   required: ['fileId'],
 };
-const schema34 = {
+const schema33 = {
   type: 'object',
   properties: { id: { type: 'string' }, data: { $ref: '#' } },
   required: ['id', 'data'],
@@ -250,223 +232,12 @@ function validate21(
   var _valid0 = _errs7 === errors;
   valid0 = valid0 || _valid0;
   const _errs9 = errors;
-  const _errs10 = errors;
-  if (errors === _errs10) {
-    if (data && typeof data == 'object' && !Array.isArray(data)) {
-      let missing0;
-      if (
-        (data.hours === undefined && (missing0 = 'hours')) ||
-        (data.minutes === undefined && (missing0 = 'minutes'))
-      ) {
-        const err4 = {
-          instancePath,
-          schemaPath: '#/$defs/timeDuration/required',
-          keyword: 'required',
-          params: { missingProperty: missing0 },
-          message: "must have required property '" + missing0 + "'",
-        };
-        if (vErrors === null) {
-          vErrors = [err4];
-        } else {
-          vErrors.push(err4);
-        }
-        errors++;
-      } else {
-        if (data.hours !== undefined) {
-          let data0 = data.hours;
-          const _errs12 = errors;
-          const _errs13 = errors;
-          let valid3 = false;
-          let passing0 = null;
-          const _errs14 = errors;
-          if (!(typeof data0 == 'number' && isFinite(data0))) {
-            const err5 = {
-              instancePath: instancePath + '/hours',
-              schemaPath: '#/$defs/timeDuration/properties/hours/oneOf/0/type',
-              keyword: 'type',
-              params: { type: 'number' },
-              message: 'must be number',
-            };
-            if (vErrors === null) {
-              vErrors = [err5];
-            } else {
-              vErrors.push(err5);
-            }
-            errors++;
-          }
-          var _valid1 = _errs14 === errors;
-          if (_valid1) {
-            valid3 = true;
-            passing0 = 0;
-          }
-          const _errs16 = errors;
-          if (data0 !== null) {
-            const err6 = {
-              instancePath: instancePath + '/hours',
-              schemaPath: '#/$defs/timeDuration/properties/hours/oneOf/1/type',
-              keyword: 'type',
-              params: { type: 'null' },
-              message: 'must be null',
-            };
-            if (vErrors === null) {
-              vErrors = [err6];
-            } else {
-              vErrors.push(err6);
-            }
-            errors++;
-          }
-          var _valid1 = _errs16 === errors;
-          if (_valid1 && valid3) {
-            valid3 = false;
-            passing0 = [passing0, 1];
-          } else {
-            if (_valid1) {
-              valid3 = true;
-              passing0 = 1;
-            }
-          }
-          if (!valid3) {
-            const err7 = {
-              instancePath: instancePath + '/hours',
-              schemaPath: '#/$defs/timeDuration/properties/hours/oneOf',
-              keyword: 'oneOf',
-              params: { passingSchemas: passing0 },
-              message: 'must match exactly one schema in oneOf',
-            };
-            if (vErrors === null) {
-              vErrors = [err7];
-            } else {
-              vErrors.push(err7);
-            }
-            errors++;
-          } else {
-            errors = _errs13;
-            if (vErrors !== null) {
-              if (_errs13) {
-                vErrors.length = _errs13;
-              } else {
-                vErrors = null;
-              }
-            }
-          }
-          var valid2 = _errs12 === errors;
-        } else {
-          var valid2 = true;
-        }
-        if (valid2) {
-          if (data.minutes !== undefined) {
-            let data1 = data.minutes;
-            const _errs18 = errors;
-            const _errs19 = errors;
-            let valid4 = false;
-            let passing1 = null;
-            const _errs20 = errors;
-            if (!(typeof data1 == 'number' && isFinite(data1))) {
-              const err8 = {
-                instancePath: instancePath + '/minutes',
-                schemaPath: '#/$defs/timeDuration/properties/minutes/oneOf/0/type',
-                keyword: 'type',
-                params: { type: 'number' },
-                message: 'must be number',
-              };
-              if (vErrors === null) {
-                vErrors = [err8];
-              } else {
-                vErrors.push(err8);
-              }
-              errors++;
-            }
-            var _valid2 = _errs20 === errors;
-            if (_valid2) {
-              valid4 = true;
-              passing1 = 0;
-            }
-            const _errs22 = errors;
-            if (data1 !== null) {
-              const err9 = {
-                instancePath: instancePath + '/minutes',
-                schemaPath: '#/$defs/timeDuration/properties/minutes/oneOf/1/type',
-                keyword: 'type',
-                params: { type: 'null' },
-                message: 'must be null',
-              };
-              if (vErrors === null) {
-                vErrors = [err9];
-              } else {
-                vErrors.push(err9);
-              }
-              errors++;
-            }
-            var _valid2 = _errs22 === errors;
-            if (_valid2 && valid4) {
-              valid4 = false;
-              passing1 = [passing1, 1];
-            } else {
-              if (_valid2) {
-                valid4 = true;
-                passing1 = 1;
-              }
-            }
-            if (!valid4) {
-              const err10 = {
-                instancePath: instancePath + '/minutes',
-                schemaPath: '#/$defs/timeDuration/properties/minutes/oneOf',
-                keyword: 'oneOf',
-                params: { passingSchemas: passing1 },
-                message: 'must match exactly one schema in oneOf',
-              };
-              if (vErrors === null) {
-                vErrors = [err10];
-              } else {
-                vErrors.push(err10);
-              }
-              errors++;
-            } else {
-              errors = _errs19;
-              if (vErrors !== null) {
-                if (_errs19) {
-                  vErrors.length = _errs19;
-                } else {
-                  vErrors = null;
-                }
-              }
-            }
-            var valid2 = _errs18 === errors;
-          } else {
-            var valid2 = true;
-          }
-        }
-      }
-    } else {
-      const err11 = {
-        instancePath,
-        schemaPath: '#/$defs/timeDuration/type',
-        keyword: 'type',
-        params: { type: 'object' },
-        message: 'must be object',
-      };
-      if (vErrors === null) {
-        vErrors = [err11];
-      } else {
-        vErrors.push(err11);
-      }
-      errors++;
-    }
-  }
-  var _valid0 = _errs9 === errors;
-  valid0 = valid0 || _valid0;
-  if (_valid0) {
-    var props0 = {};
-    props0.hours = true;
-    props0.minutes = true;
-  }
-  const _errs24 = errors;
-  if (errors === _errs24) {
+  if (errors === _errs9) {
     if (Array.isArray(data)) {
-      var valid5 = true;
+      var valid1 = true;
       const len0 = data.length;
       for (let i0 = 0; i0 < len0; i0++) {
-        const _errs26 = errors;
+        const _errs11 = errors;
         if (
           !validate22(data[i0], {
             instancePath: instancePath + '/' + i0,
@@ -479,55 +250,55 @@ function validate21(
           vErrors = vErrors === null ? validate22.errors : vErrors.concat(validate22.errors);
           errors = vErrors.length;
         }
-        var valid5 = _errs26 === errors;
-        if (!valid5) {
+        var valid1 = _errs11 === errors;
+        if (!valid1) {
           break;
         }
       }
     } else {
-      const err12 = {
+      const err4 = {
         instancePath,
-        schemaPath: '#/anyOf/5/type',
+        schemaPath: '#/anyOf/4/type',
         keyword: 'type',
         params: { type: 'array' },
         message: 'must be array',
       };
       if (vErrors === null) {
-        vErrors = [err12];
+        vErrors = [err4];
       } else {
-        vErrors.push(err12);
+        vErrors.push(err4);
       }
       errors++;
     }
   }
-  var _valid0 = _errs24 === errors;
+  var _valid0 = _errs9 === errors;
   valid0 = valid0 || _valid0;
   if (_valid0) {
     var items0 = true;
   }
-  const _errs27 = errors;
-  const _errs28 = errors;
-  if (errors === _errs28) {
+  const _errs12 = errors;
+  const _errs13 = errors;
+  if (errors === _errs13) {
     if (data && typeof data == 'object' && !Array.isArray(data)) {
-      let missing1;
-      if (data.fileId === undefined && (missing1 = 'fileId')) {
-        const err13 = {
+      let missing0;
+      if (data.fileId === undefined && (missing0 = 'fileId')) {
+        const err5 = {
           instancePath,
           schemaPath: '#/$defs/uploadedFile/required',
           keyword: 'required',
-          params: { missingProperty: missing1 },
-          message: "must have required property '" + missing1 + "'",
+          params: { missingProperty: missing0 },
+          message: "must have required property '" + missing0 + "'",
         };
         if (vErrors === null) {
-          vErrors = [err13];
+          vErrors = [err5];
         } else {
-          vErrors.push(err13);
+          vErrors.push(err5);
         }
         errors++;
       } else {
         if (data.fileId !== undefined) {
           if (typeof data.fileId !== 'string') {
-            const err14 = {
+            const err6 = {
               instancePath: instancePath + '/fileId',
               schemaPath: '#/$defs/uploadedFile/properties/fileId/type',
               keyword: 'type',
@@ -535,16 +306,16 @@ function validate21(
               message: 'must be string',
             };
             if (vErrors === null) {
-              vErrors = [err14];
+              vErrors = [err6];
             } else {
-              vErrors.push(err14);
+              vErrors.push(err6);
             }
             errors++;
           }
         }
       }
     } else {
-      const err15 = {
+      const err7 = {
         instancePath,
         schemaPath: '#/$defs/uploadedFile/type',
         keyword: 'type',
@@ -552,65 +323,63 @@ function validate21(
         message: 'must be object',
       };
       if (vErrors === null) {
-        vErrors = [err15];
+        vErrors = [err7];
       } else {
-        vErrors.push(err15);
+        vErrors.push(err7);
       }
       errors++;
     }
   }
-  var _valid0 = _errs27 === errors;
+  var _valid0 = _errs12 === errors;
   valid0 = valid0 || _valid0;
   if (_valid0) {
-    if (props0 !== true) {
-      props0 = props0 || {};
-      props0.fileId = true;
-    }
+    var props0 = {};
+    props0.fileId = true;
   }
-  const _errs32 = errors;
-  if (errors === _errs32) {
+  const _errs17 = errors;
+  if (errors === _errs17) {
     if (Array.isArray(data)) {
-      var valid8 = true;
+      var valid4 = true;
       const len1 = data.length;
       for (let i1 = 0; i1 < len1; i1++) {
-        const _errs34 = errors;
+        const _errs19 = errors;
         if (typeof data[i1] !== 'string') {
-          const err16 = {
+          const err8 = {
             instancePath: instancePath + '/' + i1,
-            schemaPath: '#/anyOf/7/items/type',
+            schemaPath: '#/anyOf/6/items/type',
             keyword: 'type',
             params: { type: 'string' },
             message: 'must be string',
           };
           if (vErrors === null) {
-            vErrors = [err16];
+            vErrors = [err8];
           } else {
-            vErrors.push(err16);
+            vErrors.push(err8);
           }
           errors++;
         }
-        var valid8 = _errs34 === errors;
-        if (!valid8) {
+        var valid4 = _errs19 === errors;
+        if (!valid4) {
           break;
         }
       }
     } else {
-      const err17 = {
+      const err9 = {
         instancePath,
-        schemaPath: '#/anyOf/7/type',
+        schemaPath: '#/anyOf/6/type',
         keyword: 'type',
         params: { type: 'array' },
         message: 'must be array',
       };
       if (vErrors === null) {
-        vErrors = [err17];
+        vErrors = [err9];
       } else {
-        vErrors.push(err17);
+        vErrors.push(err9);
       }
       errors++;
     }
   }
-  var _valid0 = _errs32 === errors;
+  var _valid0 = _errs17 === errors;
   valid0 = valid0 || _valid0;
   if (_valid0) {
     if (items0 !== true) {
@@ -618,7 +387,7 @@ function validate21(
     }
   }
   if (!valid0) {
-    const err18 = {
+    const err10 = {
       instancePath,
       schemaPath: '#/anyOf',
       keyword: 'anyOf',
@@ -626,9 +395,9 @@ function validate21(
       message: 'must match a schema in anyOf',
     };
     if (vErrors === null) {
-      vErrors = [err18];
+      vErrors = [err10];
     } else {
-      vErrors.push(err18);
+      vErrors.push(err10);
     }
     errors++;
     validate21.errors = vErrors;
@@ -701,7 +470,7 @@ function validate20(
 }
 validate20.evaluated = { props: true, dynamicProps: false, dynamicItems: false };
 export const validateExtensionConfig = validate25;
-const schema36 = {
+const schema35 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/meta/extension-config.json',
   title: 'ExtensionConfig',
@@ -1043,7 +812,7 @@ validate25.evaluated = {
   dynamicItems: false,
 };
 export const validateRichText = validate26;
-const schema37 = {
+const schema36 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/custom-field/rich-text.json',
   title: 'RichText',
@@ -1384,7 +1153,7 @@ function validate26(
 }
 validate26.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateAfterEditUserStatusInput = validate27;
-const schema38 = {
+const schema37 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/after-edit-user-status/input.json',
   title: 'AfterEditUserStatusInput',
@@ -1392,7 +1161,7 @@ const schema38 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema39 = {
+const schema38 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/after-edit-user-status/value.json',
   title: 'AfterEditUserStatusValue',
@@ -1417,7 +1186,7 @@ const schema39 = {
     userStatus: { type: 'string', title: 'UserStatus', enum: ['Pending', 'Active', 'Deactivated'] },
   },
 };
-const schema40 = {
+const schema39 = {
   type: 'string',
   title: 'UserStatus',
   enum: ['Pending', 'Active', 'Deactivated'],
@@ -1512,7 +1281,7 @@ function validate28(
                           instancePath: instancePath + '/user/status',
                           schemaPath: '#/$defs/userStatus/enum',
                           keyword: 'enum',
-                          params: { allowedValues: schema40.enum },
+                          params: { allowedValues: schema39.enum },
                           message: 'must be equal to one of the allowed values',
                         },
                       ];
@@ -1544,7 +1313,7 @@ function validate28(
                             instancePath: instancePath + '/user/previousStatus',
                             schemaPath: '#/$defs/userStatus/enum',
                             keyword: 'enum',
-                            params: { allowedValues: schema40.enum },
+                            params: { allowedValues: schema39.enum },
                             message: 'must be equal to one of the allowed values',
                           },
                         ];
@@ -1589,7 +1358,7 @@ function validate28(
   return errors === 0;
 }
 validate28.evaluated = { props: { user: true }, dynamicProps: false, dynamicItems: false };
-const schema42 = {
+const schema41 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/after-edit-user-status/context.json',
   title: 'AfterEditUserStatusContext',
@@ -1599,7 +1368,7 @@ const schema42 = {
     { $ref: '../../request-context/site.json' },
   ],
 };
-const schema47 = {
+const schema46 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/request-context/site.json',
   title: 'Site',
@@ -1614,7 +1383,7 @@ const schema47 = {
     },
   },
 };
-const schema43 = {
+const schema42 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/request-context/principal.json',
   title: 'Principal',
@@ -1678,21 +1447,21 @@ const schema43 = {
   },
   required: ['principal'],
 };
-const schema44 = {
+const schema43 = {
   description:
     'The user making the request. This is a regular user who belongs to the platform on which the request is being made.',
   type: 'object',
   properties: { id: { type: 'string' } },
   required: ['id'],
 };
-const schema45 = {
+const schema44 = {
   description:
     'The admin user making the request. Extensions do not see this user in the Users table.',
   type: 'object',
   properties: { id: { type: 'string' }, email: { type: 'string' } },
   required: ['id', 'email'],
 };
-const schema46 = {
+const schema45 = {
   description:
     'The platform API token that can be used to authenticate requests. This token is not tied to an admin or regular user.',
   type: 'object',
@@ -2491,7 +2260,7 @@ validate27.evaluated = {
   dynamicItems: false,
 };
 export const validateAfterEditUserStatusResult = validate34;
-const schema48 = {
+const schema47 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/after-edit-user-status/result.json',
   title: 'AfterEditUserStatusResult',
@@ -2511,7 +2280,7 @@ const schema48 = {
     { $ref: '../../hook-reject-result/hook-reject-result.json' },
   ],
 };
-const schema49 = {
+const schema48 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hook-reject-result/hook-reject-result.json',
   title: 'HookRejectResult',
@@ -2581,7 +2350,7 @@ function validate34(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema48.oneOf[0].properties.stop.type },
+                params: { type: schema47.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -2721,7 +2490,7 @@ function validate34(
 }
 validate34.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateAuthorizeCreateSiteInput = validate36;
-const schema50 = {
+const schema49 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-create-site/input.json',
   title: 'AuthorizeCreateSiteInput',
@@ -2729,13 +2498,13 @@ const schema50 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema51 = {
+const schema50 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-create-site/value.json',
   title: 'AuthorizeCreateSiteValue',
   $ref: '../../authorize-hook-result/authorize-hook-result.json',
 };
-const schema52 = {
+const schema51 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/authorize-hook-result/authorize-hook-result.json',
   title: 'AuthorizeHookResult',
@@ -2958,7 +2727,7 @@ function validate37(
   return errors === 0;
 }
 validate37.evaluated = { dynamicProps: true, dynamicItems: false };
-const schema53 = {
+const schema52 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-create-site/context.json',
   title: 'AuthorizeCreateSiteContext',
@@ -3157,7 +2926,7 @@ validate36.evaluated = {
   dynamicItems: false,
 };
 export const validateAuthorizeCreateSiteResult = validate42;
-const schema55 = {
+const schema54 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-create-site/result.json',
   title: 'AuthorizeCreateSiteResult',
@@ -3228,7 +2997,7 @@ function validate42(
                   instancePath: instancePath + '/stop',
                   schemaPath: '#/properties/stop/type',
                   keyword: 'type',
-                  params: { type: schema55.properties.stop.type },
+                  params: { type: schema54.properties.stop.type },
                   message: 'must be boolean,null',
                 },
               ];
@@ -3262,7 +3031,7 @@ validate42.evaluated = {
   dynamicItems: false,
 };
 export const validateAuthorizeEditSiteInput = validate44;
-const schema56 = {
+const schema55 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site/input.json',
   title: 'AuthorizeEditSiteInput',
@@ -3270,7 +3039,7 @@ const schema56 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema57 = {
+const schema56 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site/value.json',
   title: 'AuthorizeEditSiteValue',
@@ -3484,7 +3253,7 @@ function validate45(
   return errors === 0;
 }
 validate45.evaluated = { dynamicProps: true, dynamicItems: false };
-const schema59 = {
+const schema58 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site/context.json',
   title: 'AuthorizeEditSiteContext',
@@ -3774,7 +3543,7 @@ validate44.evaluated = {
   dynamicItems: false,
 };
 export const validateAuthorizeEditSiteResult = validate50;
-const schema61 = {
+const schema60 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site/result.json',
   title: 'AuthorizeEditSiteResult',
@@ -3845,7 +3614,7 @@ function validate50(
                   instancePath: instancePath + '/stop',
                   schemaPath: '#/properties/stop/type',
                   keyword: 'type',
-                  params: { type: schema61.properties.stop.type },
+                  params: { type: schema60.properties.stop.type },
                   message: 'must be boolean,null',
                 },
               ];
@@ -3879,7 +3648,7 @@ validate50.evaluated = {
   dynamicItems: false,
 };
 export const validateAuthorizeEditSiteDomainInput = validate52;
-const schema62 = {
+const schema61 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site-domain/input.json',
   title: 'AuthorizeEditSiteDomainInput',
@@ -3887,7 +3656,7 @@ const schema62 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema63 = {
+const schema62 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site-domain/value.json',
   title: 'AuthorizeEditSiteDomainValue',
@@ -4101,7 +3870,7 @@ function validate53(
   return errors === 0;
 }
 validate53.evaluated = { dynamicProps: true, dynamicItems: false };
-const schema65 = {
+const schema64 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site-domain/context.json',
   title: 'AuthorizeEditSiteDomainContext',
@@ -4391,7 +4160,7 @@ validate52.evaluated = {
   dynamicItems: false,
 };
 export const validateAuthorizeEditSiteDomainResult = validate58;
-const schema67 = {
+const schema66 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/authorize-edit-site-domain/result.json',
   title: 'AuthorizeEditSiteDomainResult',
@@ -4462,7 +4231,7 @@ function validate58(
                   instancePath: instancePath + '/stop',
                   schemaPath: '#/properties/stop/type',
                   keyword: 'type',
-                  params: { type: schema67.properties.stop.type },
+                  params: { type: schema66.properties.stop.type },
                   message: 'must be boolean,null',
                 },
               ];
@@ -4496,7 +4265,7 @@ validate58.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeCreateSiteInput = validate60;
-const schema68 = {
+const schema67 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-site/input.json',
   title: 'BeforeCreateSiteInput',
@@ -4504,7 +4273,7 @@ const schema68 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema69 = {
+const schema68 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-site/value.json',
   title: 'BeforeCreateSiteValue',
@@ -4517,7 +4286,7 @@ const schema69 = {
   },
   required: ['name', 'customFields'],
 };
-const schema70 = {
+const schema69 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/custom-field/custom-field.json',
   title: 'CustomField',
@@ -6654,7 +6423,7 @@ validate61.evaluated = {
   dynamicProps: false,
   dynamicItems: false,
 };
-const schema73 = {
+const schema72 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-site/context.json',
   title: 'BeforeCreateSiteContext',
@@ -6853,7 +6622,7 @@ validate60.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeCreateSiteResult = validate68;
-const schema75 = {
+const schema74 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-site/result.json',
   title: 'BeforeCreateSiteResult',
@@ -6935,7 +6704,7 @@ function validate68(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema75.oneOf[0].properties.stop.type },
+                params: { type: schema74.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -7075,7 +6844,7 @@ function validate68(
 }
 validate68.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateBeforeCreateUserInput = validate70;
-const schema77 = {
+const schema76 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-user/input.json',
   title: 'BeforeCreateUserInput',
@@ -7083,7 +6852,7 @@ const schema77 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema78 = {
+const schema77 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-user/value.json',
   title: 'BeforeCreateUserValue',
@@ -7101,7 +6870,7 @@ const schema78 = {
   },
   required: ['email', 'firstName', 'lastName', 'status'],
 };
-const schema79 = {
+const schema78 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-user/context.json',
   title: 'BeforeCreateUserContext',
@@ -7362,7 +7131,7 @@ function validate70(
                                 instancePath: instancePath + '/value/status',
                                 schemaPath: './value.json/properties/status/enum',
                                 keyword: 'enum',
-                                params: { allowedValues: schema78.properties.status.enum },
+                                params: { allowedValues: schema77.properties.status.enum },
                                 message: 'must be equal to one of the allowed values',
                               },
                             ];
@@ -7437,7 +7206,7 @@ validate70.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeCreateUserResult = validate74;
-const schema81 = {
+const schema80 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-create-user/result.json',
   title: 'BeforeCreateUserResult',
@@ -7632,7 +7401,7 @@ function validate74(
                               instancePath: instancePath + '/value/status',
                               schemaPath: './value.json/properties/status/enum',
                               keyword: 'enum',
-                              params: { allowedValues: schema78.properties.status.enum },
+                              params: { allowedValues: schema77.properties.status.enum },
                               message: 'must be equal to one of the allowed values',
                             };
                             if (vErrors === null) {
@@ -7680,7 +7449,7 @@ function validate74(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema81.oneOf[0].properties.stop.type },
+                params: { type: schema80.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -7820,7 +7589,7 @@ function validate74(
 }
 validate74.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateBeforeEditSiteInput = validate75;
-const schema84 = {
+const schema83 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-edit-site/input.json',
   title: 'BeforeEditSiteInput',
@@ -7828,7 +7597,7 @@ const schema84 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema85 = {
+const schema84 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-edit-site/value.json',
   title: 'BeforeEditSiteValue',
@@ -8097,7 +7866,7 @@ validate76.evaluated = {
   dynamicProps: false,
   dynamicItems: false,
 };
-const schema86 = {
+const schema85 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-edit-site/context.json',
   title: 'BeforeEditSiteContext',
@@ -8296,7 +8065,7 @@ validate75.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeEditSiteResult = validate82;
-const schema88 = {
+const schema87 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-edit-site/result.json',
   title: 'BeforeEditSiteResult',
@@ -8378,7 +8147,7 @@ function validate82(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema88.oneOf[0].properties.stop.type },
+                params: { type: schema87.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -8518,7 +8287,7 @@ function validate82(
 }
 validate82.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateBeforeSubmitFormInput = validate84;
-const schema90 = {
+const schema89 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form/input.json',
   title: 'BeforeSubmitFormInput',
@@ -8526,7 +8295,7 @@ const schema90 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema91 = {
+const schema90 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form/value.json',
   type: 'object',
@@ -8635,7 +8404,7 @@ validate85.evaluated = {
   dynamicProps: false,
   dynamicItems: false,
 };
-const schema92 = {
+const schema91 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form/context.json',
   title: 'BeforeSubmitFormContext',
@@ -9066,7 +8835,7 @@ validate84.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeSubmitFormResult = validate91;
-const schema94 = {
+const schema93 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form/result.json',
   title: 'BeforeSubmitFormResult',
@@ -9148,7 +8917,7 @@ function validate91(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema94.oneOf[0].properties.stop.type },
+                params: { type: schema93.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -9288,7 +9057,7 @@ function validate91(
 }
 validate91.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateBeforeSubmitFormWebhookInput = validate93;
-const schema96 = {
+const schema95 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form-webhook/input.json',
   title: 'BeforeSubmitFormWebhookInput',
@@ -9296,7 +9065,7 @@ const schema96 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema97 = {
+const schema96 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form-webhook/value.json',
   type: 'object',
@@ -9389,7 +9158,7 @@ const schema97 = {
   },
   required: ['payload'],
 };
-const schema98 = {
+const schema97 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form-webhook/context.json',
   title: 'BeforeSubmitFormWebhookContext',
@@ -9581,7 +9350,7 @@ function validate93(
                                           './value.json/properties/payload/properties/submissionPageUrl/type',
                                         keyword: 'type',
                                         params: {
-                                          type: schema97.properties.payload.properties
+                                          type: schema96.properties.payload.properties
                                             .submissionPageUrl.type,
                                         },
                                         message: 'must be string,null',
@@ -9626,7 +9395,7 @@ function validate93(
                                               './value.json/properties/payload/properties/submitterIpAddress/type',
                                             keyword: 'type',
                                             params: {
-                                              type: schema97.properties.payload.properties
+                                              type: schema96.properties.payload.properties
                                                 .submitterIpAddress.type,
                                             },
                                             message: 'must be string,null',
@@ -9658,7 +9427,7 @@ function validate93(
                                                 './value.json/properties/payload/properties/submitterUser/type',
                                               keyword: 'type',
                                               params: {
-                                                type: schema97.properties.payload.properties
+                                                type: schema96.properties.payload.properties
                                                   .submitterUser.type,
                                               },
                                               message: 'must be object,null',
@@ -10073,7 +9842,7 @@ function validate93(
                                                                       './value.json/properties/payload/properties/latestSubmissionsByStep/items/properties/submitterIpAddress/type',
                                                                     keyword: 'type',
                                                                     params: {
-                                                                      type: schema97.properties
+                                                                      type: schema96.properties
                                                                         .payload.properties
                                                                         .latestSubmissionsByStep
                                                                         .items.properties
@@ -10282,7 +10051,7 @@ validate93.evaluated = {
   dynamicItems: false,
 };
 export const validateBeforeSubmitFormWebhookResult = validate94;
-const schema99 = {
+const schema98 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/before-submit-form-webhook/result.json',
   title: 'BeforeSubmitFormWebhookResult',
@@ -10500,7 +10269,7 @@ function validate94(
                                         './value.json/properties/payload/properties/submissionPageUrl/type',
                                       keyword: 'type',
                                       params: {
-                                        type: schema97.properties.payload.properties
+                                        type: schema96.properties.payload.properties
                                           .submissionPageUrl.type,
                                       },
                                       message: 'must be string,null',
@@ -10551,7 +10320,7 @@ function validate94(
                                             './value.json/properties/payload/properties/submitterIpAddress/type',
                                           keyword: 'type',
                                           params: {
-                                            type: schema97.properties.payload.properties
+                                            type: schema96.properties.payload.properties
                                               .submitterIpAddress.type,
                                           },
                                           message: 'must be string,null',
@@ -10586,7 +10355,7 @@ function validate94(
                                               './value.json/properties/payload/properties/submitterUser/type',
                                             keyword: 'type',
                                             params: {
-                                              type: schema97.properties.payload.properties
+                                              type: schema96.properties.payload.properties
                                                 .submitterUser.type,
                                             },
                                             message: 'must be object,null',
@@ -11038,7 +10807,7 @@ function validate94(
                                                                     './value.json/properties/payload/properties/latestSubmissionsByStep/items/properties/submitterIpAddress/type',
                                                                   keyword: 'type',
                                                                   params: {
-                                                                    type: schema97.properties
+                                                                    type: schema96.properties
                                                                       .payload.properties
                                                                       .latestSubmissionsByStep.items
                                                                       .properties.submitterIpAddress
@@ -11196,7 +10965,7 @@ function validate94(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema99.oneOf[0].properties.stop.type },
+                params: { type: schema98.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
@@ -11336,7 +11105,7 @@ function validate94(
 }
 validate94.evaluated = { dynamicProps: true, dynamicItems: false };
 export const validateInitialFormDataInput = validate95;
-const schema102 = {
+const schema101 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/initial-form-data/input.json',
   title: 'InitialFormDataInput',
@@ -11344,7 +11113,7 @@ const schema102 = {
   properties: { value: { $ref: './value.json' }, context: { $ref: './context.json' } },
   required: ['value', 'context'],
 };
-const schema103 = {
+const schema102 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/initial-form-data/value.json',
   title: 'InitialFormDataValue',
@@ -11417,7 +11186,7 @@ function validate96(
   return errors === 0;
 }
 validate96.evaluated = { props: { formData: true }, dynamicProps: false, dynamicItems: false };
-const schema104 = {
+const schema103 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/initial-form-data/context.json',
   title: 'InitialFormDataContext',
@@ -11733,7 +11502,7 @@ validate95.evaluated = {
   dynamicItems: false,
 };
 export const validateInitialFormDataResult = validate102;
-const schema106 = {
+const schema105 = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: '/hooks/initial-form-data/result.json',
   title: 'InitialFormDataResult',
@@ -11815,7 +11584,7 @@ function validate102(
                 instancePath: instancePath + '/stop',
                 schemaPath: '#/oneOf/0/properties/stop/type',
                 keyword: 'type',
-                params: { type: schema106.oneOf[0].properties.stop.type },
+                params: { type: schema105.oneOf[0].properties.stop.type },
                 message: 'must be boolean,null',
               };
               if (vErrors === null) {
