@@ -18,12 +18,8 @@ export interface InitialFormDataValue {
  */
 export interface ContextData {
   [k: string]:
-    | (boolean | string | number | null | TimeDuration | DataTableRow[] | UploadedFile | string[])
+    | (boolean | string | number | null | DataTableRow[] | UploadedFile | string[])
     | undefined;
-}
-export interface TimeDuration {
-  hours: number | null;
-  minutes: number | null;
 }
 export interface DataTableRow {
   id: string;
@@ -31,7 +27,7 @@ export interface DataTableRow {
 }
 export interface ContextData1 {
   [k: string]:
-    | (boolean | string | number | null | TimeDuration | DataTableRow[] | UploadedFile | string[])
+    | (boolean | string | number | null | DataTableRow[] | UploadedFile | string[])
     | undefined;
 }
 export interface UploadedFile {
