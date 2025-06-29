@@ -30,7 +30,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression", "condition"]
     },
     "arrayExpression": {
       "oneOf": [
@@ -64,7 +64,7 @@
           }
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "value"]
     },
     "filter": {
       "type": "object",
@@ -79,7 +79,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression", "filterExpression"]
     },
     "numberExpression": {
       "oneOf": [
@@ -116,7 +116,7 @@
           "$ref": "#/$defs/arrayExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression"]
     },
     "currentTime": {
       "type": "object",
@@ -138,7 +138,7 @@
           "type": "number"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "value"]
     },
     "sum": {
       "type": "object",
@@ -153,7 +153,7 @@
           "$ref": "#/$defs/numberExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "left", "right"]
     },
     "sumArray": {
       "type": "object",
@@ -165,7 +165,7 @@
           "$ref": "#/$defs/arrayExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression"]
     },
     "timeLiteral": {
       "type": "object",
@@ -178,7 +178,7 @@
           "type": "number"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "value"]
     },
     "map": {
       "type": "object",
@@ -193,7 +193,7 @@
           "$ref": "#"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression", "mapExpression"]
     },
     "stringExpression": {
       "oneOf": [
@@ -248,7 +248,7 @@
           "type": "string"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "value"]
     },
     "userEmail": {
       "type": "object",
@@ -290,7 +290,7 @@
           "$ref": "#"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression", "value"]
     },
     "booleanExpression": {
       "oneOf": [
@@ -352,7 +352,7 @@
           "type": "boolean"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "value"]
     },
     "both": {
       "type": "object",
@@ -367,7 +367,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "left", "right"]
     },
     "dataValue": {
       "description": "Access a value from the data object. The source of the data depends on the context. For example, in a form the data object is the form data and the name is the name of the input component.",
@@ -380,7 +380,7 @@
           "type": "string"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "name"]
     },
     "prop": {
       "description": "Access a value from props. Applicable only in contexts where the expression deals with props.",
@@ -393,7 +393,7 @@
           "type": "string"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "name"]
     },
     "either": {
       "type": "object",
@@ -408,7 +408,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "left", "right"]
     },
     "equals": {
       "type": "object",
@@ -423,7 +423,7 @@
           "$ref": "#"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "left", "right"]
     },
     "eventValue": {
       "description": "Access the value associated with an event. Applicable only in contexts where the expression deals with an event. For example, in a form the event value is the new value of the input component for an input change event.",
@@ -445,7 +445,7 @@
           "$ref": "#"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "expression"]
     },
     "greaterThan": {
       "type": "object",
@@ -460,7 +460,7 @@
           "$ref": "#/$defs/numberExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "left", "right"]
     },
     "not": {
       "type": "object",
@@ -472,7 +472,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "expression"]
     },
     "some": {
       "type": "object",
@@ -487,7 +487,7 @@
           "$ref": "#/$defs/booleanExpression"
         }
       },
-      "required": ["operator"]
+      "required": ["operator", "arrayExpression", "condition"]
     },
     "userProductItems": {
       "type": "object",
