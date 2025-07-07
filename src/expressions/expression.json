@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/expressions/expression.json",
   "title": "Expression",
-  "oneOf": [
+  "anyOf": [
     {
       "$ref": "#/$defs/arrayExpression"
     },
@@ -33,7 +33,7 @@
       "required": ["operator", "arrayExpression", "condition"]
     },
     "arrayExpression": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/arrayLiteral"
         },
@@ -82,7 +82,7 @@
       "required": ["operator", "arrayExpression", "filterExpression"]
     },
     "numberExpression": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/count"
         },
@@ -196,7 +196,7 @@
       "required": ["operator", "arrayExpression", "mapExpression"]
     },
     "stringExpression": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/eventSourceComponentName"
         },
@@ -293,7 +293,7 @@
       "required": ["operator", "arrayExpression", "value"]
     },
     "booleanExpression": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/all"
         },
@@ -330,7 +330,7 @@
       ]
     },
     "dynamicValue": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/dataValue"
         },
