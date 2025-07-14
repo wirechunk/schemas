@@ -201,7 +201,7 @@
           "$ref": "#/$defs/eventSourceComponentName"
         },
         {
-          "$ref": "#/$defs/eventSourceComponentType"
+          "$ref": "#/$defs/eventType"
         },
         {
           "$ref": "#/$defs/stringLiteral"
@@ -220,20 +220,21 @@
         }
       ]
     },
+    "eventType": {
+      "description": "Access the type set on an event. Applicable only in contexts where the expression deals with an event.",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "eventType"
+        }
+      },
+      "required": ["operator"]
+    },
     "eventSourceComponentName": {
       "type": "object",
       "properties": {
         "operator": {
           "const": "eventSourceComponentName"
-        }
-      },
-      "required": ["operator"]
-    },
-    "eventSourceComponentType": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "eventSourceComponentType"
         }
       },
       "required": ["operator"]
@@ -336,9 +337,6 @@
         },
         {
           "$ref": "#/$defs/prop"
-        },
-        {
-          "$ref": "#/$defs/eventValue"
         }
       ]
     },
@@ -424,16 +422,6 @@
         }
       },
       "required": ["operator", "left", "right"]
-    },
-    "eventValue": {
-      "description": "Access the value associated with an event. Applicable only in contexts where the expression deals with an event. For example, in a form the event value is the new value of the input component for an input change event.",
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "eventValue"
-        }
-      },
-      "required": ["operator"]
     },
     "exists": {
       "type": "object",
