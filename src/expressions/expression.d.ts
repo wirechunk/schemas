@@ -22,10 +22,10 @@ export type NumberExpression =
   | SumArray
   | TimeLiteral
   | DynamicValue;
-export type DynamicValue = DataValue | Prop | EventValue;
+export type DynamicValue = DataValue | Prop;
 export type StringExpression =
   | EventSourceComponentName
-  | EventSourceComponentType
+  | EventType
   | StringLiteral
   | UserEmail
   | UserOrgId
@@ -123,12 +123,6 @@ export interface Prop {
   operator: 'prop';
   name: string;
 }
-/**
- * Access the value associated with an event. Applicable only in contexts where the expression deals with an event. For example, in a form the event value is the new value of the input component for an input change event.
- */
-export interface EventValue {
-  operator: 'eventValue';
-}
 export interface Not {
   operator: 'not';
   expression: BooleanExpression;
@@ -149,8 +143,8 @@ export interface UserProductItems {
 export interface EventSourceComponentName {
   operator: 'eventSourceComponentName';
 }
-export interface EventSourceComponentType {
-  operator: 'eventSourceComponentType';
+export interface EventType {
+  operator: 'eventType';
 }
 export interface StringLiteral {
   operator: 'stringLiteral';
