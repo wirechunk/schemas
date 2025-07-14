@@ -143,6 +143,9 @@ export interface UserProductItems {
 export interface EventSourceComponentName {
   operator: 'eventSourceComponentName';
 }
+/**
+ * Access the type set on an event. Applicable only in contexts where the expression deals with an event.
+ */
 export interface EventType {
   operator: 'eventType';
 }
