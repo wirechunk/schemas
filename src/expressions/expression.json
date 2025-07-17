@@ -198,9 +198,6 @@
     "stringExpression": {
       "anyOf": [
         {
-          "$ref": "#/$defs/eventSourceComponentName"
-        },
-        {
           "$ref": "#/$defs/eventType"
         },
         {
@@ -226,15 +223,6 @@
       "properties": {
         "operator": {
           "const": "eventType"
-        }
-      },
-      "required": ["operator"]
-    },
-    "eventSourceComponentName": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "eventSourceComponentName"
         }
       },
       "required": ["operator"]
