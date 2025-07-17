@@ -24,7 +24,6 @@ export type NumberExpression =
   | DynamicValue;
 export type DynamicValue = DataValue | Prop;
 export type StringExpression =
-  | EventSourceComponentName
   | EventType
   | StringLiteral
   | UserEmail
@@ -139,9 +138,6 @@ export interface Map {
 }
 export interface UserProductItems {
   operator: 'userProductItems';
-}
-export interface EventSourceComponentName {
-  operator: 'eventSourceComponentName';
 }
 /**
  * Access the type set on an event. Applicable only in contexts where the expression deals with an event.
