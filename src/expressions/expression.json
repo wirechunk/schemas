@@ -51,6 +51,18 @@
         }
       ]
     },
+    "arrayLength": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "arrayLength"
+        },
+        "arrayExpression": {
+          "$ref": "#/$defs/arrayExpression"
+        }
+      },
+      "required": ["operator", "arrayExpression"]
+    },
     "arrayLiteral": {
       "type": "object",
       "properties": {
@@ -83,6 +95,9 @@
     },
     "numberExpression": {
       "anyOf": [
+        {
+          "$ref": "#/$defs/arrayLength"
+        },
         {
           "$ref": "#/$defs/count"
         },
