@@ -15,22 +15,15 @@ export type BooleanExpression =
   | Some
   | DynamicValue;
 export type NumberExpression =
-  | ArrayLength
-  | Count
   | CurrentTime
+  | Length
   | NumberLiteral
   | Sum
   | SumArray
   | TimeLiteral
   | DynamicValue;
+export type StringExpression = EventType | StringLiteral | UserOrgId | UserRole | DynamicValue;
 export type DynamicValue = DataValue | Prop;
-export type StringExpression =
-  | EventType
-  | StringLiteral
-  | UserEmail
-  | UserOrgId
-  | UserRole
-  | DynamicValue;
 
 export interface ArrayLiteral {
   operator: 'arrayLiteral';
@@ -79,19 +72,45 @@ export interface GreaterThan {
   left: NumberExpression;
   right: NumberExpression;
 }
-export interface ArrayLength {
-  operator: 'arrayLength';
-  arrayExpression: ArrayExpression;
-}
-export interface Count {
-  operator: 'count';
-  arrayExpression: ArrayExpression;
-}
 /**
  * A timestamp in milliseconds since epoch.
  */
 export interface CurrentTime {
   operator: 'currentTime';
+}
+export interface Length {
+  operator: 'length';
+  value: ArrayExpression | StringExpression;
+}
+/**
+ * Access the type set on an event. Applicable only in contexts where the expression deals with an event.
+ */
+export interface EventType {
+  operator: 'eventType';
+}
+export interface StringLiteral {
+  operator: 'stringLiteral';
+  value: string;
+}
+export interface UserOrgId {
+  operator: 'userOrgId';
+}
+export interface UserRole {
+  operator: 'userRole';
+}
+/**
+ * Access a value from the data object. The source of the data depends on the context. For example, in a form the data object is the form data and the name is the name of the input component.
+ */
+export interface DataValue {
+  operator: 'dataValue';
+  name: string;
+}
+/**
+ * Access a value from props. Applicable only in contexts where the expression deals with props.
+ */
+export interface Prop {
+  operator: 'prop';
+  name: string;
 }
 export interface NumberLiteral {
   operator: 'numberLiteral';
@@ -113,20 +132,6 @@ export interface TimeLiteral {
   operator: 'timeLiteral';
   value: number;
 }
-/**
- * Access a value from the data object. The source of the data depends on the context. For example, in a form the data object is the form data and the name is the name of the input component.
- */
-export interface DataValue {
-  operator: 'dataValue';
-  name: string;
-}
-/**
- * Access a value from props. Applicable only in contexts where the expression deals with props.
- */
-export interface Prop {
-  operator: 'prop';
-  name: string;
-}
 export interface Not {
   operator: 'not';
   expression: BooleanExpression;
@@ -143,23 +148,4 @@ export interface Map {
 }
 export interface UserProductItems {
   operator: 'userProductItems';
-}
-/**
- * Access the type set on an event. Applicable only in contexts where the expression deals with an event.
- */
-export interface EventType {
-  operator: 'eventType';
-}
-export interface StringLiteral {
-  operator: 'stringLiteral';
-  value: string;
-}
-export interface UserEmail {
-  operator: 'userEmail';
-}
-export interface UserOrgId {
-  operator: 'userOrgId';
-}
-export interface UserRole {
-  operator: 'userRole';
 }
