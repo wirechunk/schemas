@@ -51,18 +51,6 @@
         }
       ]
     },
-    "arrayLength": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "arrayLength"
-        },
-        "arrayExpression": {
-          "$ref": "#/$defs/arrayExpression"
-        }
-      },
-      "required": ["operator", "arrayExpression"]
-    },
     "arrayLiteral": {
       "type": "object",
       "properties": {
@@ -93,16 +81,32 @@
       },
       "required": ["operator", "arrayExpression", "filterExpression"]
     },
+    "length": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "const": "length"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/arrayExpression"
+            },
+            {
+              "$ref": "#/$defs/stringExpression"
+            }
+          ]
+        }
+      },
+      "required": ["operator", "value"]
+    },
     "numberExpression": {
       "anyOf": [
         {
-          "$ref": "#/$defs/arrayLength"
-        },
-        {
-          "$ref": "#/$defs/count"
-        },
-        {
           "$ref": "#/$defs/currentTime"
+        },
+        {
+          "$ref": "#/$defs/length"
         },
         {
           "$ref": "#/$defs/numberLiteral"
@@ -120,18 +124,6 @@
           "$ref": "#/$defs/dynamicValue"
         }
       ]
-    },
-    "count": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "count"
-        },
-        "arrayExpression": {
-          "$ref": "#/$defs/arrayExpression"
-        }
-      },
-      "required": ["operator", "arrayExpression"]
     },
     "currentTime": {
       "type": "object",
@@ -219,9 +211,6 @@
           "$ref": "#/$defs/stringLiteral"
         },
         {
-          "$ref": "#/$defs/userEmail"
-        },
-        {
           "$ref": "#/$defs/userOrgId"
         },
         {
@@ -253,15 +242,6 @@
         }
       },
       "required": ["operator", "value"]
-    },
-    "userEmail": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "userEmail"
-        }
-      },
-      "required": ["operator"]
     },
     "userOrgId": {
       "type": "object",
