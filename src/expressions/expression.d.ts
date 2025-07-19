@@ -15,6 +15,7 @@ export type BooleanExpression =
   | Some
   | DynamicValue;
 export type NumberExpression =
+  | ArrayLength
   | Count
   | CurrentTime
   | NumberLiteral
@@ -77,6 +78,10 @@ export interface GreaterThan {
   operator: 'greaterThan';
   left: NumberExpression;
   right: NumberExpression;
+}
+export interface ArrayLength {
+  operator: 'arrayLength';
+  arrayExpression: ArrayExpression;
 }
 export interface Count {
   operator: 'count';
