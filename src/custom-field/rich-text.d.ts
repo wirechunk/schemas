@@ -5,7 +5,11 @@ export type RichText = Delta;
 export interface Delta {
   delta: {
     ops: {
-      insert: string | {};
+      insert:
+        | string
+        | {
+            [k: string]: unknown | undefined;
+          };
       attributes?: {
         [k: string]: unknown | undefined;
       };
