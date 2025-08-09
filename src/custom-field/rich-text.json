@@ -21,12 +21,14 @@
                         "type": "string"
                       },
                       {
-                        "type": "object"
+                        "type": "object",
+                        "additionalProperties": true
                       }
                     ]
                   },
                   "attributes": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   }
                 },
                 "required": ["insert"]
