@@ -830,7 +830,7 @@ const schema36 = {
                 type: 'object',
                 properties: {
                   insert: { oneOf: [{ type: 'string' }, { type: 'object' }] },
-                  attributes: { type: 'object' },
+                  attributes: { type: 'object', additionalProperties: true },
                 },
                 required: ['insert'],
               },
@@ -1016,24 +1016,26 @@ function validate26(
                                 if (data2.attributes !== undefined) {
                                   let data4 = data2.attributes;
                                   const _errs15 = errors;
-                                  if (
-                                    !(data4 && typeof data4 == 'object' && !Array.isArray(data4))
-                                  ) {
-                                    const err6 = {
-                                      instancePath:
-                                        instancePath + '/delta/ops/' + i0 + '/attributes',
-                                      schemaPath:
-                                        '#/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
-                                      keyword: 'type',
-                                      params: { type: 'object' },
-                                      message: 'must be object',
-                                    };
-                                    if (vErrors === null) {
-                                      vErrors = [err6];
-                                    } else {
-                                      vErrors.push(err6);
+                                  if (errors === _errs15) {
+                                    if (
+                                      !(data4 && typeof data4 == 'object' && !Array.isArray(data4))
+                                    ) {
+                                      const err6 = {
+                                        instancePath:
+                                          instancePath + '/delta/ops/' + i0 + '/attributes',
+                                        schemaPath:
+                                          '#/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
+                                        keyword: 'type',
+                                        params: { type: 'object' },
+                                        message: 'must be object',
+                                      };
+                                      if (vErrors === null) {
+                                        vErrors = [err6];
+                                      } else {
+                                        vErrors.push(err6);
+                                      }
+                                      errors++;
                                     }
-                                    errors++;
                                   }
                                   var valid4 = _errs15 === errors;
                                 } else {
@@ -4876,31 +4878,33 @@ function validate62(
                                               if (data11.attributes !== undefined) {
                                                 let data13 = data11.attributes;
                                                 const _errs37 = errors;
-                                                if (
-                                                  !(
-                                                    data13 &&
-                                                    typeof data13 == 'object' &&
-                                                    !Array.isArray(data13)
-                                                  )
-                                                ) {
-                                                  const err19 = {
-                                                    instancePath:
-                                                      instancePath +
-                                                      '/value/delta/ops/' +
-                                                      i0 +
-                                                      '/attributes',
-                                                    schemaPath:
-                                                      'rich-text.json/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
-                                                    keyword: 'type',
-                                                    params: { type: 'object' },
-                                                    message: 'must be object',
-                                                  };
-                                                  if (vErrors === null) {
-                                                    vErrors = [err19];
-                                                  } else {
-                                                    vErrors.push(err19);
+                                                if (errors === _errs37) {
+                                                  if (
+                                                    !(
+                                                      data13 &&
+                                                      typeof data13 == 'object' &&
+                                                      !Array.isArray(data13)
+                                                    )
+                                                  ) {
+                                                    const err19 = {
+                                                      instancePath:
+                                                        instancePath +
+                                                        '/value/delta/ops/' +
+                                                        i0 +
+                                                        '/attributes',
+                                                      schemaPath:
+                                                        'rich-text.json/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
+                                                      keyword: 'type',
+                                                      params: { type: 'object' },
+                                                      message: 'must be object',
+                                                    };
+                                                    if (vErrors === null) {
+                                                      vErrors = [err19];
+                                                    } else {
+                                                      vErrors.push(err19);
+                                                    }
+                                                    errors++;
                                                   }
-                                                  errors++;
                                                 }
                                                 var valid9 = _errs37 === errors;
                                               } else {
@@ -5052,8 +5056,8 @@ function validate62(
           props0.value = true;
         }
       }
-      const _errs39 = errors;
-      if (errors === _errs39) {
+      const _errs40 = errors;
+      if (errors === _errs40) {
         if (data && typeof data == 'object' && !Array.isArray(data)) {
           let missing6;
           if (
@@ -5076,7 +5080,7 @@ function validate62(
             errors++;
           } else {
             if (data.type !== undefined) {
-              const _errs41 = errors;
+              const _errs42 = errors;
               if ('String' !== data.type) {
                 const err27 = {
                   instancePath: instancePath + '/type',
@@ -5092,13 +5096,13 @@ function validate62(
                 }
                 errors++;
               }
-              var valid11 = _errs41 === errors;
+              var valid11 = _errs42 === errors;
             } else {
               var valid11 = true;
             }
             if (valid11) {
               if (data.key !== undefined) {
-                const _errs42 = errors;
+                const _errs43 = errors;
                 if (typeof data.key !== 'string') {
                   const err28 = {
                     instancePath: instancePath + '/key',
@@ -5114,13 +5118,13 @@ function validate62(
                   }
                   errors++;
                 }
-                var valid11 = _errs42 === errors;
+                var valid11 = _errs43 === errors;
               } else {
                 var valid11 = true;
               }
               if (valid11) {
                 if (data.value !== undefined) {
-                  const _errs44 = errors;
+                  const _errs45 = errors;
                   if (typeof data.value !== 'string') {
                     const err29 = {
                       instancePath: instancePath + '/value',
@@ -5136,7 +5140,7 @@ function validate62(
                     }
                     errors++;
                   }
-                  var valid11 = _errs44 === errors;
+                  var valid11 = _errs45 === errors;
                 } else {
                   var valid11 = true;
                 }
@@ -5159,7 +5163,7 @@ function validate62(
           errors++;
         }
       }
-      var _valid0 = _errs39 === errors;
+      var _valid0 = _errs40 === errors;
       if (_valid0 && valid0) {
         valid0 = false;
         passing0 = [passing0, 3];
@@ -5174,8 +5178,8 @@ function validate62(
             props0.value = true;
           }
         }
-        const _errs46 = errors;
-        if (errors === _errs46) {
+        const _errs47 = errors;
+        if (errors === _errs47) {
           if (data && typeof data == 'object' && !Array.isArray(data)) {
             let missing7;
             if (
@@ -5198,7 +5202,7 @@ function validate62(
               errors++;
             } else {
               if (data.type !== undefined) {
-                const _errs48 = errors;
+                const _errs49 = errors;
                 if ('OptionalBoolean' !== data.type) {
                   const err32 = {
                     instancePath: instancePath + '/type',
@@ -5214,13 +5218,13 @@ function validate62(
                   }
                   errors++;
                 }
-                var valid12 = _errs48 === errors;
+                var valid12 = _errs49 === errors;
               } else {
                 var valid12 = true;
               }
               if (valid12) {
                 if (data.key !== undefined) {
-                  const _errs49 = errors;
+                  const _errs50 = errors;
                   if (typeof data.key !== 'string') {
                     const err33 = {
                       instancePath: instancePath + '/key',
@@ -5236,18 +5240,18 @@ function validate62(
                     }
                     errors++;
                   }
-                  var valid12 = _errs49 === errors;
+                  var valid12 = _errs50 === errors;
                 } else {
                   var valid12 = true;
                 }
                 if (valid12) {
                   if (data.value !== undefined) {
                     let data19 = data.value;
-                    const _errs51 = errors;
                     const _errs52 = errors;
+                    const _errs53 = errors;
                     let valid13 = false;
                     let passing3 = null;
-                    const _errs53 = errors;
+                    const _errs54 = errors;
                     if (typeof data19 !== 'boolean') {
                       const err34 = {
                         instancePath: instancePath + '/value',
@@ -5263,12 +5267,12 @@ function validate62(
                       }
                       errors++;
                     }
-                    var _valid3 = _errs53 === errors;
+                    var _valid3 = _errs54 === errors;
                     if (_valid3) {
                       valid13 = true;
                       passing3 = 0;
                     }
-                    const _errs55 = errors;
+                    const _errs56 = errors;
                     if (data19 !== null) {
                       const err35 = {
                         instancePath: instancePath + '/value',
@@ -5284,7 +5288,7 @@ function validate62(
                       }
                       errors++;
                     }
-                    var _valid3 = _errs55 === errors;
+                    var _valid3 = _errs56 === errors;
                     if (_valid3 && valid13) {
                       valid13 = false;
                       passing3 = [passing3, 1];
@@ -5309,16 +5313,16 @@ function validate62(
                       }
                       errors++;
                     } else {
-                      errors = _errs52;
+                      errors = _errs53;
                       if (vErrors !== null) {
-                        if (_errs52) {
-                          vErrors.length = _errs52;
+                        if (_errs53) {
+                          vErrors.length = _errs53;
                         } else {
                           vErrors = null;
                         }
                       }
                     }
-                    var valid12 = _errs51 === errors;
+                    var valid12 = _errs52 === errors;
                   } else {
                     var valid12 = true;
                   }
@@ -5341,7 +5345,7 @@ function validate62(
             errors++;
           }
         }
-        var _valid0 = _errs46 === errors;
+        var _valid0 = _errs47 === errors;
         if (_valid0 && valid0) {
           valid0 = false;
           passing0 = [passing0, 4];
@@ -5356,8 +5360,8 @@ function validate62(
               props0.value = true;
             }
           }
-          const _errs57 = errors;
-          if (errors === _errs57) {
+          const _errs58 = errors;
+          if (errors === _errs58) {
             if (data && typeof data == 'object' && !Array.isArray(data)) {
               let missing8;
               if (
@@ -5380,7 +5384,7 @@ function validate62(
                 errors++;
               } else {
                 if (data.type !== undefined) {
-                  const _errs59 = errors;
+                  const _errs60 = errors;
                   if ('OptionalInt' !== data.type) {
                     const err39 = {
                       instancePath: instancePath + '/type',
@@ -5396,13 +5400,13 @@ function validate62(
                     }
                     errors++;
                   }
-                  var valid14 = _errs59 === errors;
+                  var valid14 = _errs60 === errors;
                 } else {
                   var valid14 = true;
                 }
                 if (valid14) {
                   if (data.key !== undefined) {
-                    const _errs60 = errors;
+                    const _errs61 = errors;
                     if (typeof data.key !== 'string') {
                       const err40 = {
                         instancePath: instancePath + '/key',
@@ -5418,18 +5422,18 @@ function validate62(
                       }
                       errors++;
                     }
-                    var valid14 = _errs60 === errors;
+                    var valid14 = _errs61 === errors;
                   } else {
                     var valid14 = true;
                   }
                   if (valid14) {
                     if (data.value !== undefined) {
                       let data22 = data.value;
-                      const _errs62 = errors;
                       const _errs63 = errors;
+                      const _errs64 = errors;
                       let valid15 = false;
                       let passing4 = null;
-                      const _errs64 = errors;
+                      const _errs65 = errors;
                       if (
                         !(
                           typeof data22 == 'number' &&
@@ -5452,12 +5456,12 @@ function validate62(
                         }
                         errors++;
                       }
-                      var _valid4 = _errs64 === errors;
+                      var _valid4 = _errs65 === errors;
                       if (_valid4) {
                         valid15 = true;
                         passing4 = 0;
                       }
-                      const _errs66 = errors;
+                      const _errs67 = errors;
                       if (data22 !== null) {
                         const err42 = {
                           instancePath: instancePath + '/value',
@@ -5473,7 +5477,7 @@ function validate62(
                         }
                         errors++;
                       }
-                      var _valid4 = _errs66 === errors;
+                      var _valid4 = _errs67 === errors;
                       if (_valid4 && valid15) {
                         valid15 = false;
                         passing4 = [passing4, 1];
@@ -5498,16 +5502,16 @@ function validate62(
                         }
                         errors++;
                       } else {
-                        errors = _errs63;
+                        errors = _errs64;
                         if (vErrors !== null) {
-                          if (_errs63) {
-                            vErrors.length = _errs63;
+                          if (_errs64) {
+                            vErrors.length = _errs64;
                           } else {
                             vErrors = null;
                           }
                         }
                       }
-                      var valid14 = _errs62 === errors;
+                      var valid14 = _errs63 === errors;
                     } else {
                       var valid14 = true;
                     }
@@ -5530,7 +5534,7 @@ function validate62(
               errors++;
             }
           }
-          var _valid0 = _errs57 === errors;
+          var _valid0 = _errs58 === errors;
           if (_valid0 && valid0) {
             valid0 = false;
             passing0 = [passing0, 5];
@@ -5545,8 +5549,8 @@ function validate62(
                 props0.value = true;
               }
             }
-            const _errs68 = errors;
-            if (errors === _errs68) {
+            const _errs69 = errors;
+            if (errors === _errs69) {
               if (data && typeof data == 'object' && !Array.isArray(data)) {
                 let missing9;
                 if (
@@ -5569,7 +5573,7 @@ function validate62(
                   errors++;
                 } else {
                   if (data.type !== undefined) {
-                    const _errs70 = errors;
+                    const _errs71 = errors;
                     if ('OptionalRichText' !== data.type) {
                       const err46 = {
                         instancePath: instancePath + '/type',
@@ -5585,13 +5589,13 @@ function validate62(
                       }
                       errors++;
                     }
-                    var valid16 = _errs70 === errors;
+                    var valid16 = _errs71 === errors;
                   } else {
                     var valid16 = true;
                   }
                   if (valid16) {
                     if (data.key !== undefined) {
-                      const _errs71 = errors;
+                      const _errs72 = errors;
                       if (typeof data.key !== 'string') {
                         const err47 = {
                           instancePath: instancePath + '/key',
@@ -5607,23 +5611,23 @@ function validate62(
                         }
                         errors++;
                       }
-                      var valid16 = _errs71 === errors;
+                      var valid16 = _errs72 === errors;
                     } else {
                       var valid16 = true;
                     }
                     if (valid16) {
                       if (data.value !== undefined) {
                         let data25 = data.value;
-                        const _errs73 = errors;
                         const _errs74 = errors;
+                        const _errs75 = errors;
                         let valid17 = false;
                         let passing5 = null;
-                        const _errs75 = errors;
-                        const _errs77 = errors;
+                        const _errs76 = errors;
+                        const _errs78 = errors;
                         let valid19 = false;
                         let passing6 = null;
-                        const _errs78 = errors;
-                        if (errors === _errs78) {
+                        const _errs79 = errors;
+                        if (errors === _errs79) {
                           if (data25 && typeof data25 == 'object' && !Array.isArray(data25)) {
                             let missing10;
                             if (data25.delta === undefined && (missing10 = 'delta')) {
@@ -5643,8 +5647,8 @@ function validate62(
                             } else {
                               if (data25.delta !== undefined) {
                                 let data26 = data25.delta;
-                                const _errs80 = errors;
-                                if (errors === _errs80) {
+                                const _errs81 = errors;
+                                if (errors === _errs81) {
                                   if (
                                     data26 &&
                                     typeof data26 == 'object' &&
@@ -5669,15 +5673,15 @@ function validate62(
                                     } else {
                                       if (data26.ops !== undefined) {
                                         let data27 = data26.ops;
-                                        const _errs82 = errors;
-                                        if (errors === _errs82) {
+                                        const _errs83 = errors;
+                                        if (errors === _errs83) {
                                           if (Array.isArray(data27)) {
                                             var valid22 = true;
                                             const len1 = data27.length;
                                             for (let i1 = 0; i1 < len1; i1++) {
                                               let data28 = data27[i1];
-                                              const _errs84 = errors;
-                                              if (errors === _errs84) {
+                                              const _errs85 = errors;
+                                              if (errors === _errs85) {
                                                 if (
                                                   data28 &&
                                                   typeof data28 == 'object' &&
@@ -5709,11 +5713,11 @@ function validate62(
                                                   } else {
                                                     if (data28.insert !== undefined) {
                                                       let data29 = data28.insert;
-                                                      const _errs86 = errors;
                                                       const _errs87 = errors;
+                                                      const _errs88 = errors;
                                                       let valid24 = false;
                                                       let passing7 = null;
-                                                      const _errs88 = errors;
+                                                      const _errs89 = errors;
                                                       if (typeof data29 !== 'string') {
                                                         const err51 = {
                                                           instancePath:
@@ -5734,12 +5738,12 @@ function validate62(
                                                         }
                                                         errors++;
                                                       }
-                                                      var _valid7 = _errs88 === errors;
+                                                      var _valid7 = _errs89 === errors;
                                                       if (_valid7) {
                                                         valid24 = true;
                                                         passing7 = 0;
                                                       }
-                                                      const _errs90 = errors;
+                                                      const _errs91 = errors;
                                                       if (
                                                         !(
                                                           data29 &&
@@ -5766,7 +5770,7 @@ function validate62(
                                                         }
                                                         errors++;
                                                       }
-                                                      var _valid7 = _errs90 === errors;
+                                                      var _valid7 = _errs91 === errors;
                                                       if (_valid7 && valid24) {
                                                         valid24 = false;
                                                         passing7 = [passing7, 1];
@@ -5797,50 +5801,52 @@ function validate62(
                                                         }
                                                         errors++;
                                                       } else {
-                                                        errors = _errs87;
+                                                        errors = _errs88;
                                                         if (vErrors !== null) {
-                                                          if (_errs87) {
-                                                            vErrors.length = _errs87;
+                                                          if (_errs88) {
+                                                            vErrors.length = _errs88;
                                                           } else {
                                                             vErrors = null;
                                                           }
                                                         }
                                                       }
-                                                      var valid23 = _errs86 === errors;
+                                                      var valid23 = _errs87 === errors;
                                                     } else {
                                                       var valid23 = true;
                                                     }
                                                     if (valid23) {
                                                       if (data28.attributes !== undefined) {
                                                         let data30 = data28.attributes;
-                                                        const _errs92 = errors;
-                                                        if (
-                                                          !(
-                                                            data30 &&
-                                                            typeof data30 == 'object' &&
-                                                            !Array.isArray(data30)
-                                                          )
-                                                        ) {
-                                                          const err54 = {
-                                                            instancePath:
-                                                              instancePath +
-                                                              '/value/delta/ops/' +
-                                                              i1 +
-                                                              '/attributes',
-                                                            schemaPath:
-                                                              'rich-text.json/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
-                                                            keyword: 'type',
-                                                            params: { type: 'object' },
-                                                            message: 'must be object',
-                                                          };
-                                                          if (vErrors === null) {
-                                                            vErrors = [err54];
-                                                          } else {
-                                                            vErrors.push(err54);
+                                                        const _errs93 = errors;
+                                                        if (errors === _errs93) {
+                                                          if (
+                                                            !(
+                                                              data30 &&
+                                                              typeof data30 == 'object' &&
+                                                              !Array.isArray(data30)
+                                                            )
+                                                          ) {
+                                                            const err54 = {
+                                                              instancePath:
+                                                                instancePath +
+                                                                '/value/delta/ops/' +
+                                                                i1 +
+                                                                '/attributes',
+                                                              schemaPath:
+                                                                'rich-text.json/oneOf/0/properties/delta/properties/ops/items/properties/attributes/type',
+                                                              keyword: 'type',
+                                                              params: { type: 'object' },
+                                                              message: 'must be object',
+                                                            };
+                                                            if (vErrors === null) {
+                                                              vErrors = [err54];
+                                                            } else {
+                                                              vErrors.push(err54);
+                                                            }
+                                                            errors++;
                                                           }
-                                                          errors++;
                                                         }
-                                                        var valid23 = _errs92 === errors;
+                                                        var valid23 = _errs93 === errors;
                                                       } else {
                                                         var valid23 = true;
                                                       }
@@ -5864,7 +5870,7 @@ function validate62(
                                                   errors++;
                                                 }
                                               }
-                                              var valid22 = _errs84 === errors;
+                                              var valid22 = _errs85 === errors;
                                               if (!valid22) {
                                                 break;
                                               }
@@ -5922,7 +5928,7 @@ function validate62(
                             errors++;
                           }
                         }
-                        var _valid6 = _errs78 === errors;
+                        var _valid6 = _errs79 === errors;
                         if (_valid6) {
                           valid19 = true;
                           passing6 = 0;
@@ -5944,21 +5950,21 @@ function validate62(
                           }
                           errors++;
                         } else {
-                          errors = _errs77;
+                          errors = _errs78;
                           if (vErrors !== null) {
-                            if (_errs77) {
-                              vErrors.length = _errs77;
+                            if (_errs78) {
+                              vErrors.length = _errs78;
                             } else {
                               vErrors = null;
                             }
                           }
                         }
-                        var _valid5 = _errs75 === errors;
+                        var _valid5 = _errs76 === errors;
                         if (_valid5) {
                           valid17 = true;
                           passing5 = 0;
                         }
-                        const _errs94 = errors;
+                        const _errs96 = errors;
                         if (data25 !== null) {
                           const err60 = {
                             instancePath: instancePath + '/value',
@@ -5974,7 +5980,7 @@ function validate62(
                           }
                           errors++;
                         }
-                        var _valid5 = _errs94 === errors;
+                        var _valid5 = _errs96 === errors;
                         if (_valid5 && valid17) {
                           valid17 = false;
                           passing5 = [passing5, 1];
@@ -5999,16 +6005,16 @@ function validate62(
                           }
                           errors++;
                         } else {
-                          errors = _errs74;
+                          errors = _errs75;
                           if (vErrors !== null) {
-                            if (_errs74) {
-                              vErrors.length = _errs74;
+                            if (_errs75) {
+                              vErrors.length = _errs75;
                             } else {
                               vErrors = null;
                             }
                           }
                         }
-                        var valid16 = _errs73 === errors;
+                        var valid16 = _errs74 === errors;
                       } else {
                         var valid16 = true;
                       }
@@ -6031,7 +6037,7 @@ function validate62(
                 errors++;
               }
             }
-            var _valid0 = _errs68 === errors;
+            var _valid0 = _errs69 === errors;
             if (_valid0 && valid0) {
               valid0 = false;
               passing0 = [passing0, 6];
@@ -6046,8 +6052,8 @@ function validate62(
                   props0.value = true;
                 }
               }
-              const _errs96 = errors;
-              if (errors === _errs96) {
+              const _errs98 = errors;
+              if (errors === _errs98) {
                 if (data && typeof data == 'object' && !Array.isArray(data)) {
                   let missing13;
                   if (
@@ -6070,7 +6076,7 @@ function validate62(
                     errors++;
                   } else {
                     if (data.type !== undefined) {
-                      const _errs98 = errors;
+                      const _errs100 = errors;
                       if ('OptionalString' !== data.type) {
                         const err64 = {
                           instancePath: instancePath + '/type',
@@ -6086,13 +6092,13 @@ function validate62(
                         }
                         errors++;
                       }
-                      var valid25 = _errs98 === errors;
+                      var valid25 = _errs100 === errors;
                     } else {
                       var valid25 = true;
                     }
                     if (valid25) {
                       if (data.key !== undefined) {
-                        const _errs99 = errors;
+                        const _errs101 = errors;
                         if (typeof data.key !== 'string') {
                           const err65 = {
                             instancePath: instancePath + '/key',
@@ -6108,18 +6114,18 @@ function validate62(
                           }
                           errors++;
                         }
-                        var valid25 = _errs99 === errors;
+                        var valid25 = _errs101 === errors;
                       } else {
                         var valid25 = true;
                       }
                       if (valid25) {
                         if (data.value !== undefined) {
                           let data33 = data.value;
-                          const _errs101 = errors;
-                          const _errs102 = errors;
+                          const _errs103 = errors;
+                          const _errs104 = errors;
                           let valid26 = false;
                           let passing8 = null;
-                          const _errs103 = errors;
+                          const _errs105 = errors;
                           if (typeof data33 !== 'string') {
                             const err66 = {
                               instancePath: instancePath + '/value',
@@ -6135,12 +6141,12 @@ function validate62(
                             }
                             errors++;
                           }
-                          var _valid8 = _errs103 === errors;
+                          var _valid8 = _errs105 === errors;
                           if (_valid8) {
                             valid26 = true;
                             passing8 = 0;
                           }
-                          const _errs105 = errors;
+                          const _errs107 = errors;
                           if (data33 !== null) {
                             const err67 = {
                               instancePath: instancePath + '/value',
@@ -6156,7 +6162,7 @@ function validate62(
                             }
                             errors++;
                           }
-                          var _valid8 = _errs105 === errors;
+                          var _valid8 = _errs107 === errors;
                           if (_valid8 && valid26) {
                             valid26 = false;
                             passing8 = [passing8, 1];
@@ -6181,16 +6187,16 @@ function validate62(
                             }
                             errors++;
                           } else {
-                            errors = _errs102;
+                            errors = _errs104;
                             if (vErrors !== null) {
-                              if (_errs102) {
-                                vErrors.length = _errs102;
+                              if (_errs104) {
+                                vErrors.length = _errs104;
                               } else {
                                 vErrors = null;
                               }
                             }
                           }
-                          var valid25 = _errs101 === errors;
+                          var valid25 = _errs103 === errors;
                         } else {
                           var valid25 = true;
                         }
@@ -6213,7 +6219,7 @@ function validate62(
                   errors++;
                 }
               }
-              var _valid0 = _errs96 === errors;
+              var _valid0 = _errs98 === errors;
               if (_valid0 && valid0) {
                 valid0 = false;
                 passing0 = [passing0, 7];

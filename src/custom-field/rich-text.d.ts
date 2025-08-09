@@ -6,7 +6,9 @@ export interface Delta {
   delta: {
     ops: {
       insert: string | {};
-      attributes?: {};
+      attributes?: {
+        [k: string]: unknown | undefined;
+      };
     }[];
   };
 }
