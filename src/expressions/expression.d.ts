@@ -22,7 +22,7 @@ export type NumberExpression =
   | SumArray
   | TimeLiteral
   | DynamicValue;
-export type StringExpression = EventType | StringLiteral | UserOrgId | UserRole | DynamicValue;
+export type StringExpression = EventType | StringLiteral | UserRole | DynamicValue;
 export type DynamicValue = DataValue | Prop;
 
 export interface ArrayLiteral {
@@ -91,9 +91,6 @@ export interface EventType {
 export interface StringLiteral {
   operator: 'stringLiteral';
   value: string;
-}
-export interface UserOrgId {
-  operator: 'userOrgId';
 }
 export interface UserRole {
   operator: 'userRole';
