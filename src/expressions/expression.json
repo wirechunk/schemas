@@ -211,9 +211,6 @@
           "$ref": "#/$defs/stringLiteral"
         },
         {
-          "$ref": "#/$defs/userOrgId"
-        },
-        {
           "$ref": "#/$defs/userRole"
         },
         {
@@ -242,15 +239,6 @@
         }
       },
       "required": ["operator", "value"]
-    },
-    "userOrgId": {
-      "type": "object",
-      "properties": {
-        "operator": {
-          "const": "userOrgId"
-        }
-      },
-      "required": ["operator"]
     },
     "userRole": {
       "type": "object",
