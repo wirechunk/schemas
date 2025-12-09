@@ -3,6 +3,9 @@
   "$id": "/hooks/authorize-create-site/input.json",
   "title": "AuthorizeCreateSiteInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/authorize-create-site/value.json" },
+    "context": { "$ref": "/hooks/authorize-create-site/context.json" }
+  },
   "required": ["value", "context"]
 }

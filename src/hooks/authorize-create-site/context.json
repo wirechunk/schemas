@@ -3,8 +3,5 @@
   "$id": "/hooks/authorize-create-site/context.json",
   "title": "AuthorizeCreateSiteContext",
   "description": "The context of the request.",
-  "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" }
-  ]
+  "allOf": [{ "$ref": "/request-context/principal.json" }, { "$ref": "/request-context/site.json" }]
 }

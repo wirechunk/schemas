@@ -37,7 +37,7 @@
     "customFields": {
       "description": "The custom fields to edit. If this field is not set or is an empty array, no custom fields are being edited.",
       "type": "array",
-      "items": { "$ref": "../../custom-field/custom-field.json" }
+      "items": { "$ref": "/custom-field/custom-field.json" }
     }
   }
 }

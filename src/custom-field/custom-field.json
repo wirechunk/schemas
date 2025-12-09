@@ -46,7 +46,7 @@
           "type": "string"
         },
         "value": {
-          "$ref": "rich-text.json"
+          "$ref": "/custom-field/rich-text.json"
         }
       },
       "required": ["type", "key", "value"]
@@ -126,7 +126,7 @@
         "value": {
           "oneOf": [
             {
-              "$ref": "rich-text.json"
+              "$ref": "/custom-field/rich-text.json"
             },
             {
               "type": "null"

@@ -5,7 +5,7 @@
   "title": "BeforeSubmitFormValue",
   "properties": {
     "formData": {
-      "$ref": "../../context-data/context-data.json",
+      "$ref": "/context-data/context-data.json",
       "description": "The data that was submitted in the form."
     },
     "saveToDatabase": {

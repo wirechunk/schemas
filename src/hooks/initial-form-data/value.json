@@ -5,7 +5,7 @@
   "type": "object",
   "properties": {
     "formData": {
-      "$ref": "../../context-data/context-data.json",
+      "$ref": "/context-data/context-data.json",
       "description": "The initial data for the form."
     }
   },

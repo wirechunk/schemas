@@ -3,6 +3,9 @@
   "$id": "/hooks/before-create-user/input.json",
   "title": "BeforeCreateUserInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/before-create-user/value.json" },
+    "context": { "$ref": "/hooks/before-create-user/context.json" }
+  },
   "required": ["value", "context"]
 }

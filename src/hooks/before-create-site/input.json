@@ -3,6 +3,9 @@
   "$id": "/hooks/before-create-site/input.json",
   "title": "BeforeCreateSiteInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/before-create-site/value.json" },
+    "context": { "$ref": "/hooks/before-create-site/context.json" }
+  },
   "required": ["value", "context"]
 }

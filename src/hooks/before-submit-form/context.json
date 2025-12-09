@@ -4,8 +4,8 @@
   "title": "BeforeSubmitFormContext",
   "description": "The context of the request.",
   "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" },
+    { "$ref": "/request-context/principal.json" },
+    { "$ref": "/request-context/site.json" },
     {
       "type": "object",
       "properties": {

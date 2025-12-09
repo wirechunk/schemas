@@ -16,7 +16,7 @@
     },
     "customFields": {
       "type": "array",
-      "items": { "$ref": "../../custom-field/custom-field.json" }
+      "items": { "$ref": "/custom-field/custom-field.json" }
     }
   },
   "required": ["name", "customFields"]

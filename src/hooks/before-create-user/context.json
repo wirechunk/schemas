@@ -3,8 +3,5 @@
   "$id": "/hooks/before-create-user/context.json",
   "title": "BeforeCreateUserContext",
   "description": "The context of the request.",
-  "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" }
-  ]
+  "allOf": [{ "$ref": "/request-context/principal.json" }, { "$ref": "/request-context/site.json" }]
 }
