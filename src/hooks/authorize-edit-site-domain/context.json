@@ -4,8 +4,8 @@
   "title": "AuthorizeEditSiteDomainContext",
   "description": "The context of the request. Either adminUser or user will be set.",
   "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" },
+    { "$ref": "/request-context/principal.json" },
+    { "$ref": "/request-context/site.json" },
     {
       "type": "object",
       "properties": {

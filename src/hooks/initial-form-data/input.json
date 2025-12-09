@@ -3,6 +3,9 @@
   "$id": "/hooks/initial-form-data/input.json",
   "title": "InitialFormDataInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/initial-form-data/value.json" },
+    "context": { "$ref": "/hooks/initial-form-data/context.json" }
+  },
   "required": ["value", "context"]
 }

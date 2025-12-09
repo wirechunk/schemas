@@ -6,7 +6,7 @@
     {
       "type": "object",
       "properties": {
-        "value": { "$ref": "./value.json" },
+        "value": { "$ref": "/hooks/initial-form-data/value.json" },
         "stop": {
           "description": "If true, this is the last handler that will be called for the hook, and the result value will be used as the final result.",
           "type": ["boolean", "null"]
@@ -14,6 +14,6 @@
       },
       "required": ["value"]
     },
-    { "$ref": "../../hook-reject-result/hook-reject-result.json" }
+    { "$ref": "/hook-reject-result/hook-reject-result.json" }
   ]
 }

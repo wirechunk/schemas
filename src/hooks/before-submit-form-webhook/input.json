@@ -3,6 +3,9 @@
   "$id": "/hooks/before-submit-form-webhook/input.json",
   "title": "BeforeSubmitFormWebhookInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/before-submit-form-webhook/value.json" },
+    "context": { "$ref": "/hooks/before-submit-form-webhook/context.json" }
+  },
   "required": ["value", "context"]
 }

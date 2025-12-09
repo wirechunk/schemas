@@ -1,16 +1,17 @@
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
-import standaloneCode from 'ajv/dist/standalone/index.js';
 import type { Options as GeneratorOptions } from 'json-schema-to-typescript';
+import type { FileInfo as RefParserFileInfo } from '@apidevtools/json-schema-ref-parser';
 import { compileFromFile } from 'json-schema-to-typescript';
 import { existsSync } from 'node:fs';
 import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import authorizeHookResultSchema from '../src/authorize-hook-result/authorize-hook-result.json' with { type: 'json' };
 import contextDataSchema from '../src/context-data/context-data.json' with { type: 'json' };
 import customFieldSchema from '../src/custom-field/custom-field.json' with { type: 'json' };
 import richTextSchema from '../src/custom-field/rich-text.json' with { type: 'json' };
 import hookRejectResultSchema from '../src/hook-reject-result/hook-reject-result.json' with { type: 'json' };
-import extensionConfigSchema from '../src/meta/extension-config.json' with { type: 'json' };
+import extensionConfigSchema from '../src/extension-config/extension-config.json' with { type: 'json' };
 import type { HookPropertiesSchema } from '../src/meta/hook-properties.d.ts';
 import hookPropertiesSchema from '../src/meta/hook-properties.json' with { type: 'json' };
 import principalSchema from '../src/request-context/principal.json' with { type: 'json' };
@@ -54,6 +55,8 @@ const ajvGeneratedNameMapping: Record<string, string> = {
 const codegenExcludeFilePathPatterns = [/\/hooks\/[^/]+\/properties\.json$/];
 
 // Recurse through the src directory and for each file generate a corresponding TypeScript file.
+const schemaBaseDir = join(process.cwd(), 'src');
+
 const generatorOptions: Partial<GeneratorOptions> = {
   additionalProperties: false,
   bannerComment:
@@ -61,6 +64,21 @@ const generatorOptions: Partial<GeneratorOptions> = {
   enableConstEnums: false,
   format: false,
   strictIndexSignatures: true,
+  $refOptions: {
+    resolve: {
+      // Resolve absolute-path-style $refs like "/custom-field/rich-text.json" from the repo's src dir.
+      absoluteSrc: {
+        order: 1,
+        canRead: (file: RefParserFileInfo) => file.url.startsWith('/'),
+        read: async (file: RefParserFileInfo) => {
+          const relPath = file.url.replace(/^\//, '');
+          return readFile(join(schemaBaseDir, relPath), 'utf8');
+        },
+      },
+      http: false,
+      https: false,
+    },
+  },
 };
 
 // Read in the specified JSON Schema file, generate TypeScript, and output the new file next to the JSON file.
@@ -100,9 +118,9 @@ const buildHookInput = (hookName: string, hasContext: boolean): SchemaObject => 
     type: 'object',
     properties: {
       value: {
-        $ref: './value.json',
+        $ref: `/hooks/${hookName}/value.json`,
       },
-      ...(hasContext ? { context: { $ref: './context.json' } } : {}),
+      ...(hasContext ? { context: { $ref: `/hooks/${hookName}/context.json` } } : {}),
     },
     required: ['value', ...(hasContext ? ['context'] : [])],
   };
@@ -118,7 +136,7 @@ const buildHookResult = (
     type: 'object',
     properties: {
       value: {
-        $ref: './value.json',
+        $ref: `/hooks/${hookName}/value.json`,
       },
       stop: {
         description:
@@ -134,7 +152,7 @@ const buildHookResult = (
     title: `${hookNamePascal}Result`,
     ...(enableRejectResult
       ? {
-          oneOf: [valueSchema, { $ref: '../../hook-reject-result/hook-reject-result.json' }],
+          oneOf: [valueSchema, { $ref: '/hook-reject-result/hook-reject-result.json' }],
         }
       : valueSchema),
   };
@@ -193,12 +211,6 @@ const parseHookJsonSchema = async (
   return schema as SchemaObject;
 };
 
-const validateFileImports = [
-  `import type { ContextData } from './context-data/context-data.js';`,
-  `import type { ExtensionConfig } from './meta/extension-config.js';`,
-  `import type { RichText } from './custom-field/rich-text.js';`,
-];
-
 for (const hookName of hooksDir) {
   const hookDirPath = `src/hooks/${hookName}`;
   const stat = await lstat(hookDirPath);
@@ -255,11 +267,6 @@ for (const hookName of hooksDir) {
       }
     }
 
-    validateFileImports.push(
-      `import type { ${kebabToPascal(hookName)}Input } from './hooks/${hookName}/input.js';`,
-      `import type { ${kebabToPascal(hookName)}Result } from './hooks/${hookName}/result.js';`,
-    );
-
     const inputSchema = buildHookInput(hookName, hasContext);
     ajv.addSchema(inputSchema);
     ajvGeneratedNameMapping[`validate${requireNonEmptyString(inputSchema.title)}`] =
@@ -276,31 +283,5 @@ for (const hookName of hooksDir) {
     process.exit(1);
   }
 }
-
-await writeFile('src/validate.js', (standaloneCode as any)(ajv, ajvGeneratedNameMapping));
-
-const validateTypings = Object.keys(ajvGeneratedNameMapping).map((name) => {
-  const typeName = name.slice('validate'.length);
-  return `export declare const ${name}: {
-    (value: unknown): value is ${typeName};
-    errors?: SchemaValidationError[] | null;
-  };`;
-});
-
-await writeFile(
-  'src/validate.d.ts',
-  `${validateFileImports.join('\n')}
-
-export type SchemaValidationError = {
-  keyword: string;
-  instancePath: string;
-  schemaPath: string;
-  params: Record<string, unknown>;
-  message?: string;
-};
-
-${validateTypings.join('\n')}
-`,
-);
 
 await codegenDirectoryToTypeScript('src');

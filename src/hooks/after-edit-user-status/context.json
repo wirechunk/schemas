@@ -3,8 +3,5 @@
   "$id": "/hooks/after-edit-user-status/context.json",
   "title": "AfterEditUserStatusContext",
   "description": "The context of the request.",
-  "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" }
-  ]
+  "allOf": [{ "$ref": "/request-context/principal.json" }, { "$ref": "/request-context/site.json" }]
 }

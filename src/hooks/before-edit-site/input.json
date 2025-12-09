@@ -3,6 +3,9 @@
   "$id": "/hooks/before-edit-site/input.json",
   "title": "BeforeEditSiteInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/before-edit-site/value.json" },
+    "context": { "$ref": "/hooks/before-edit-site/context.json" }
+  },
   "required": ["value", "context"]
 }

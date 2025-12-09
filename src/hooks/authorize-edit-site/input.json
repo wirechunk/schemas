@@ -3,6 +3,9 @@
   "$id": "/hooks/authorize-edit-site/input.json",
   "title": "AuthorizeEditSiteInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/authorize-edit-site/value.json" },
+    "context": { "$ref": "/hooks/authorize-edit-site/context.json" }
+  },
   "required": ["value", "context"]
 }

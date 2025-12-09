@@ -3,8 +3,5 @@
   "$id": "/hooks/before-edit-site/context.json",
   "title": "BeforeEditSiteContext",
   "description": "The context of the request.",
-  "allOf": [
-    { "$ref": "../../request-context/principal.json" },
-    { "$ref": "../../request-context/site.json" }
-  ]
+  "allOf": [{ "$ref": "/request-context/principal.json" }, { "$ref": "/request-context/site.json" }]
 }

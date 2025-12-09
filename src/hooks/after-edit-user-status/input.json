@@ -3,6 +3,9 @@
   "$id": "/hooks/after-edit-user-status/input.json",
   "title": "AfterEditUserStatusInput",
   "type": "object",
-  "properties": { "value": { "$ref": "./value.json" }, "context": { "$ref": "./context.json" } },
+  "properties": {
+    "value": { "$ref": "/hooks/after-edit-user-status/value.json" },
+    "context": { "$ref": "/hooks/after-edit-user-status/context.json" }
+  },
   "required": ["value", "context"]
 }
