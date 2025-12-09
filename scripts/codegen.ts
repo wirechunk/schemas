@@ -1,6 +1,7 @@
 import type { SchemaObject } from 'ajv/dist/2020.d.ts';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import type { Options as GeneratorOptions } from 'json-schema-to-typescript';
+import type { FileInfo as RefParserFileInfo } from '@apidevtools/json-schema-ref-parser';
 import { compileFromFile } from 'json-schema-to-typescript';
 import { existsSync } from 'node:fs';
 import { lstat, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -68,10 +69,9 @@ const generatorOptions: Partial<GeneratorOptions> = {
       // Resolve absolute-path-style $refs like "/custom-field/rich-text.json" from the repo's src dir.
       absoluteSrc: {
         order: 1,
-        canRead: (file: { url?: string }) =>
-          typeof file.url === 'string' && file.url.startsWith('/'),
-        read: async (file: { url?: string }) => {
-          const relPath = (file.url ?? '').replace(/^\//, '');
+        canRead: (file: RefParserFileInfo) => file.url.startsWith('/'),
+        read: async (file: RefParserFileInfo) => {
+          const relPath = file.url.replace(/^\//, '');
           return readFile(join(schemaBaseDir, relPath), 'utf8');
         },
       },
