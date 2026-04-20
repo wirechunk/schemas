@@ -60,18 +60,19 @@ export interface RichTextCustomField {
   value: RichText;
 }
 export interface Delta {
-  delta: {
-    ops: {
-      insert:
-        | string
-        | {
-            [k: string]: unknown | undefined;
-          };
-      attributes?: {
-        [k: string]: unknown | undefined;
-      };
-    }[];
-  };
+  delta: Delta1;
+}
+export interface Delta1 {
+  ops: {
+    insert:
+      | string
+      | {
+          [k: string]: unknown | undefined;
+        };
+    attributes?: {
+      [k: string]: unknown | undefined;
+    };
+  }[];
 }
 export interface StringCustomField {
   type: 'String';

@@ -35,12 +35,21 @@
           "items": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/$defs/richText"
+        },
+        {
+          "$ref": "#/$defs/asset"
         }
       ]
     },
     "dataTableRow": {
       "type": "object",
       "properties": {
+        "type": {
+          "const": "DataTableRow"
+        },
         "id": {
           "type": "string"
         },
@@ -53,11 +62,41 @@
     "uploadedFile": {
       "type": "object",
       "properties": {
+        "type": {
+          "const": "UploadedFile"
+        },
         "fileId": {
           "type": "string"
         }
       },
       "required": ["fileId"]
+    },
+    "richText": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "RichText"
+        },
+        "delta": {
+          "$ref": "/custom-field/rich-text.json#/$defs/delta"
+        }
+      },
+      "required": ["type", "delta"]
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Asset"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "variantId": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "assetId", "variantId"]
     }
   }
 }

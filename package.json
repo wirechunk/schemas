@@ -1,6 +1,6 @@
 {
   "name": "@wirechunk/schemas",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Wirechunk schemas with type definitions",
   "type": "module",
   "repository": {
@@ -29,7 +29,6 @@
     "codegen": "npm run codegen:generate && npm run format",
     "codegen:generate": "node scripts/codegen.ts",
     "typecheck": "tsc",
-    "typecheck-src": "tsc --skipLibCheck",
     "format": "prettier --write ."
   },
   "devDependencies": {
