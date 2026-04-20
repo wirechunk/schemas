@@ -8,37 +8,42 @@
       "type": "object",
       "properties": {
         "delta": {
-          "type": "object",
-          "properties": {
-            "ops": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "insert": {
-                    "oneOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "object",
-                        "additionalProperties": true
-                      }
-                    ]
-                  },
-                  "attributes": {
-                    "type": "object",
-                    "additionalProperties": true
-                  }
-                },
-                "required": ["insert"]
-              }
-            }
-          },
-          "required": ["ops"]
+          "$ref": "#/$defs/delta"
         }
       },
       "required": ["delta"]
     }
-  ]
+  ],
+  "$defs": {
+    "delta": {
+      "type": "object",
+      "properties": {
+        "ops": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "insert": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "required": ["insert"]
+          }
+        }
+      },
+      "required": ["ops"]
+    }
+  }
 }
