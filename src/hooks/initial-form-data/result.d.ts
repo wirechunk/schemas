@@ -18,17 +18,7 @@ export interface InitialFormDataValue {
  */
 export interface ContextData {
   [k: string]:
-    | (
-        | boolean
-        | string
-        | number
-        | null
-        | DataTableRow[]
-        | UploadedFile
-        | string[]
-        | RichText
-        | Asset
-      )
+    | (boolean | string | number | null | DataTableRow[] | string[] | RichText | Asset)
     | undefined;
 }
 export interface DataTableRow {
@@ -38,22 +28,8 @@ export interface DataTableRow {
 }
 export interface ContextData1 {
   [k: string]:
-    | (
-        | boolean
-        | string
-        | number
-        | null
-        | DataTableRow[]
-        | UploadedFile
-        | string[]
-        | RichText
-        | Asset
-      )
+    | (boolean | string | number | null | DataTableRow[] | string[] | RichText | Asset)
     | undefined;
-}
-export interface UploadedFile {
-  type?: 'UploadedFile';
-  fileId: string;
 }
 export interface RichText {
   type: 'RichText';
