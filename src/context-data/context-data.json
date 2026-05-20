@@ -28,9 +28,6 @@
           }
         },
         {
-          "$ref": "#/$defs/uploadedFile"
-        },
-        {
           "type": "array",
           "items": {
             "type": "string"
@@ -58,18 +55,6 @@
         }
       },
       "required": ["id", "data"]
-    },
-    "uploadedFile": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "const": "UploadedFile"
-        },
-        "fileId": {
-          "type": "string"
-        }
-      },
-      "required": ["fileId"]
     },
     "richText": {
       "type": "object",
